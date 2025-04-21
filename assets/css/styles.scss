@@ -4,4 +4,11 @@
     width: 300px;
     height: 300px;
 }
+
+.carousel-indicators,
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(60%);
+}
+
 @import "portfolYOU";
