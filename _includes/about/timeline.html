@@ -5,7 +5,14 @@
         <div class="content">
           <h2>{{ item.title }}</h2>
           <h6 class="date">{{ item.from }} — {{ item.to }}</h6>
-          <p>{{ item.description }}</p>
+          <p>{{ item.summary }}</p>
+          <p>
+            <ul>
+              {% for highlight in item.highlights %}
+              <li>{{ highlight }}</li>
+              {% endfor %}
+            </ul>
+          </p>
         </div>
       </div>
     {% endfor %}
