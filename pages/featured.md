@@ -9,6 +9,9 @@ weight: 1
 # **Featured works**
 ---
 
+
+<img src="/assets/img/1.avifs">
+
 <div style="text-align:center;">
     <video width="100%" preload="auto" muted loop autoplay>
       <source src="/assets/img/1.webm" type="video/mp4">
@@ -20,8 +23,8 @@ weight: 1
 
 <div class="centered">
 {% capture carousel_images %}
-/assets/img/2.webm
-/assets/img/3.webm
+/assets/img/2.avifs
+/assets/img/3.avifs
 /assets/img/4.png
 /assets/img/5.jpg
 /assets/img/6.jpg
