@@ -1,15 +1,13 @@
 <div class="row justify-content-center align-items-center p-4">
   <div class="col-lg-4 col-md-6 text-center mt-4">
+  <!-- <div class="text-center mt-4"> -->
 
     <link href="{{ '/assets/dflip/css/dflip.min.css' | relative_url }}" rel="stylesheet" type="text/css">
-    <!-- <link href="{{ '/assets/css/style.css' | relative_url }}" rel="stylesheet" type="text/css"> -->
+    <link href="{{ '/assets/dflip/css/themify-icons.min.css' | relative_url }}" rel="stylesheet" type="text/css">
+
+    <link href="{{ '/assets/css/styles.css' | relative_url }}" rel="stylesheet" type="text/css">
     <script src="{{ '/assets/dflip/js/libs/jquery.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/dflip/js/dflip.min.js' | relative_url }}"></script>
-
-    <!-- <div class="_df_book" source="{{ '/assets/p.pdf' | relative_url }}"></div> -->
-    <div class="_df_thumb" 
-     source="{{ 'assets/p.pdf' | relative_url }}"
-     thumb="https://upload.wikimedia.org/wikipedia/commons/a/a9/Example.jpg">Intro Book</div>
 
     <!-- Fine Circle Responsive Image -->
     <!-- <div id="container" class="my-2">
@@ -17,9 +15,56 @@
       <div id="element">
         <img src="{{ site.author.image }}" alt="{{ site.title }}" class="circle-image wow animated zoomIn" data-wow-delay=".1s">
       </div>
+    </div> -->
+
+    <!-- <p class="text-muted wow animated slideInUp" data-wow-delay=".15s">{{ site.description }}</p> -->
+
+    <div
+      class="_df_thumb wow animated zoomIn"
+      thumb="{{ 'assets/thumb.jpg' | relative_url }}"
+      id="button_pdf">
+        Portfolio
     </div>
 
-    <p class="text-muted wow animated slideInUp" data-wow-delay=".15s">{{ site.description }}</p> -->
+    <!-- <div
+      class="_df_thumb wow animated zoomIn"
+      thumb="https://upload.wikimedia.org/wikipedia/commons/a/a9/Example.jpg"
+      id="button_pdf">
+        Dflip Manual
+    </div> -->
+
+    <script>
+      var option_button_pdf = {
+          source:'assets/p.pdf',
+          webgl:true,
+          webglShadow: true,
+          shadowOpacity: 0.2,
+          soundEnable: false,
+          pageMode: DFLIP.PAGE_MODE.DOUBLE,
+          singlePageMode: DFLIP.SINGLE_PAGE_MODE.AUTO,
+          zoomRatio: 1.5,
+          stiffness: 0,
+          backgroundColor: "#b8a8cbcc",
+          transparent: true, //true or false
+          hard: "cover", //possible values are "all", "none", "cover"
+          allControls: "startPage,altPrev,pageNumber,altNext,zoomIn,zoomOut,pageMode,fullScreen",
+          //we recommend using default auto height
+      };
+    </script>
+
+    <!-- <div class="_df_thumb" id="button_image">Dflip Pictures</div>
+    <script>
+      var option_button_image = {
+        source : ['https://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg',
+                  'https://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg',
+                  'https://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg'],
+        webgl:true
+       };
+    </script> -->
+
+    <!-- <div class="col-lg-4 col-md-6 text-center mt-4"> -->
+      <p class="text-muted wow animated slideInUp" data-wow-delay=".15s">{{ site.description }}</p>
+    <!-- </div> -->
 
   </div>
 </div>
