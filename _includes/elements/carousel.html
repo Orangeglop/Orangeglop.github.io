@@ -26,7 +26,8 @@
       {%- if forloop.first -%}
         <div class="carousel-item active">
           {% if ext == 'mp4' or ext == 'webm' %}
-          <video width="100%" preload="auto" muted loop autoplay>
+          <!-- <video width="100%" preload="auto" muted loop autoplay> -->
+          <video width="100%" autoplay muted playsinline loop preload="auto">
             <source src="{{ image }}" type="video/mp4">
           </video>
           {% else %}
@@ -36,7 +37,8 @@
       {%- else -%}
         <div class="carousel-item">
           {% if ext == 'mp4' or ext == 'webm' %}
-          <video width="100%" preload="auto" muted loop autoplay>
+          <!-- <video width="100%" preload="auto" muted loop autoplay> -->
+          <video width="100%" autoplay muted playsinline loop preload="auto">
             <source src="{{ image }}" type="video/mp4">
           </video>
           {% else %}
