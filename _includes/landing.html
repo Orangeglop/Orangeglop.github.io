@@ -20,8 +20,9 @@
     <!-- <p class="text-muted wow animated slideInUp" data-wow-delay=".15s">{{ site.description }}</p> -->
 
     <div
-      class="_df_thumb wow animated zoomIn"
-      thumb="{{ 'assets/thumb.jpg' | relative_url }}"
+      class="_df_thumb"
+      data-wow-delay=".2s"
+      thumb="{{ 'assets/portfolio_thumb.jpg' | relative_url }}"
       id="button_pdf">
         Portfolio
     </div>
@@ -35,7 +36,7 @@
 
     <script>
       var option_button_pdf = {
-          source:'assets/p.pdf',
+          source:'assets/portfolio.pdf',
           webgl:true,
           webglShadow: true,
           shadowOpacity: 0.2,
