@@ -11,7 +11,7 @@ weight: 1
 
 <div style="text-align:center;">
     <video width="100%" preload="auto" muted loop autoplay>
-      <source src="/assets/test.webm" type="video/mp4">
+      <source src="/assets/img/1.webm" type="video/mp4">
     </video>
     <p>MAHS-MAULP autumn studio 2023 - Heverleebos - The forest campus</p>
 </div>
@@ -20,8 +20,8 @@ weight: 1
 
 <div class="centered">
 {% capture carousel_images %}
-/assets/img/2.gif
-/assets/img/3.gif
+/assets/img/2.webm
+/assets/img/3.webm
 /assets/img/4.png
 /assets/img/5.png
 /assets/img/6.png
