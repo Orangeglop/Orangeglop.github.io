@@ -23,8 +23,8 @@ weight: 1
 /assets/img/2.webm
 /assets/img/3.webm
 /assets/img/4.png
-/assets/img/5.png
-/assets/img/6.png
+/assets/img/5.jpg
+/assets/img/6.jpg
 /assets/img/7.png
 /assets/img/8.png
 {% endcapture %}
