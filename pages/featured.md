@@ -9,12 +9,12 @@ weight: 1
 # **Featured works**
 ---
 
-<!-- <div style="text-align: right">
-MAHS-MAULP autumn studio 2023 - Heverleebos - The forest campus
-</div> -->
-<!-- ![alt text](/assets/img/1.gif) -->
-
-{% include elements/figure.html image="assets/img/1.gif" caption="MAHS-MAULP autumn studio 2023 - Heverleebos - The forest campus" %}
+<div style="text-align:center;">
+    <video width="100%" preload="auto" muted loop autoplay>
+      <source src="/assets/test.webm" type="video/mp4">
+    </video>
+    <p>MAHS-MAULP autumn studio 2023 - Heverleebos - The forest campus</p>
+</div>
 
 ---
 
