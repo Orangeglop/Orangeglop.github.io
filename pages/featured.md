@@ -11,7 +11,7 @@ weight: 1
 
 
 <div style="text-align:center;">
-    <img src="/assets/img/1.avifs">
+    <img src="/assets/img/0.webp">
     <p>MAHS-MAULP autumn studio 2023 - Heverleebos - The forest campus</p>
 </div>
 
@@ -26,13 +26,13 @@ weight: 1
 
 <div class="centered">
 {% capture carousel_images %}
-/assets/img/2.avifs
-/assets/img/3.avifs
-/assets/img/4.png
-/assets/img/5.jpg
-/assets/img/6.jpg
-/assets/img/7.png
-/assets/img/8.png
+/assets/img/1.webp
+/assets/img/2.webp
+/assets/img/3.webp
+/assets/img/4.webp
+/assets/img/5.webp
+/assets/img/6.webp
+/assets/img/7.webp
 {% endcapture %}
 {% include elements/carousel.html %}
 </div>

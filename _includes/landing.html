@@ -9,34 +9,97 @@
     <script src="{{ '/assets/dflip/js/libs/jquery.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/dflip/js/dflip.min.js' | relative_url }}"></script>
 
-    <!-- Fine Circle Responsive Image -->
-    <!-- <div id="container" class="my-2">
-      <div id="dummy"></div>
-      <div id="element">
-        <img src="{{ site.author.image }}" alt="{{ site.title }}" class="circle-image wow animated zoomIn" data-wow-delay=".1s">
-      </div>
-    </div> -->
-
-    <!-- <p class="text-muted wow animated slideInUp" data-wow-delay=".15s">{{ site.description }}</p> -->
-
     <div
       class="_df_thumb"
-      data-wow-delay=".2s"
-      thumb="{{ 'assets/portfolio_thumb.jpg' | relative_url }}"
+      thumb="{{ 'assets/portfolio/portfolio_thumb.jpg' | relative_url }}"
       id="button_pdf">
         Portfolio
     </div>
 
-    <!-- <div
-      class="_df_thumb wow animated zoomIn"
-      thumb="https://upload.wikimedia.org/wikipedia/commons/a/a9/Example.jpg"
-      id="button_pdf">
-        Dflip Manual
-    </div> -->
-
     <script>
       var option_button_pdf = {
-          source:'assets/portfolio.pdf',
+        // source: [
+        //   "/assets/portfolio/pages/page-0.avif",
+        //   "/assets/portfolio/pages/page-1.avif",
+        //   "/assets/portfolio/pages/page-2.avif",
+        //   "/assets/portfolio/pages/page-3.avif",
+        //   "/assets/portfolio/pages/page-4.avif",
+        //   "/assets/portfolio/pages/page-5.avif",
+        //   "/assets/portfolio/pages/page-6.avif",
+        //   "/assets/portfolio/pages/page-7.avif",
+        //   "/assets/portfolio/pages/page-8.avif",
+        //   "/assets/portfolio/pages/page-9.avif",
+        //   "/assets/portfolio/pages/page-10.avif",
+        //   "/assets/portfolio/pages/page-11.avif",
+        //   "/assets/portfolio/pages/page-12.avif",
+        //   "/assets/portfolio/pages/page-13.avif",
+        //   "/assets/portfolio/pages/page-14.avif",
+        //   "/assets/portfolio/pages/page-15.avif",
+        //   "/assets/portfolio/pages/page-16.avif",
+        //   "/assets/portfolio/pages/page-17.avif",
+        //   "/assets/portfolio/pages/page-18.avif",
+        //   "/assets/portfolio/pages/page-19.avif",
+        //   "/assets/portfolio/pages/page-20.avif",
+        //   "/assets/portfolio/pages/page-21.avif",
+        //   "/assets/portfolio/pages/page-22.avif",
+        //   "/assets/portfolio/pages/page-23.avif",
+        //   "/assets/portfolio/pages/page-24.avif",
+        //   "/assets/portfolio/pages/page-25.avif",
+        //   "/assets/portfolio/pages/page-26.avif",
+        //   "/assets/portfolio/pages/page-27.avif",
+        //   "/assets/portfolio/pages/page-28.avif",
+        //   "/assets/portfolio/pages/page-29.avif",
+        // ],
+        source: [
+          "/assets/portfolio/pages/page-0.webp",
+          "/assets/portfolio/pages/page-1.webp",
+          "/assets/portfolio/pages/page-2.webp",
+          "/assets/portfolio/pages/page-3.webp",
+          "/assets/portfolio/pages/page-4.webp",
+          "/assets/portfolio/pages/page-5.webp",
+          "/assets/portfolio/pages/page-6.webp",
+          "/assets/portfolio/pages/page-7.webp",
+          "/assets/portfolio/pages/page-8.webp",
+          "/assets/portfolio/pages/page-9.webp",
+          "/assets/portfolio/pages/page-10.webp",
+          "/assets/portfolio/pages/page-11.webp",
+          "/assets/portfolio/pages/page-12.webp",
+          "/assets/portfolio/pages/page-13.webp",
+          "/assets/portfolio/pages/page-14.webp",
+          "/assets/portfolio/pages/page-15.webp",
+          "/assets/portfolio/pages/page-16.webp",
+          "/assets/portfolio/pages/page-17.webp",
+          "/assets/portfolio/pages/page-18.webp",
+          "/assets/portfolio/pages/page-19.webp",
+          "/assets/portfolio/pages/page-20.webp",
+          "/assets/portfolio/pages/page-21.webp",
+          "/assets/portfolio/pages/page-22.webp",
+          "/assets/portfolio/pages/page-23.webp",
+          "/assets/portfolio/pages/page-24.webp",
+          "/assets/portfolio/pages/page-25.webp",
+          "/assets/portfolio/pages/page-26.webp",
+          "/assets/portfolio/pages/page-27.webp",
+          "/assets/portfolio/pages/page-28.webp",
+          "/assets/portfolio/pages/page-29.webp",
+        ],
+        webgl:true,
+        webglShadow: true,
+        shadowOpacity: 0.2,
+        soundEnable: false,
+        pageMode: DFLIP.PAGE_MODE.DOUBLE,
+        singlePageMode: DFLIP.SINGLE_PAGE_MODE.AUTO,
+        zoomRatio: 1.5,
+        stiffness: 0,
+        backgroundColor: "#b8a8cbcc",
+        transparent: true,
+        hard: "cover",
+        allControls: "startPage,altPrev,pageNumber,altNext,zoomIn,zoomOut,pageMode,fullScreen",
+      };
+    </script>
+
+    <!-- <script>
+      var option_button_pdf = {
+          // source:'assets/portfolio/portfolio.pdf',
           webgl:true,
           webglShadow: true,
           shadowOpacity: 0.2,
@@ -46,26 +109,13 @@
           zoomRatio: 1.5,
           stiffness: 0,
           backgroundColor: "#b8a8cbcc",
-          transparent: true, //true or false
-          hard: "cover", //possible values are "all", "none", "cover"
+          transparent: true,
+          hard: "cover",
           allControls: "startPage,altPrev,pageNumber,altNext,zoomIn,zoomOut,pageMode,fullScreen",
-          //we recommend using default auto height
       };
-    </script>
-
-    <!-- <div class="_df_thumb" id="button_image">Dflip Pictures</div>
-    <script>
-      var option_button_image = {
-        source : ['https://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg',
-                  'https://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg',
-                  'https://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg'],
-        webgl:true
-       };
     </script> -->
 
-    <!-- <div class="col-lg-4 col-md-6 text-center mt-4"> -->
-      <p class="text-muted wow animated slideInUp" data-wow-delay=".15s">{{ site.description }}</p>
-    <!-- </div> -->
+    <p class="text-muted wow animated slideInUp" data-wow-delay=".15s">{{ site.description }}</p>
 
   </div>
 </div>
