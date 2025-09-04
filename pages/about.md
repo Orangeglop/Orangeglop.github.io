@@ -25,3 +25,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <div class="row">
 {% include about/timeline.html %}
 </div>
+
+<div class="row">
+{% include about/education.html %}
+</div>
