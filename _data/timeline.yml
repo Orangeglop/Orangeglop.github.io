@@ -1,19 +1,11 @@
-- title: Student, Harvard CS
-  from: August 2013
-  to: August 2014
-  location: Amsterdam, NL
-  summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-               reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+- title: Student job, KU LEUVEN
+  from: October 2024
+  to: August 2025
+  location: Leuven, Belgium
+  summary: Updating n/•	Working on map assessments n/•	Communicate and support the Professors on related tasks
 
-- title: Student, Harvard CS
-  from: 2014
-  to: 2018
-  location: Amsterdam, NL
-  summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-               reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+- title: Summer Internship, METAPOLIS EU
+  from: July 2024
+  to: August 2024
+  location: Cluj, Romania
+  summary: •	Contributed to the Colentina Lakes International Design Competition, assisting in concept development and urban planning strategies
