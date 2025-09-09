@@ -1,5 +1,18 @@
 ---
 ---
+.horizontal_container {
+  display: flex; /* Enables flexbox layout */
+  flex-direction: row; /* Aligns children in a row */
+  justify-content: space-around; /* Distributes space evenly between items */
+  align-items: center; /* Centers items vertically */
+  flex-wrap: wrap; /* Allows items to wrap to the next line if necessary */
+}
+
+.horizontal_element {
+  flex: 1 1; /* Allows elements to grow and shrink, with a minimum width */
+  text-align: center; /* Centers text inside the element */
+}
+
 ._df_thumb {
     width: 300px;
     height: 300px;
