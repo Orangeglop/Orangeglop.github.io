@@ -1,5 +1,12 @@
 ---
 ---
+.df_thumb-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100%; /* Ensure it takes full height of the parent */
+}
+
 .horizontal_container {
   display: flex; /* Enables flexbox layout */
   flex-direction: row; /* Aligns children in a row */
