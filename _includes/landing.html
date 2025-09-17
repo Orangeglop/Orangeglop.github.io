@@ -46,6 +46,12 @@
             transparent: true,
             hard: "cover",
             allControls: "startPage,altPrev,pageNumber,altNext,zoomIn,zoomOut,pageMode,fullScreen",
+            onCreateUI: function (flipBook) {
+              var downloadUrl = "/assets/portfolio/%5BTRAN%5D%20PORTFOLIO_LANDSCAPE_2025.pdf"
+              var downloadButton = jQuery('<a class="df-ui-btn ti-download df-ui-custom-download-button" download target="_blank"></a>');
+              downloadButton.attr("href",downloadUrl).attr("title","Download PDF");
+              flipBook.ui.zoomOut.after(downloadButton);
+            },
           };
         </script>
 
@@ -64,8 +70,16 @@
             transparent: true,
             hard: "cover",
             allControls: "startPage,altPrev,pageNumber,altNext,zoomIn,zoomOut,pageMode,fullScreen",
+            onCreateUI: function (flipBook) {
+              var downloadUrl = "/assets/portfolio/%5BTRAN%5D%20PORTFOLIO_URBAN_2025.pdf"
+              var downloadButton = jQuery('<a class="df-ui-btn ti-download df-ui-custom-download-button" download target="_blank"></a>');
+              downloadButton.attr("href",downloadUrl).attr("title","Download PDF");
+              flipBook.ui.zoomOut.after(downloadButton);
+            },
           };
         </script>
+
+
     </div>
   </div>
 </div>
