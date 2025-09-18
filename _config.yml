@@ -1,7 +1,8 @@
 ### Site Settings ###
-title               : Mun Station
-description         : >-
+title               : Tran Hoang
+description_en      : >-
                       Hello, I am Tran - an architect specialized in urban design and a landscape enthusiast.
+description_nl      : >-
                       Hallo, ik ben Tran - een architect gespecialiseerd in stedenbouwkundig ontwerp en een liefhebber van landschappen.
 baseurl             : ""            # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : Orangeglop/Orangeglop.github.io      # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)

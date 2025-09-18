@@ -1,0 +1,19 @@
+- name: "Office: Word, Excel, PowerPoint"
+  percentage:
+  color:
+
+- name: "Autodesk: AutoCAD, Infraworks, Civil3D"
+  percentage:
+  color:
+
+- name: "Adobe: Photoshop, Illustrator, Indesign"
+  percentage:
+  color:
+
+- name: "Other: Sketchup, Lumion, Handsketch, QGIS"
+  percentage:
+  color:
+  
+- name: "Language: English, Vietnamese, Mandarin, Japanese"
+  percentage:
+  color:

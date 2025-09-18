@@ -1,9 +1,11 @@
 <div class="col mt-4">
+  <h5 class="mb-3">{{ include.title }}</h5>
+
   <div class="timeline-body bg-themed">
     {% for item in site.data.education %}
       <div class="timeline-item">
         <div class="content">
-          <h2>{{ item.area }} ({{ item.degree }})</h2>
+          <h4>{{ item.area }} ({{ item.degree }})</h4>
           <h5 style="font-size:80%">{{ item.end_date }}</h5>
           <p>{{ item.institution }}</p>
         </div>

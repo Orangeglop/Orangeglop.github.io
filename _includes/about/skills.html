@@ -1,29 +1,9 @@
 <div class="col-lg">
+  <h5 class="mb-3">{{ include.title }}</h5>
 
-  <h2 class="mb-3">{{ include.title }}</h2>
-
+  <ul>
   {% for skill in include.source %}
-
-  <div class="row justify-content-between align-items-center">
-    <div class="col-10">
-      <p class="mb-1">{{ skill.name }}</p>
-    </div>
-    <div class="col-2 text-right">
-      <p class="mb-1 text-muted">{{ skill.percentage }}%</p>
-    </div>
-  </div>
-
-  <div class="progress mb-4 bg-themed" style="height: 8px;">
-    <div class="progress-bar bg-{{ skill.color | default: "primary" }} wow animated slideInLeft"
-      data-wow-delay="{{ forloop.index | divided_by: 20.0 }}"
-      role="progressbar"
-      style="width: {{ skill.percentage }}%;"
-      aria-valuenow="{{ skill.percentage }}"
-      aria-valuemin="0"
-      aria-valuemax="100">
-    </div>
-  </div>
-
+    <li>{{ skill.name }}</li>
   {% endfor %}
-
+  </ul>
 </div>

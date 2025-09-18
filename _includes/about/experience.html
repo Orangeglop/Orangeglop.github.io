@@ -1,16 +1,18 @@
 <div class="col mt-4">
+  <h5 class="mb-3">{{ include.title }}</h5>
+
   <div class="timeline-body bg-themed">
-    {% for item in site.data.timeline %}
+    {% for item in site.data.experience %}
       <div class="timeline-item">
         <div class="content">
-          <h2>{{ item.title }}</h2>
+          <h4>{{ item.title }}</h4>
           <h5 style="font-size:80%">{{ item.location }}</h5>
           <h6 class="date">{{ item.from }} — {{ item.to }}</h6>
           <p>{{ item.summary }}</p>
           <p>
             <ul>
               {% for highlight in item.highlights %}
-              <li>{{ highlight }}</li>
+                <li style="font-size:80%">{{ highlight }}</li>
               {% endfor %}
             </ul>
           </p>

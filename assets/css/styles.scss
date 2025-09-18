@@ -85,4 +85,12 @@
     filter: invert(60%);
 }
 
+ul {
+  list-style-type: "◦ ";
+}
+
 @import "portfolYOU";
+
+.timeline-body::after {
+  content: none;
+}
