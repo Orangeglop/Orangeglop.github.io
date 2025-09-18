@@ -8,8 +8,8 @@ weight: 3
 # **About Me**
 ---
 
-Hi I am **{{ site.author.name }}** :wave:,<br>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Hello, I’m **{{ site.author.name }}** :wave:,an architect specialized in urban design, urban planning, and a landscape enthusiast.<br>
+I’m currently living in The Netherlands and working as a freelance planner for some projects in Southeast Asia. I am also learning Dutch to improve my communication skill. This website was created to store my most up-to-date portfolio and some featured works. I’m open to work and willingly to move within The Netherlands.
 
 <div style="text-align:center;">
     <video width="100%" autoplay muted playsinline loop preload="auto">
