@@ -1,10 +1,9 @@
----
-<!-- layout: default -->
+<!-- ---
 layout: page
 title: Featured
 permalink: /featured/
 weight: 1
----
+--- -->
 
 ###### Featured works
 ---
