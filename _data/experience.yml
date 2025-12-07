@@ -1,76 +1,155 @@
-- title: Freelance - Self employed
-  from: July 2025
-  to: Present
-  location: The Netherlands
-  summary:
-  highlights:
+en:
+  - title: Freelance - Self employed
+    from: July 2025
+    to: Present
+    location: The Netherlands
+    summary:
+    highlights:
 
-- title: Student job, KU LEUVEN
-  from: October 2024
-  to: June 2025
-  location: Leuven, Belgium
-  summary:
-  highlights:
-    - Assisted with map assessments to support projects
-    - Communicated with and provided support to professors on academic related tasks
+  - title: Student job, KU LEUVEN
+    from: October 2024
+    to: June 2025
+    location: Leuven, Belgium
+    summary:
+    highlights:
+      - Assisted with map assessments to support projects
+      - Communicated with and provided support to professors on academic related tasks
 
-- title: Summer Internship, METAPOLIS EU
-  from: July 2024
-  to: August 2024
-  location: Cluj, Romania
-  summary:
-  highlights:
-    - Contributed to the Colentina Lakes International Design Competition, assisting in concept development and urban planning strategies
-    - Designed urban green pocket spaces to enhance livability in both single-housing neighborhoods and socialist-era residential blocks
-    - Developed visually compelling graphics and presentation materials to communicate urban design principles effectively
+  - title: Summer Internship, METAPOLIS EU
+    from: July 2024
+    to: August 2024
+    location: Cluj, Romania
+    summary:
+    highlights:
+      - Contributed to the Colentina Lakes International Design Competition, assisting in concept development and urban planning strategies
+      - Designed urban green pocket spaces to enhance livability in both single-housing neighborhoods and socialist-era residential blocks
+      - Developed visually compelling graphics and presentation materials to communicate urban design principles effectively
 
-- title: Urban Planner - Full time, AIM REAL ESTATE INVESTMENT AND DEVELOPMENT JSC
-  from: February 2023
-  to: July 2023
-  location: Ho Chi Minh, Vietnam
-  summary:
-  highlights:
-    - Led urban planning tasks for residential projects (1/500 and 1/2000 scale), ensuring compliance with zoning regulations and sustainable growth strategies
-    - Coordinated between multidisciplinary teams, including architects, engineers, and legal consultants, to streamline project execution
-    - Conducted spatial analysis and demographic studies to inform zoning, population growth forecasts, and phased urban development
-    - Created graphic master plans and urban design visualizations, improving stakeholder understanding and engagement
-    
-- title: Urban Planner - Freelance Contractor, SURBANA JURONG
-  from: September 2022
-  to: December 2022
-  location: Ho Chi Minh, Vietnam
-  summary:
-  highlights:
-    - Provided urban planning consultancy for large-scale residential and mixed-use projects, applying data-driven planning principles
-    - Developed zoning strategies that balanced developer objectives with local regulations, optimizing land use and community integration
-        
-- title: Urban Planner - Full time, SURBANA JURONG
-  from: December 2019
-  to: September 2022
-  location: Ho Chi Minh, Vietnam
-  summary:
-  highlights:
-    - Designed comprehensive master plans for residential, industrial, and tourism projects, working on scales of 1/500, 1/2000, and 1/5000
-    - Led land-use planning and infrastructure integration, ensuring alignment with sustainability and climate adaptation principles
-    - Conducted public consultations and stakeholder meetings with government agencies, developers, and community representatives to drive consensus
-    - Created high-quality digital graphics, including GIS maps, 3D models, and urban development diagrams, to support planning decisions
-        
-- title: Urban Planner - Full time, NDA GROUP - NEW DESIGN ASSOCIATES
-  from: August 2017
-  to: August 2019
-  location: Ho Chi Minh, Vietnam
-  summary:
-  highlights:
-    - Developed concept zoning strategies that balance regulatory constraints with investor goals, facilitating project approvals
-    - Created detailed site analysis, hand-drawn master plans, and urban diagrams, enhancing the clarity of project presentations
-    - Contributed to the planning of resort, cultural, and residential developments, ensuring a strong integration of urban aesthetics and functionality
-        
-- title: Quality Controller - Part time, VIBUMA.COM - VIETNAM BUILDING MATERIALS
-  from: March 2016
-  to: February 2017
-  location: Ho Chi Minh, Vietnam
-  summary:
-  highlights:
-    - Conducted quality assessments of material suppliers and verified compliance with industry standards
-    - Facilitated connections between suppliers, architects, and interior designers, optimizing material sourcing for construction projects
-    - Managed and maintained a comprehensive database of building materials, improving data accessibility for industry professionals
+  - title: Urban Planner - Full time, AIM REAL ESTATE INVESTMENT AND DEVELOPMENT JSC
+    from: February 2023
+    to: July 2023
+    location: Ho Chi Minh, Vietnam
+    summary:
+    highlights:
+      - Led urban planning tasks for residential projects (1/500 and 1/2000 scale), ensuring compliance with zoning regulations and sustainable growth strategies
+      - Coordinated between multidisciplinary teams, including architects, engineers, and legal consultants, to streamline project execution
+      - Conducted spatial analysis and demographic studies to inform zoning, population growth forecasts, and phased urban development
+      - Created graphic master plans and urban design visualizations, improving stakeholder understanding and engagement
+      
+  - title: Urban Planner - Freelance Contractor, SURBANA JURONG
+    from: September 2022
+    to: December 2022
+    location: Ho Chi Minh, Vietnam
+    summary:
+    highlights:
+      - Provided urban planning consultancy for large-scale residential and mixed-use projects, applying data-driven planning principles
+      - Developed zoning strategies that balanced developer objectives with local regulations, optimizing land use and community integration
+          
+  - title: Urban Planner - Full time, SURBANA JURONG
+    from: December 2019
+    to: September 2022
+    location: Ho Chi Minh, Vietnam
+    summary:
+    highlights:
+      - Designed comprehensive master plans for residential, industrial, and tourism projects, working on scales of 1/500, 1/2000, and 1/5000
+      - Led land-use planning and infrastructure integration, ensuring alignment with sustainability and climate adaptation principles
+      - Conducted public consultations and stakeholder meetings with government agencies, developers, and community representatives to drive consensus
+      - Created high-quality digital graphics, including GIS maps, 3D models, and urban development diagrams, to support planning decisions
+          
+  - title: Urban Planner - Full time, NDA GROUP - NEW DESIGN ASSOCIATES
+    from: August 2017
+    to: August 2019
+    location: Ho Chi Minh, Vietnam
+    summary:
+    highlights:
+      - Developed concept zoning strategies that balance regulatory constraints with investor goals, facilitating project approvals
+      - Created detailed site analysis, hand-drawn master plans, and urban diagrams, enhancing the clarity of project presentations
+      - Contributed to the planning of resort, cultural, and residential developments, ensuring a strong integration of urban aesthetics and functionality
+          
+  - title: Quality Controller - Part time, VIBUMA.COM - VIETNAM BUILDING MATERIALS
+    from: March 2016
+    to: February 2017
+    location: Ho Chi Minh, Vietnam
+    summary:
+    highlights:
+      - Conducted quality assessments of material suppliers and verified compliance with industry standards
+      - Facilitated connections between suppliers, architects, and interior designers, optimizing material sourcing for construction projects
+      - Managed and maintained a comprehensive database of building materials, improving data accessibility for industry professionals
+
+nl:
+  - title: Freelance - Self employed
+    from: July 2025
+    to: Present
+    location: The Netherlands
+    summary:
+    highlights:
+
+  - title: Student job, KU LEUVEN
+    from: October 2024
+    to: June 2025
+    location: Leuven, Belgium
+    summary:
+    highlights:
+      - Assisted with map assessments to support projects
+      - Communicated with and provided support to professors on academic related tasks
+
+  - title: Summer Internship, METAPOLIS EU
+    from: July 2024
+    to: August 2024
+    location: Cluj, Romania
+    summary:
+    highlights:
+      - Contributed to the Colentina Lakes International Design Competition, assisting in concept development and urban planning strategies
+      - Designed urban green pocket spaces to enhance livability in both single-housing neighborhoods and socialist-era residential blocks
+      - Developed visually compelling graphics and presentation materials to communicate urban design principles effectively
+
+  - title: Urban Planner - Full time, AIM REAL ESTATE INVESTMENT AND DEVELOPMENT JSC
+    from: February 2023
+    to: July 2023
+    location: Ho Chi Minh, Vietnam
+    summary:
+    highlights:
+      - Led urban planning tasks for residential projects (1/500 and 1/2000 scale), ensuring compliance with zoning regulations and sustainable growth strategies
+      - Coordinated between multidisciplinary teams, including architects, engineers, and legal consultants, to streamline project execution
+      - Conducted spatial analysis and demographic studies to inform zoning, population growth forecasts, and phased urban development
+      - Created graphic master plans and urban design visualizations, improving stakeholder understanding and engagement
+      
+  - title: Urban Planner - Freelance Contractor, SURBANA JURONG
+    from: September 2022
+    to: December 2022
+    location: Ho Chi Minh, Vietnam
+    summary:
+    highlights:
+      - Provided urban planning consultancy for large-scale residential and mixed-use projects, applying data-driven planning principles
+      - Developed zoning strategies that balanced developer objectives with local regulations, optimizing land use and community integration
+          
+  - title: Urban Planner - Full time, SURBANA JURONG
+    from: December 2019
+    to: September 2022
+    location: Ho Chi Minh, Vietnam
+    summary:
+    highlights:
+      - Designed comprehensive master plans for residential, industrial, and tourism projects, working on scales of 1/500, 1/2000, and 1/5000
+      - Led land-use planning and infrastructure integration, ensuring alignment with sustainability and climate adaptation principles
+      - Conducted public consultations and stakeholder meetings with government agencies, developers, and community representatives to drive consensus
+      - Created high-quality digital graphics, including GIS maps, 3D models, and urban development diagrams, to support planning decisions
+          
+  - title: Urban Planner - Full time, NDA GROUP - NEW DESIGN ASSOCIATES
+    from: August 2017
+    to: August 2019
+    location: Ho Chi Minh, Vietnam
+    summary:
+    highlights:
+      - Developed concept zoning strategies that balance regulatory constraints with investor goals, facilitating project approvals
+      - Created detailed site analysis, hand-drawn master plans, and urban diagrams, enhancing the clarity of project presentations
+      - Contributed to the planning of resort, cultural, and residential developments, ensuring a strong integration of urban aesthetics and functionality
+          
+  - title: Quality Controller - Part time, VIBUMA.COM - VIETNAM BUILDING MATERIALS
+    from: March 2016
+    to: February 2017
+    location: Ho Chi Minh, Vietnam
+    summary:
+    highlights:
+      - Conducted quality assessments of material suppliers and verified compliance with industry standards
+      - Facilitated connections between suppliers, architects, and interior designers, optimizing material sourcing for construction projects
+      - Managed and maintained a comprehensive database of building materials, improving data accessibility for industry professionals

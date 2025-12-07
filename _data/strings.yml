@@ -1,0 +1,23 @@
+featured_works:
+  en: "Featured works"
+  nl: "Uitgelichte werken"
+
+portfolio:
+  en: "Portfolio"
+  nl: "Portfolio"
+
+about_me:
+  en: "About me"
+  nl: "Over mij"
+
+skills:
+  en: "Skills"
+  nl: "Vaardigheden"
+
+experiences:
+  en: "Experiences"
+  nl: "Ervaringen"
+
+education:
+  en: "Education"
+  nl: "Opleiding"

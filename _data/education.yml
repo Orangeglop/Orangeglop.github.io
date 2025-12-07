@@ -1,12 +1,27 @@
-- institution: KU Leuven
-  area: Urbanism, Landscape and Planning
-  degree: MSc
-  end_date: 2025-07
-  location: Leuven, Belgium
-- institution: Ho Chi Minh University of Architecture
-  area: Urban and Regional Planning
-  degree: BSc
-  date:
-  start_date:
-  end_date: 2018
-  location: Ho Chi Minh, Viet Nam
+en:
+  - institution: KU Leuven
+    area: Urbanism, Landscape and Planning
+    degree: MSc
+    end_date: 2025-07
+    location: Leuven, Belgium
+  - institution: Ho Chi Minh University of Architecture
+    area: Urban and Regional Planning
+    degree: BSc
+    date:
+    start_date:
+    end_date: 2018
+    location: Ho Chi Minh, Viet Nam
+
+nl:
+  - institution: KU Leuven
+    area: Urbanism, Landscape and Planning
+    degree: MSc
+    end_date: 2025-07
+    location: Leuven, Belgium
+  - institution: Ho Chi Minh University of Architecture
+    area: Urban and Regional Planning
+    degree: BSc
+    date:
+    start_date:
+    end_date: 2018
+    location: Ho Chi Minh, Viet Nam

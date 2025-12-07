@@ -1,8 +1,10 @@
+{% assign current_lang = page.lang | default: 'en' %}
+
 <div class="col-lg">
   <h5 class="mb-3">{{ include.title }}</h5>
 
   <ul>
-  {% for skill in include.source %}
+  {% for skill in site.data.skills[current_lang] %}
     <li>{{ skill.name }}</li>
   {% endfor %}
   </ul>

@@ -1,11 +1,14 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: Over mij
+lang: nl
+permalink: /nl/about/
+ref: about-page
 weight: 3
 ---
 
-###### **About Me**
+###### **{{ site.data.strings.about_me[page.lang] }}**
+
 ---
 
 Hello, I'm **{{ site.author.name }}** :wave:, an urban planner and designer, and a landscape enthusiast.<br>
@@ -14,16 +17,18 @@ I'm currently living in The Netherlands and working as a freelance planner for s
 <br />
 
 <div class="row">
-{% include about/skills.html title="Skills" source=site.data.skills %}
-<!-- {% include about/skills.html title="Other Skills" source=site.data.other-skills %} -->
+{% assign skills_title = site.data.strings.skills[page.lang] %}
+{% include about/skills.html title=skills_title %}
 </div>
 
 <div class="row">
-{% include about/experience.html title="Experiences" %}
+{% assign experience_title = site.data.strings.experiences[page.lang] %}
+{% include about/experience.html title=experience_title %}
 </div>
 
 <br />
 
 <div class="row">
-{% include about/education.html title="Education" %}
+{% assign education_title = site.data.strings.education[page.lang] %}
+{% include about/education.html title=education_title %}
 </div>

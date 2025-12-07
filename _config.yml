@@ -3,7 +3,7 @@ title               : Tran Hoang
 description_en      : >-
                       Hello, I am Tran - an urban planner-designer, and a landscape enthusiast.
 description_nl      : >-
-                      Hallo, ik ben Tran - een stedenbouwkundige een liefhebber van landschappen.
+                      Hallo, ik ben Tran - een stedenbouwkundige en een liefhebber van landschappen.
 baseurl             : ""            # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : Orangeglop/Orangeglop.github.io      # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
 remote_theme        : yousinix/portfolYOU
@@ -20,7 +20,6 @@ nav_exclude:                                            # The following paths ar
   - pages/tags.html
   - pages/404.html
   - pages/index.md
-  - pages/featured.md
   - documentation/partials/**                           # For Documentation Only
 
 

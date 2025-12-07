@@ -1,0 +1,7 @@
+main:
+  - title: 
+      en: "About"
+      nl: "Over"
+    url: 
+      en: "/en/about"
+      nl: "/nl/about"
