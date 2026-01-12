@@ -11,8 +11,10 @@ weight: 3
 
 ---
 
-Hello, I'm **{{ site.author.name }}** :wave:, an urban planner and designer, and a landscape enthusiast.<br>
-I'm currently living in The Netherlands and working as a freelance planner for several projects in Southeast Asia. I am also learning Dutch to improve my communication skills. This website is created to store my most up-to-date portfolio and featured works. I'm open to work and willingly to relocate within The Netherlands.
+Hallo, ik ben **{{ site.author.name }}** :wave:, een stedenbbouwkundige, ontwerper en liefhebber van landschappen.<br>
+Momenteel woon ik in Nederland, waar ik werk aan verschillende projecten in Zuidoost-Azië.
+Om mijn communicatie verbeteren, leer ik actief Nederlands.
+Op deze website presenteer ik mijn meest recente werk en projecten. Daarnaast sta ik open voor nieuwe kansen en ben ik bereid om binnen Nederland te verhuizen als dat nodig is.
 
 <br />
 

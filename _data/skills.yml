@@ -15,7 +15,7 @@ en:
     percentage:
     color:
     
-  - name: "Language: English, Vietnamese, Mandarin, Japanese"
+  - name: "Language: English, Vietnamese, Dutch, Mandarin, Japanese"
     percentage:
     color:
 
@@ -32,10 +32,10 @@ nl:
     percentage:
     color:
 
-  - name: "Other: Sketchup, Lumion, Handsketch, QGIS"
+  - name: "Anders: Sketchup, Lumion, Handsketch, QGIS"
     percentage:
     color:
     
-  - name: "Language: English, Vietnamese, Mandarin, Japanese"
+  - name: "Talen: Engel, Vietnamees, Nederlands, Chinees, Japans"
     percentage:
     color:
