@@ -1,7 +1,7 @@
 ---
 layout: page
 lang: nl
-permalink: /nl
+permalink: /nl/
 ref: index
 ---
 
