@@ -23,13 +23,13 @@ Op deze website presenteer ik mijn meest recente werk en projecten. Om mijn comm
 </div>
 
 <div class="row">
-{% assign experience_title = site.data.strings.experiences[page.lang] %}
-{% include about/experience.html title=experience_title %}
+{% assign education_title = site.data.strings.education[page.lang] %}
+{% include about/education.html title=education_title %}
 </div>
 
 <br />
 
 <div class="row">
-{% assign education_title = site.data.strings.education[page.lang] %}
-{% include about/education.html title=education_title %}
+{% assign experience_title = site.data.strings.experiences[page.lang] %}
+{% include about/experience.html title=experience_title %}
 </div>
