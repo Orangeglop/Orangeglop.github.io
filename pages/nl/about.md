@@ -11,10 +11,9 @@ weight: 3
 
 ---
 
-Hallo, ik ben **{{ site.author.name }}** :wave:, een stedenbbouwkundige, ontwerper en liefhebber van landschappen.<br>
-Momenteel woon ik in Nederland, waar ik werk aan verschillende projecten in Zuidoost-Azië.
-Om mijn communicatie verbeteren, leer ik actief Nederlands.
-Op deze website presenteer ik mijn meest recente werk en projecten. Daarnaast sta ik open voor nieuwe kansen en ben ik bereid om binnen Nederland te verhuizen als dat nodig is.
+Hallo, ik ben **{{ site.author.name }}** :wave:, stedenbbouwkundige, landschapsontwerper en liefhebber van landschappen.<br>
+Momenteel woon ik in Nederland, en werk ik aan verschillende projecten in Zuidoost-Azië.
+Op deze website presenteer ik mijn meest recente werk en projecten. Om mijn communicatie verbeteren, leer ik actief Nederlands. Daarnaast sta ik open voor nieuwe kansen en ben ik bereid om binnen Nederland te verhuizen als dat nodig is.
 
 <br />
 

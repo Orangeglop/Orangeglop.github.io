@@ -14,10 +14,11 @@ skills:
   en: "Skills"
   nl: "Vaardigheden"
 
+education:
+  en: "Education"
+  nl: "Opleiding"
+  
 experiences:
   en: "Experiences"
   nl: "Ervaringen"
 
-education:
-  en: "Education"
-  nl: "Opleiding"

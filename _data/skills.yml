@@ -1,41 +1,41 @@
 en:
-  - name: "Office: Word, Excel, PowerPoint"
+  - name: "Autodesk: AutoCAD, Infraworks, Civil3D"
     percentage:
     color:
 
-  - name: "Autodesk: AutoCAD, Infraworks, Civil3D"
+  - name: "QGIS, Sketchup, Lumion, Handsketch"
     percentage:
     color:
 
   - name: "Adobe: Photoshop, Illustrator, Indesign"
     percentage:
     color:
-
-  - name: "Other: Sketchup, Lumion, Handsketch, QGIS"
+    
+  - name: "Language: English (C1), Vietnamese (Native), Dutch (B1), Mandarin, Japanese"
     percentage:
     color:
-    
-  - name: "Language: English, Vietnamese, Dutch, Mandarin, Japanese"
+
+  - name: "Office: Word, Excel, PowerPoint"
     percentage:
     color:
 
 nl:
-  - name: "Office: Word, Excel, PowerPoint"
-    percentage:
-    color:
-
   - name: "Autodesk: AutoCAD, Infraworks, Civil3D"
     percentage:
     color:
 
+  - name: "QGIS, Sketchup, Lumion, Handsketch"
+    percentage:
+    color:
+    
   - name: "Adobe: Photoshop, Illustrator, Indesign"
     percentage:
     color:
 
-  - name: "Anderen: Sketchup, Lumion, Handsketch, QGIS"
+  - name: "Talen: Engel (C2), Vietnamees (Moedertaal), Nederlands (B1), Chinees, Japans"
     percentage:
     color:
-    
-  - name: "Talen: Engel, Vietnamees, Nederlands, Chinees, Japans"
+
+  - name: "Office: Word, Excel, PowerPoint"
     percentage:
     color:
