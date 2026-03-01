@@ -83,11 +83,11 @@
           var landscapeBase = "{{ '/assets/portfolio/landscape/page-' | relative_url }}";
           
           // Note: URL encoding (%5BTRAN%5D...) is safer for filenames with spaces/brackets
-          var urbanPdf = "{{ '/assets/portfolio/%5BTRAN%5D%20PORTFOLIO_URBAN_2025.pdf' | relative_url }}";
-          var landscapePdf = "{{ '/assets/portfolio/%5BTRAN%5D%20PORTFOLIO_LANDSCAPE_2025.pdf' | relative_url }}";
+          var urbanPdf = "{{ '/assets/portfolio/%5BTRAN%5D%20PORTFOLIO_URBAN_2026.pdf' | relative_url }}";
+          var landscapePdf = "{{ '/assets/portfolio/%5BTRAN%5D%20PORTFOLIO_LANDSCAPE_2026.pdf' | relative_url }}";
 
           var option_button_pdf_landscape = {
-            source: Array.from({ length: 26 }, (_, i) => landscapeBase + (i+1) + ".webp"),
+            source: Array.from({ length: 21 }, (_, i) => landscapeBase + (i+1) + ".webp"),
             webgl:true,
             webglShadow: true,
             shadowOpacity: 0.2,
@@ -108,7 +108,7 @@
           };
 
           var option_button_pdf_urban = {
-            source: Array.from({ length: 32 }, (_, i) => urbanBase + (i+1) + ".webp"),
+            source: Array.from({ length: 31 }, (_, i) => urbanBase + (i+1) + ".webp"),
             webgl:true,
             webglShadow: true,
             shadowOpacity: 0.2,
