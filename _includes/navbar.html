@@ -3,7 +3,12 @@
   {% assign current_lang = page.lang | default: 'en' %}
   
   <a class="navbar-brand" href="{{ site.baseurl }}/{{ current_lang }}/">
-    <h5><b>{{ site.title }}</b></h5>
+  <h5 style="margin:0; display:flex; flex-direction:column; align-items:center;">
+    <b style="line-height:1;">{{ site.title }}</b>
+    <span class="nav-item" style="display:block; text-align:center; padding:0; margin-top:2px; font-size:0.85rem; font-weight:600;">
+      {{ site.data.strings.portfolio[page.lang] | default: "Portfolio" }}
+    </span>
+  </h5>
   </a>
 
   <div class="navbar-collapse" id="navbarNavAltMarkup">
@@ -25,7 +30,7 @@
       {% assign translations = site.pages | where: "ref", page.ref | sort: 'lang' %}
       {% for t in translations %}
         {% if t.lang != current_lang %}
-          <a class="nav-item nav-link" href="{{ t.url | relative_url }}" style="font-weight: bold;">
+          <a class="nav-item nav-link" href="{{ t.url | relative_url }}">
             {{ t.lang | upcase }}
           </a>
         {% endif %}

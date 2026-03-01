@@ -7,13 +7,15 @@ permalink: /en/about/
 weight: 3
 ---
 
-###### **{{ site.data.strings.about_me[page.lang] }}**
+###### **{{ site.data.strings.about_me[page.lang]}}**
 
 ---
 
-Hello, I'm **{{ site.author.name }}** :wave:, an urban planner, designer, and a landscape enthusiast.<br>
-I'm currently living in The Netherlands and working as a freelance planner and designer for several projects in Southeast Asia.
-This website is created to store my most up-to-date portfolio and featured works. I am also learning Dutch to improve my communication skills. I'm open to work and willingly to relocate within The Netherlands.
+{{ site.data.strings.about_me_text[page.lang] | replace: "%AUTHOR_NAME%", site.author.name }}
+
+<br />
+
+{% include elements/about_me_carousel.html %}
 
 <br />
 

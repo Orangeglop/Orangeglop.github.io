@@ -1,0 +1,25 @@
+<div id="carouselAboutMe" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+  {% for image in site.data.images %}
+      <li data-target="#carouselAboutMe" data-slide-to="{{ forloop.index0 }}" class="{% if forloop.first %}active{% endif %}"></li>
+  {% endfor %}
+  </ol>
+
+  <div class="carousel-inner">
+    {% for image in site.data.images %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img src="{{ image.path | relative_url }}" class="d-block w-100">
+      </div>
+    {% endfor %}
+  </div>
+
+  <a class="carousel-control-prev" href="#carouselAboutMe" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+
+  <a class="carousel-control-next" href="#carouselAboutMe" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

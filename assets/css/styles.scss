@@ -51,6 +51,30 @@
   margin: 0 auto;
 }
 
+#carouselAboutMe {
+  width: 100%;      
+  height: 300px;     /* fixed carousel height */
+  overflow: hidden;
+}
+
+#carouselAboutMe .carousel-inner {
+  width: 100%;
+  height: 100%;
+}
+
+#carouselAboutMe .carousel-item {
+  height: 100%;
+}
+
+#carouselAboutMe .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;      /* scales image to fit inside container while preserving aspect ratio */
+  object-position: center;  /* centers the image inside the container */
+  display: block;
+  margin: 0 auto;
+}
+
 .df-ui-custom-download-button{
   width:max-content;
 }
