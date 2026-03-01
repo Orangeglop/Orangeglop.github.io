@@ -13,13 +13,13 @@
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2500">
   <ol class="carousel-indicators">
-  {% for image in site.data.images %}
+  {% for image in site.data.images_featured %}
       <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.index0 }}" class="{% if forloop.first %}active{% endif %}"></li>
   {% endfor %}
   </ol>
 
   <div class="carousel-inner">
-    {% for image in site.data.images %}
+    {% for image in site.data.images_featured %}
       <div class="carousel-item {% if forloop.first %}active{% endif %}">
         <img src="{{ image.path | relative_url }}" class="d-block w-100">
       </div>
@@ -94,7 +94,7 @@
             soundEnable: false,
             pageMode: DFLIP.PAGE_MODE.DOUBLE,
             singlePageMode: DFLIP.SINGLE_PAGE_MODE.AUTO,
-            zoomRatio: 1.5,
+            zoomRatio: 10.0,
             stiffness: 0,
             backgroundColor: "#b8a8cbcc",
             transparent: true,
