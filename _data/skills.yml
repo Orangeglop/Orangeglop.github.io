@@ -11,7 +11,7 @@ en:
     percentage:
     color:
     
-  - name: "Language: English (C1), Vietnamese (Native), Dutch (B1), Mandarin, Japanese"
+  - name: "Language: Vietnamese (Native), Dutch (B1), English (C1), Mandarin, Japanese"
     percentage:
     color:
 
@@ -32,7 +32,7 @@ nl:
     percentage:
     color:
 
-  - name: "Talen: Engel (C2), Vietnamees (Moedertaal), Nederlands (B1), Chinees, Japans"
+  - name: "Talen: Vietnamees (Moedertaal), Nederlands (B1), Engel (C1), Chinees, Japans"
     percentage:
     color:
 
