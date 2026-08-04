@@ -85,6 +85,10 @@
     height: 100%; /* Ensure it takes full height of the parent */
 }
 
+.df-page-front:before, .df-page-back:before {
+    opacity: 0;
+}
+
 .horizontal_container {
   display: flex; /* Enables flexbox layout */
   flex-direction: row; /* Aligns children in a row */

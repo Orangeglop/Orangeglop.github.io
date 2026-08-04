@@ -88,13 +88,13 @@
 
           var option_button_pdf_landscape = {
             source: Array.from({ length: 21 }, (_, i) => landscapeBase + (i+1) + ".webp"),
-            webgl:true,
+            webgl:false,
             webglShadow: true,
             shadowOpacity: 0.2,
             soundEnable: false,
             pageMode: DFLIP.PAGE_MODE.DOUBLE,
             singlePageMode: DFLIP.SINGLE_PAGE_MODE.AUTO,
-            zoomRatio: 10.0,
+            zoomRatio: 1.5,
             stiffness: 0,
             backgroundColor: "#b8a8cbcc",
             transparent: true,
@@ -109,7 +109,7 @@
 
           var option_button_pdf_urban = {
             source: Array.from({ length: 31 }, (_, i) => urbanBase + (i+1) + ".webp"),
-            webgl:true,
+            webgl:false,
             webglShadow: true,
             shadowOpacity: 0.2,
             soundEnable: false,
