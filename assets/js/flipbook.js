@@ -95,6 +95,8 @@
     this._onKey   = this._handleKey.bind(this);
     this._onFS    = this._handleFS.bind(this);
     this._onWheel = this._handleWheel.bind(this);
+    this._onPop   = this._handlePop.bind(this);
+    this._pushedHistory = false;
 
     this._buildDOM();
   }
@@ -214,8 +216,15 @@
   };
 
   /* =========================================================
-     Open / Close
+     Open / Close & Browser History Integration
   ========================================================= */
+  FlipBook.prototype._handlePop = function () {
+    if (this._open) {
+      this._pushedHistory = false;
+      this.close();
+    }
+  };
+
   FlipBook.prototype.open = function () {
     if (this._open) return;
     var self = this;
@@ -231,6 +240,16 @@
     document.body.appendChild(this._overlay);
     this._overlay.classList.add('fb-open');
     document.body.style.overflow = 'hidden';
+
+    /* Browser back-button support */
+    if (window.history && window.history.pushState) {
+      try {
+        window.history.pushState({ flipbookOpen: true }, '', window.location.href);
+        this._pushedHistory = true;
+      } catch (err) {}
+    }
+    window.addEventListener('popstate', this._onPop);
+
     document.addEventListener('keydown', this._onKey);
     ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(function (ev) {
       document.addEventListener(ev, self._onFS);
@@ -251,6 +270,15 @@
     if (document.activeElement && document.activeElement.blur) {
       document.activeElement.blur();
     }
+
+    window.removeEventListener('popstate', this._onPop);
+    if (this._pushedHistory) {
+      this._pushedHistory = false;
+      try {
+        window.history.back();
+      } catch (err) {}
+    }
+
     document.removeEventListener('keydown', this._onKey);
     ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(function (ev) {
       document.removeEventListener(ev, self._onFS);
