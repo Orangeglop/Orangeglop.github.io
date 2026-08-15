@@ -1,18 +1,16 @@
-<nav class="navbar navbar-expand navbar-themed">
+<nav class="navbar navbar-expand px-0" aria-label="Main Navigation">
 
   {% assign current_lang = page.lang | default: 'en' %}
   
   <a class="navbar-brand" href="{{ site.baseurl }}/{{ current_lang }}/">
-  <h5 style="margin:0; display:flex; flex-direction:column; align-items:center;">
-    <b style="line-height:1;">{{ site.title }}</b>
-    <span class="nav-item" style="display:block; text-align:center; padding:0; margin-top:2px; font-size:0.85rem; font-weight:600;">
-      {{ site.data.strings.portfolio[page.lang] | default: "Portfolio" }}
+    <h5 class="navbar-brand-title">{{ site.title }}</h5>
+    <span class="navbar-brand-subtitle">
+      {{ site.data.strings.portfolio[current_lang] | default: "Portfolio" }}
     </span>
-  </h5>
   </a>
 
   <div class="navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto">
+    <div class="navbar-nav ml-auto align-items-center">
 
       {% for link in site.data.navigation.main %}  
         {% assign link_url = link.url[current_lang] | default: "/" %}
@@ -27,15 +25,17 @@
         </a>
       {% endfor %}
 
-      {% assign translations = site.pages | concat: site.research %}
-      {% assign translations = translations | where_exp: "item", "item.ref == page.ref" | sort: 'lang' %}
-      {% for t in translations %}
-        {% if t.lang and t.lang != current_lang %}
-          <a class="nav-item nav-link" href="{{ t.url | relative_url }}">
-            {{ t.lang | upcase }}
-          </a>
-        {% endif %}
-      {% endfor %}
+      {% if page.ref %}
+        {% assign translations = site.pages | concat: site.research %}
+        {% assign translations = translations | where_exp: "item", "item.ref == page.ref" | sort: 'lang' %}
+        {% for t in translations %}
+          {% if t.lang and t.lang != current_lang %}
+            <a class="nav-item nav-link lang-switch" href="{{ t.url | relative_url }}" aria-label="Switch to {{ t.lang | upcase }}">
+              {{ t.lang | upcase }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
 
     </div>
   </div>

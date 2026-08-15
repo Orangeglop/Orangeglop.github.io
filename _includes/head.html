@@ -1,25 +1,52 @@
 <head>
 
+  {% assign current_lang = page.lang | default: 'en' %}
   {% assign title = page.title | default: site.title | escape %}
-  {% assign description = page.description | default: site.description | strip_html | strip_newlines | truncate: 160 %}
-  {% assign image = page.image | default: site.author.image %}
+  {% if current_lang == 'nl' %}
+    {% assign default_desc = site.description_nl | default: site.description %}
+  {% else %}
+    {% assign default_desc = site.description_en | default: site.description %}
+  {% endif %}
+  {% assign description = page.description | default: page.subtitle | default: default_desc | strip_html | strip_newlines | truncate: 160 %}
+  {% assign og_image_path = page.image | default: site.author.image %}
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
-  <meta property="og:image" content="{{ image }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ og_image_path | absolute_url }}">
 
-  <title>{{ title }}</title>
-  <meta name="description" content="{{ description }}">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ description }}">
+  <meta name="twitter:image" content="{{ og_image_path | absolute_url }}">
+
+  <!-- Multilingual SEO Alternates -->
+  {% if page.ref %}
+    {% assign translations = site.pages | concat: site.research %}
+    {% assign translations = translations | where_exp: "item", "item.ref == page.ref" %}
+    {% for t in translations %}
+      {% if t.lang %}
+        <link rel="alternate" hreflang="{{ t.lang }}" href="{{ t.url | absolute_url }}" />
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 
   <link rel="shortcut icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
 
-  <!-- Theme style -->
-  <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
@@ -30,11 +57,7 @@
   <!-- Animate CSS CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
 
-  <!-- Custom CSS -->
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
-
-  <script>
-    document.documentElement.setAttribute("data-theme", "light");
-    localStorage.setItem("theme", "light");
-  </script>
+  <link rel="stylesheet" href="{{ '/assets/css/flipbook.css' | relative_url }}">
 </head>

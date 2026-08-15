@@ -80,22 +80,14 @@
   margin-top: 14px;
   font-size: 1.05rem;
   font-weight: 600;
-  color: #2c2538;
+  color: #1a1a1a;
   letter-spacing: -0.01em;
   text-align: center;
   transition: color 0.2s ease;
 }
 
 .fb-thumb:hover .fb-thumb-title {
-  color: #6d42a8;
-}
-
-[data-theme="dark"] .fb-thumb-title {
-  color: #e2dff0;
-}
-
-[data-theme="dark"] .fb-thumb:hover .fb-thumb-title {
-  color: #c4b5fd;
+  color: #2563eb;
 }
 
 /* --------------------------------------------------------------------------

@@ -8,6 +8,7 @@ main:
   - title: 
       en: "About"
       nl: "Over"
+    ref: about-page
     url: 
       en: "/en/about"
       nl: "/nl/about"

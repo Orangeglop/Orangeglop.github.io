@@ -7,13 +7,13 @@ layout: page
 
   {% if page.image and page.hide_hero != true %}
   <div class="post-hero-image mb-3">
-    <img src="{{ page.image | relative_url }}" class="img-fluid rounded shadow-sm mx-auto d-block" alt="{{ page.title }}" style="max-height: 520px; object-fit: cover;">
+    <img src="{{ page.image | relative_url }}" class="img-fluid rounded shadow-sm mx-auto d-block" alt="{{ page.title }}">
   </div>
   {% endif %}
 
   {% assign subtitle_text = page.subtitle | default: page.description %}
   {% if subtitle_text %}
-  <p class="post-subtitle text-muted mb-4 lead mx-auto" style="font-size: 1.15rem; font-weight: 400; max-width: 800px;">
+  <p class="post-subtitle mb-4 lead mx-auto">
     {{ subtitle_text }}
   </p>
   {% endif %}
