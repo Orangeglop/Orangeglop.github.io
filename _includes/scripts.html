@@ -11,9 +11,16 @@
 <!-- FlipBook Viewer -->
 <script src="{{ '/assets/js/flipbook.js' | relative_url }}"></script>
 
-<!-- Initialize Bootstrap tooltips if any -->
+<!-- Initialize Bootstrap tooltips and touch blur handlers -->
 <script>
   $(function () {
     $('[data-toggle="tooltip"]').tooltip();
   });
+
+  document.addEventListener('touchend', function (e) {
+    var btn = e.target.closest('.carousel-control-prev, .carousel-control-next');
+    if (btn) {
+      setTimeout(function () { btn.blur(); }, 80);
+    }
+  }, { passive: true });
 </script>

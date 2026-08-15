@@ -257,25 +257,21 @@ ul {
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   opacity: 0.4;
-  transition: opacity 0.25s ease, transform 0.2s ease, background-color 0.2s ease;
-  margin: 0 12px;
+  transition: opacity 0.25s ease, transform 0.15s ease, background-color 0.2s ease;
+  margin: 0 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
-.site-carousel:hover .carousel-control-prev,
-.site-carousel:hover .carousel-control-next {
-  opacity: 0.75;
-}
-
-.site-carousel .carousel-control-prev:hover,
-.site-carousel .carousel-control-next:hover {
-  opacity: 0.95;
-  background-color: rgba(255, 255, 255, 0.92);
-  transform: translateY(-50%) scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.site-carousel .carousel-control-prev:active,
+.site-carousel .carousel-control-next:active {
+  opacity: 0.85;
+  transform: translateY(-50%) scale(0.94);
+  background-color: rgba(255, 255, 255, 0.85);
 }
 
 .site-carousel .carousel-control-prev:focus,
@@ -284,23 +280,26 @@ ul {
   box-shadow: none;
 }
 
-.site-carousel .carousel-control-prev:focus:not(:hover),
-.site-carousel .carousel-control-next:focus:not(:hover) {
-  opacity: 0.4;
-  background-color: rgba(255, 255, 255, 0.65);
-  transform: translateY(-50%) scale(1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.site-carousel:hover .carousel-control-prev:focus:not(:hover),
-.site-carousel:hover .carousel-control-next:focus:not(:hover) {
-  opacity: 0.75;
-}
-
 .site-carousel .carousel-control-prev:focus-visible,
 .site-carousel .carousel-control-next:focus-visible {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
+}
+
+/* Desktop-only hover rules (ignored on mobile touchscreens) */
+@media (hover: hover) and (pointer: fine) {
+  .site-carousel:hover .carousel-control-prev,
+  .site-carousel:hover .carousel-control-next {
+    opacity: 0.75;
+  }
+
+  .site-carousel .carousel-control-prev:hover,
+  .site-carousel .carousel-control-next:hover {
+    opacity: 0.95;
+    background-color: rgba(255, 255, 255, 0.92);
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .carousel-control-prev-icon,
