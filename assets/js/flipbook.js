@@ -155,10 +155,10 @@
     /* ---- Desktop Nav Arrows ---- */
     var navPrev = el('button', 'fb-nav-arrow fb-nav-prev', I.prev);
     navPrev.type = 'button'; navPrev.title = 'Previous page (Left arrow)'; navPrev.setAttribute('aria-label', 'Previous page');
-    navPrev.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); self._back(); });
+    navPrev.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); self._back(); navPrev.blur(); });
     var navNext = el('button', 'fb-nav-arrow fb-nav-next', I.next);
     navNext.type = 'button'; navNext.title = 'Next page (Right arrow)'; navNext.setAttribute('aria-label', 'Next page');
-    navNext.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); self._forward(); });
+    navNext.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); self._forward(); navNext.blur(); });
     this._navPrev = navPrev;
     this._navNext = navNext;
 
