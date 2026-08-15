@@ -1,0 +1,363 @@
+/* ==========================================================================
+   Custom Flipbook Viewer — flipbook.css
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Thumbnail card (.fb-thumb)
+   -------------------------------------------------------------------------- */
+
+.fb-thumb-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.fb-thumb {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: 15px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  background: #1a1520;
+}
+
+.fb-thumb:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.24);
+}
+
+.fb-thumb-cover {
+  width: 100%;
+  height: calc(100% - 48px);
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 12px 12px 0 0;
+}
+
+.fb-thumb-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(15, 10, 28, 0.9);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 0 12px;
+}
+.fb-thumb-label svg { opacity: 0.65; flex-shrink: 0; }
+
+/* --------------------------------------------------------------------------
+   Overlay — full screen
+   -------------------------------------------------------------------------- */
+
+.fb-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(4, 3, 10, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.fb-overlay.fb-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* --------------------------------------------------------------------------
+   Modal — fills overlay
+   -------------------------------------------------------------------------- */
+
+.fb-modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background: #0c0a17;
+}
+
+/* --------------------------------------------------------------------------
+   Toolbar
+   -------------------------------------------------------------------------- */
+
+.fb-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 5px 14px;
+  background: rgba(255, 255, 255, 0.035);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+  flex-shrink: 0;
+  min-height: 50px;
+  flex-wrap: wrap;
+}
+
+.fb-sep {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+.fb-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  transition: background 0.14s, color 0.14s, transform 0.1s;
+  flex-shrink: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family: inherit;
+}
+.fb-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: scale(1.09);
+  text-decoration: none;
+}
+.fb-btn:active { transform: scale(0.93); }
+.fb-btn svg   { pointer-events: none; }
+
+.fb-page-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 1px;
+}
+
+.fb-page-in {
+  width: 42px;
+  height: 28px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.fb-page-in:focus { border-color: rgba(180, 155, 210, 0.55); }
+
+.fb-page-tot {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.32);
+  white-space: nowrap;
+}
+
+.fb-dl  { text-decoration: none; }
+.fb-close { margin-left: auto; }
+
+/* --------------------------------------------------------------------------
+   Stage — holds the book spread, clips zoom overflow
+   -------------------------------------------------------------------------- */
+
+.fb-stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+.fb-stage-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  transition: transform 0.12s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Book spread
+   -------------------------------------------------------------------------- */
+
+.fb-book {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  /* Perspective origin for 3D page-flip children */
+  perspective: 3200px;
+  perspective-origin: center 45%;
+  /* Constrain to readable aspect ratio */
+  max-width: min(100%, calc((100vh - 70px) * 1.55));
+  filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.55));
+  transform: translateX(0);
+  transition: transform 0.38s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+}
+
+/* ---- Page slots ---- */
+.fb-slot {
+  position: relative;
+  flex: 1 1 50%;
+  max-width: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.fb-left {
+  border-radius: 4px 0 0 4px;
+}
+
+.fb-right {
+  border-radius: 0 4px 4px 0;
+}
+
+/* Cover mode: book is translated left by 25% of its width so the right slot (cover) is centered */
+.fb-book.fb-cover-mode {
+  transform: translateX(-25%);
+}
+
+/* Page image inside slot */
+.fb-pg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* --------------------------------------------------------------------------
+   Page flipper — CSS 3D book-page turn
+   -------------------------------------------------------------------------- */
+
+.fb-flipper {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform-style: preserve-3d;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* Right-side flipper: peels RIGHT → LEFT (forward) */
+.fb-flipper-right {
+  left: 50%;
+  transform-origin: left center;
+}
+
+/* Left-side flipper: peels LEFT → RIGHT (backward) */
+.fb-flipper-left {
+  left: 0;
+  transform-origin: right center;
+}
+
+/* ---- Faces ---- */
+.fb-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  /* Critical: hide face when rotated away from viewer */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Back face: pre-rotated 180° so content reads correctly when revealed */
+.fb-face-back {
+  transform: rotateY(180deg);
+}
+
+/* ---- Flip keyframe animations ---- */
+
+@keyframes fb-flip-fwd {
+  from { transform: rotateY(0deg);    }
+  to   { transform: rotateY(-180deg); }
+}
+
+@keyframes fb-flip-bwd {
+  from { transform: rotateY(0deg);   }
+  to   { transform: rotateY(180deg); }
+}
+
+/* Trigger by adding .fb-go class via JS */
+.fb-flipper-right.fb-go {
+  animation: fb-flip-fwd 0.38s cubic-bezier(0.645, 0.045, 0.355, 1.000) forwards;
+}
+
+.fb-flipper-left.fb-go {
+  animation: fb-flip-bwd 0.38s cubic-bezier(0.645, 0.045, 0.355, 1.000) forwards;
+}
+
+/* --------------------------------------------------------------------------
+   Loading spinner (paper color, subtle)
+   -------------------------------------------------------------------------- */
+
+.fb-spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.fb-spinner::after {
+  content: '';
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(0, 0, 0, 0.08);
+  border-top-color: rgba(90, 60, 130, 0.35);
+  border-radius: 50%;
+  animation: fb-spin 0.75s linear infinite;
+}
+@keyframes fb-spin { to { transform: rotate(360deg); } }
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 600px) {
+  .fb-stage { padding: 6px; }
+  .fb-btn   { width: 30px; height: 30px; }
+  .fb-page-in { width: 34px; }
+  .fb-toolbar { gap: 1px; padding: 4px 8px; }
+}

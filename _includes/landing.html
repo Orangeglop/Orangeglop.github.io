@@ -1,8 +1,5 @@
-<link href="{{ '/assets/dflip/css/dflip.min.css' | relative_url }}" rel="stylesheet" type="text/css">
-<link href="{{ '/assets/dflip/css/themify-icons.min.css' | relative_url }}" rel="stylesheet" type="text/css">
-
-<script src="{{ '/assets/dflip/js/libs/jquery.min.js' | relative_url }}"></script>
-<script src="{{ '/assets/dflip/js/dflip.min.js' | relative_url }}"></script>
+<link href="{{ '/assets/css/flipbook.css' | relative_url }}" rel="stylesheet" type="text/css">
+<script src="{{ '/assets/js/flipbook.js' | relative_url }}"></script>
 
 <div class="landing-content mt-4">
 
@@ -40,15 +37,11 @@
   <h5 class="section-title mt-5">{{ site.data.strings.portfolio[page.lang] | default: "Portfolio" }}</h5>
 
   <div class="row justify-content-center align-items-center py-3">
-    <div class="col-12 col-md-6 mb-3 df_thumb-container">
-      <div class="_df_thumb" thumb="{{ '/assets/portfolio/urban.webp' | relative_url }}" id="button_pdf_urban">
-        {{ site.data.strings.portfolio_urban[page.lang] | default: "Urban" }}
-      </div>
+    <div class="col-12 col-md-6 mb-3 fb-thumb-container">
+      <div id="fb-urban-host"></div>
     </div>
-    <div class="col-12 col-md-6 mb-3 df_thumb-container">
-      <div class="_df_thumb" thumb="{{ '/assets/portfolio/landscape.webp' | relative_url }}" id="button_pdf_landscape">
-        {{ site.data.strings.portfolio_landscape[page.lang] | default: "Landscape" }}
-      </div>
+    <div class="col-12 col-md-6 mb-3 fb-thumb-container">
+      <div id="fb-landscape-host"></div>
     </div>
 
     <div class="col-12 text-center mt-3">
@@ -63,52 +56,33 @@
   </div>
 
   <script>
-    var urbanBase = "{{ '/assets/portfolio/urban/page-' | relative_url }}";
-    var landscapeBase = "{{ '/assets/portfolio/landscape/page-' | relative_url }}";
-    var urbanPdf = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_URBAN_2026.pdf' | relative_url }}";
-    var landscapePdf = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_LANDSCAPE_2026.pdf' | relative_url }}";
+    (function () {
+      var urbanBase     = "{{ '/assets/portfolio/urban/page-' | relative_url }}";
+      var landscapeBase = "{{ '/assets/portfolio/landscape/page-' | relative_url }}";
+      var urbanPdf      = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_URBAN_2026.pdf' | relative_url }}";
+      var landscapePdf  = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_LANDSCAPE_2026.pdf' | relative_url }}";
+      var urbanThumb    = "{{ '/assets/portfolio/urban.webp' | relative_url }}";
+      var landscapeThumb = "{{ '/assets/portfolio/landscape.webp' | relative_url }}";
 
-    var option_button_pdf_landscape = {
-      source: Array.from({ length: 23 }, (_, i) => landscapeBase + (i + 1) + ".webp"),
-      webgl: false,
-      webglShadow: true,
-      shadowOpacity: 0.2,
-      soundEnable: false,
-      pageMode: DFLIP.PAGE_MODE.DOUBLE,
-      singlePageMode: DFLIP.SINGLE_PAGE_MODE.AUTO,
-      zoomRatio: 1.5,
-      stiffness: 0,
-      backgroundColor: "#b8a8cbcc",
-      transparent: true,
-      hard: "cover",
-      allControls: "startPage,altPrev,pageNumber,altNext,zoomIn,zoomOut,pageMode,fullScreen",
-      onCreateUI: function (flipBook) {
-        var downloadButton = jQuery('<a class="df-ui-btn ti-download df-ui-custom-download-button" download target="_blank"></a>');
-        downloadButton.attr("href", landscapePdf).attr("title", "Download PDF");
-        flipBook.ui.zoomOut.after(downloadButton);
-      },
-    };
+      var urbanLabel     = {{ site.data.strings.portfolio_urban[page.lang] | default: "Urban" | jsonify }};
+      var landscapeLabel = {{ site.data.strings.portfolio_landscape[page.lang] | default: "Landscape" | jsonify }};
 
-    var option_button_pdf_urban = {
-      source: Array.from({ length: 43 }, (_, i) => urbanBase + (i + 1) + ".webp"),
-      webgl: false,
-      webglShadow: true,
-      shadowOpacity: 0.2,
-      soundEnable: false,
-      pageMode: DFLIP.PAGE_MODE.DOUBLE,
-      singlePageMode: DFLIP.SINGLE_PAGE_MODE.AUTO,
-      zoomRatio: 1.5,
-      stiffness: 0,
-      backgroundColor: "#b8a8cbcc",
-      transparent: true,
-      hard: "cover",
-      allControls: "startPage,altPrev,pageNumber,altNext,zoomIn,zoomOut,pageMode,fullScreen",
-      onCreateUI: function (flipBook) {
-        var downloadButton = jQuery('<a class="df-ui-btn ti-download df-ui-custom-download-button" download target="_blank"></a>');
-        downloadButton.attr("href", urbanPdf).attr("title", "Download PDF");
-        flipBook.ui.zoomOut.after(downloadButton);
-      },
-    };
+      FlipBook.buildThumb({
+        containerId: 'fb-urban-host',
+        thumb:       urbanThumb,
+        label:       urbanLabel,
+        source:      Array.from({ length: 43 }, function (_, i) { return urbanBase + (i + 1) + '.webp'; }),
+        downloadUrl: urbanPdf,
+      });
+
+      FlipBook.buildThumb({
+        containerId: 'fb-landscape-host',
+        thumb:       landscapeThumb,
+        label:       landscapeLabel,
+        source:      Array.from({ length: 23 }, function (_, i) { return landscapeBase + (i + 1) + '.webp'; }),
+        downloadUrl: landscapePdf,
+      });
+    }());
   </script>
 
 </div>
