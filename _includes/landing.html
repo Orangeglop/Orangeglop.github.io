@@ -55,13 +55,35 @@
     </div>
   </div>
 
+  {% assign urban_files = site.static_files | where_exp: "f", "f.path contains '/assets/portfolio/urban/'" %}
+  {% assign landscape_files = site.static_files | where_exp: "f", "f.path contains '/assets/portfolio/landscape/'" %}
+
   <script>
     (function () {
-      var urbanBase     = "{{ '/assets/portfolio/urban/page-' | relative_url }}";
-      var landscapeBase = "{{ '/assets/portfolio/landscape/page-' | relative_url }}";
-      var urbanPdf      = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_URBAN_2026.pdf' | relative_url }}";
-      var landscapePdf  = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_LANDSCAPE_2026.pdf' | relative_url }}";
-      var urbanThumb    = "{{ '/assets/portfolio/urban.webp' | relative_url }}";
+      var rawUrban = [
+        {% for f in urban_files %}
+          {{ f.path | relative_url | jsonify }}{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ];
+      var rawLandscape = [
+        {% for f in landscape_files %}
+          {{ f.path | relative_url | jsonify }}{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ];
+
+      /* Natural alphabetical sorting (e.g. page-1.webp, page-2.webp ... page-10.webp ... page-43.webp) */
+      function natSort(arr) {
+        return arr.slice().sort(function (a, b) {
+          return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+        });
+      }
+
+      var urbanSource = natSort(rawUrban);
+      var landscapeSource = natSort(rawLandscape);
+
+      var urbanPdf       = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_URBAN_2026.pdf' | relative_url }}";
+      var landscapePdf   = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_LANDSCAPE_2026.pdf' | relative_url }}";
+      var urbanThumb     = "{{ '/assets/portfolio/urban.webp' | relative_url }}";
       var landscapeThumb = "{{ '/assets/portfolio/landscape.webp' | relative_url }}";
 
       var urbanLabel     = {{ site.data.strings.portfolio_urban[page.lang] | default: "Urban" | jsonify }};
@@ -71,7 +93,7 @@
         containerId: 'fb-urban-host',
         thumb:       urbanThumb,
         label:       urbanLabel,
-        source:      Array.from({ length: 43 }, function (_, i) { return urbanBase + (i + 1) + '.webp'; }),
+        source:      urbanSource,
         downloadUrl: urbanPdf,
       });
 
@@ -79,7 +101,7 @@
         containerId: 'fb-landscape-host',
         thumb:       landscapeThumb,
         label:       landscapeLabel,
-        source:      Array.from({ length: 23 }, function (_, i) { return landscapeBase + (i + 1) + '.webp'; }),
+        source:      landscapeSource,
         downloadUrl: landscapePdf,
       });
     }());
