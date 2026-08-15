@@ -3,7 +3,7 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Thumbnail card (.fb-thumb) — Realistic Publication Book Cover
+   Thumbnail card (.fb-thumb) — Clean, Minimalist Portfolio Cards
    -------------------------------------------------------------------------- */
 
 .fb-thumb-container {
@@ -25,60 +25,43 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.28s ease;
+  outline: none !important;
+  border: none !important;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+.fb-thumb:focus,
+.fb-thumb:focus-visible,
+.fb-thumb:focus-within {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none;
 }
 
 .fb-thumb:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
 }
 
 .fb-thumb:active {
-  transform: translateY(-2px) scale(0.98);
+  transform: translateY(-1px) scale(0.99);
 }
 
-/* Realistic 3D Book Cover Container */
-.fb-thumb-book {
+/* Minimalist Clean Card Container */
+.fb-thumb-card {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 6px 14px 14px 6px;
+  border-radius: 12px;
   background: #ffffff;
   overflow: hidden;
-  /* Multi-layered realistic book shadows & page edge effect */
-  box-shadow:
-    0 16px 36px -8px rgba(35, 20, 55, 0.18),
-    0 6px 14px -4px rgba(35, 20, 55, 0.10),
-    2px 2px 0 #f0eef4,
-    4px 4px 0 #e4e0ec,
-    inset 0 0 0 1px rgba(0, 0, 0, 0.06);
-  transition: box-shadow 0.28s ease;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-.fb-thumb:hover .fb-thumb-book {
-  box-shadow:
-    0 24px 48px -10px rgba(60, 30, 95, 0.26),
-    0 10px 20px -6px rgba(60, 30, 95, 0.14),
-    3px 3px 0 #ece8f4,
-    6px 6px 0 #ded8eb,
-    inset 0 0 0 1px rgba(110, 70, 180, 0.15);
-}
-
-/* Book spine crease effect on left edge */
-.fb-thumb-spine {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 18px;
-  background: linear-gradient(to right,
-    rgba(0, 0, 0, 0.14) 0%,
-    rgba(0, 0, 0, 0.05) 30%,
-    rgba(255, 255, 255, 0.4) 60%,
-    rgba(0, 0, 0, 0.06) 90%,
-    transparent 100%
-  );
-  z-index: 5;
-  pointer-events: none;
+.fb-thumb:hover .fb-thumb-card {
+  border-color: rgba(120, 80, 200, 0.3);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 /* Cover Image: 100% full view, zero clipping */
@@ -92,80 +75,27 @@
   background: #ffffff;
 }
 
-/* Hover reveal: subtle frosted glass badge */
-.fb-thumb-hover {
-  position: absolute;
-  inset: 0;
-  background: rgba(20, 14, 32, 0.45);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  z-index: 10;
-}
-
-.fb-thumb:hover .fb-thumb-hover {
-  opacity: 1;
-}
-
-.fb-thumb-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 30px;
-  background: rgba(255, 255, 255, 0.95);
-  color: #1a1226;
-  font-weight: 600;
-  font-size: 0.88rem;
-  letter-spacing: 0.02em;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-  transform: translateY(8px);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.fb-thumb:hover .fb-thumb-badge {
-  transform: translateY(0);
-}
-
-.fb-thumb-badge svg {
-  width: 18px;
-  height: 18px;
-  color: #634399;
-}
-
-/* Bottom caption below book */
-.fb-thumb-caption {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 6px 4px 6px;
-  color: #2b233a;
-}
-
+/* Centered Title */
 .fb-thumb-title {
+  margin-top: 14px;
   font-size: 1.05rem;
   font-weight: 600;
+  color: #2c2538;
   letter-spacing: -0.01em;
+  text-align: center;
+  transition: color 0.2s ease;
 }
 
-.fb-thumb-action {
-  font-size: 0.84rem;
-  font-weight: 500;
-  color: #7952b3;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition: transform 0.2s ease, color 0.2s ease;
+.fb-thumb:hover .fb-thumb-title {
+  color: #6d42a8;
 }
 
-.fb-thumb:hover .fb-thumb-action {
-  transform: translateX(4px);
-  color: #56338e;
+[data-theme="dark"] .fb-thumb-title {
+  color: #e2dff0;
+}
+
+[data-theme="dark"] .fb-thumb:hover .fb-thumb-title {
+  color: #c4b5fd;
 }
 
 /* --------------------------------------------------------------------------
@@ -176,9 +106,9 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(10, 6, 20, 0.60);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: rgba(8, 5, 18, 0.62);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
   display: flex;
   flex-direction: column;
   opacity: 0;
@@ -220,6 +150,91 @@
 }
 
 /* --------------------------------------------------------------------------
+   Top bar controls — Quick close
+   -------------------------------------------------------------------------- */
+
+.fb-top-close {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  border-radius: 50% !important;
+  background: rgba(20, 14, 32, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  outline: none !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5) !important;
+  transition: all 0.18s ease !important;
+}
+
+.fb-top-close svg {
+  width: 20px !important;
+  height: 20px !important;
+  stroke: #ffffff !important;
+  stroke-width: 2.2 !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+.fb-top-close:hover {
+  background: rgba(220, 50, 60, 0.9) !important;
+  border-color: rgba(255, 120, 130, 0.6) !important;
+  color: #ffffff !important;
+  transform: scale(1.1) !important;
+}
+
+.fb-top-close:active {
+  transform: scale(0.92) !important;
+}
+
+/* Side navigation arrow overlays (desktop) */
+.fb-nav-arrow {
+  position: absolute;
+  top: calc(50% - 24px);
+  z-index: 80;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(18, 14, 28, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.35;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+  transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, color 0.2s ease;
+}
+
+.fb-nav-prev { left: 24px; }
+.fb-nav-next { right: 24px; }
+
+.fb-nav-arrow:hover {
+  opacity: 1;
+  transform: scale(1.12);
+  background: rgba(26, 20, 40, 0.9);
+  color: #fff;
+  border-color: rgba(180, 150, 240, 0.4);
+}
+
+.fb-nav-arrow:active {
+  transform: scale(0.92);
+}
+
+/* --------------------------------------------------------------------------
    Toolbar — Floating bottom-middle dock
    -------------------------------------------------------------------------- */
 
@@ -233,20 +248,21 @@
   align-items: center;
   gap: 3px;
   padding: 4px 10px;
-  background: rgba(18, 14, 28, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(18, 14, 28, 0.84);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 40px;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.58), inset 0 1px 0 rgba(255, 255, 255, 0.14);
   user-select: none;
   -webkit-user-select: none;
   opacity: 1;
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-.fb-toolbar.fb-tb-idle {
-  opacity: 0.25;
+.fb-toolbar.fb-tb-idle,
+.fb-idle-dim {
+  opacity: 0.25 !important;
 }
 
 .fb-toolbar:hover,
@@ -375,10 +391,12 @@
   perspective: 3200px;
   perspective-origin: center 45%;
   max-width: 100%;
-  filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.55));
+  filter: drop-shadow(0 28px 60px rgba(0, 0, 0, 0.40)) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
   transform: translateX(0);
   transition: transform 0.24s cubic-bezier(0.645, 0.045, 0.355, 1.000);
 }
+
+
 
 /* ---- Page slots ---- */
 .fb-slot {
@@ -405,6 +423,10 @@
 /* Cover mode: book is translated left by 25% of its width so the right slot (cover) is centered */
 .fb-book.fb-cover-mode {
   transform: translateX(-25%);
+}
+
+.fb-book.fb-cover-mode .fb-right {
+  border-radius: 2px 8px 8px 2px;
 }
 
 /* Page image inside slot */
@@ -480,6 +502,8 @@
 .fb-face-back {
   transform: rotateY(180deg);
 }
+
+
 
 /* ---- Flip keyframe animations ---- */
 

@@ -144,6 +144,22 @@
 
     tb.appendChild(mkBtn('fb-close', 'Close', I.close));
 
+    /* ---- Top Bar Controls ---- */
+    var topClose = el('button', 'fb-top-close', I.close);
+    topClose.type = 'button'; topClose.title = 'Close viewer (Esc)'; topClose.setAttribute('aria-label', 'Close viewer');
+    topClose.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); self.close(); });
+    this._topClose = topClose;
+
+    /* ---- Desktop Nav Arrows ---- */
+    var navPrev = el('button', 'fb-nav-arrow fb-nav-prev', I.prev);
+    navPrev.type = 'button'; navPrev.title = 'Previous page (Left arrow)'; navPrev.setAttribute('aria-label', 'Previous page');
+    navPrev.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); self._back(); });
+    var navNext = el('button', 'fb-nav-arrow fb-nav-next', I.next);
+    navNext.type = 'button'; navNext.title = 'Next page (Right arrow)'; navNext.setAttribute('aria-label', 'Next page');
+    navNext.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); self._forward(); });
+    this._navPrev = navPrev;
+    this._navNext = navNext;
+
     /* ---- Stage ---- */
     var stage = el('div', 'fb-stage');
     var si    = el('div', 'fb-stage-inner');
@@ -162,6 +178,10 @@
     book.appendChild(rs);
     si.appendChild(book);
     stage.appendChild(si);
+
+    modal.appendChild(topClose);
+    modal.appendChild(navPrev);
+    modal.appendChild(navNext);
     modal.appendChild(stage);
     modal.appendChild(tb);
     overlay.appendChild(modal);
@@ -228,6 +248,9 @@
     if (this._idleTimer) clearTimeout(this._idleTimer);
     this._resetZoom();
     document.body.style.overflow = '';
+    if (document.activeElement && document.activeElement.blur) {
+      document.activeElement.blur();
+    }
     document.removeEventListener('keydown', this._onKey);
     ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(function (ev) {
       document.removeEventListener(ev, self._onFS);
@@ -685,8 +708,9 @@
 
     stage.addEventListener('mousedown', function (e) {
       if (!self._open) return;
-      if (e.target.closest('.fb-btn, .fb-toolbar, input, a')) return;
+      if (e.target.closest('.fb-btn, .fb-toolbar, .fb-top-close, .fb-nav-arrow, input, a')) return;
       e.preventDefault();
+      self._hasMoved = false;
       isMouseDown = true;
       mouseStartX = e.clientX;
       mouseStartY = e.clientY;
@@ -709,6 +733,9 @@
       if (!self._open || !isMouseDown) return;
       mouseEndX = e.clientX;
       mouseEndY = e.clientY;
+      if (Math.abs(mouseEndX - mouseStartX) > 8 || Math.abs(mouseEndY - mouseStartY) > 8) {
+        self._hasMoved = true;
+      }
       if (isMousePanning) {
         e.preventDefault();
         self._panX = e.clientX - mousePanStartX;
@@ -721,6 +748,11 @@
     window.addEventListener('mouseup', function (e) {
       if (!self._open || !isMouseDown) return;
       isMouseDown = false;
+      var dx = (e.clientX || mouseEndX) - mouseStartX;
+      var dy = (e.clientY || mouseEndY) - mouseStartY;
+      if (Math.abs(dx) <= 8 && Math.abs(dy) <= 8) {
+        self._hasMoved = false;
+      }
       if (isMousePanning) {
         isMousePanning = false;
         stage.classList.remove('fb-grabbing');
@@ -729,8 +761,6 @@
         if (!self._isDefaultView()) return; // only allow swipe to flip at default zoom and default pan
 
         var dt = Date.now() - mouseStartTime;
-        var dx = (e.clientX || mouseEndX) - mouseStartX;
-        var dy = (e.clientY || mouseEndY) - mouseStartY;
         if (Math.abs(dx) >= 35 && Math.abs(dx) >= Math.abs(dy) * 0.75 && dt < 700) {
           if (dx < 0) {
             self._forward();
@@ -743,7 +773,7 @@
   };
 
   /* =========================================================
-     Auto-dimming idle toolbar
+     Auto-dimming idle toolbar & controls
   ========================================================= */
   FlipBook.prototype._setupIdleToolbar = function () {
     var self = this;
@@ -752,9 +782,18 @@
 
     function wake() {
       if (tb) tb.classList.remove('fb-tb-idle');
+      if (self._topClose) self._topClose.classList.remove('fb-idle-dim');
+      if (self._navPrev) self._navPrev.classList.remove('fb-idle-dim');
+      if (self._navNext) self._navNext.classList.remove('fb-idle-dim');
+
       if (self._idleTimer) clearTimeout(self._idleTimer);
       self._idleTimer = setTimeout(function () {
-        if (self._open && tb) tb.classList.add('fb-tb-idle');
+        if (self._open) {
+          if (tb) tb.classList.add('fb-tb-idle');
+          if (self._topClose) self._topClose.classList.add('fb-idle-dim');
+          if (self._navPrev) self._navPrev.classList.add('fb-idle-dim');
+          if (self._navNext) self._navNext.classList.add('fb-idle-dim');
+        }
       }, 2400);
     }
 
@@ -832,29 +871,17 @@
     thumb.setAttribute('role', 'button');
     thumb.setAttribute('aria-label', 'Open ' + opts.label + ' flipbook');
 
-    /* 3D Book wrapper */
-    var book = el('div', 'fb-thumb-book');
-
-    var spine = el('div', 'fb-thumb-spine');
-    var cImg  = el('img', 'fb-thumb-cover');
+    /* Clean Card wrapper */
+    var card = el('div', 'fb-thumb-card');
+    var cImg = el('img', 'fb-thumb-cover');
     cImg.src = opts.thumb; cImg.alt = opts.label; cImg.draggable = false;
+    card.appendChild(cImg);
 
-    var hover = el('div', 'fb-thumb-hover');
-    hover.innerHTML = '<div class="fb-thumb-badge">' + I.book + '<span>' + opts.label + '</span></div>';
+    /* Centered Title */
+    var title = el('div', 'fb-thumb-title', opts.label);
 
-    book.appendChild(spine);
-    book.appendChild(cImg);
-    book.appendChild(hover);
-
-    /* Caption */
-    var cap = el('div', 'fb-thumb-caption');
-    var capTitle = el('span', 'fb-thumb-title', opts.label);
-    var capAction = el('span', 'fb-thumb-action', 'Explore &rarr;');
-    cap.appendChild(capTitle);
-    cap.appendChild(capAction);
-
-    thumb.appendChild(book);
-    thumb.appendChild(cap);
+    thumb.appendChild(card);
+    thumb.appendChild(title);
     container.appendChild(thumb);
 
     var fb = new FlipBook({
