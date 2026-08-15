@@ -43,3 +43,15 @@ about_me_text:
     Hallo, ik ben <strong class="author-name">%AUTHOR_NAME%</strong> 👋, stedenbouwkundig ontwerper, landschapsontwerper en liefhebber van landschappen.<br>
     Momenteel woon ik in Nederland, en werk ik aan verschillende projecten in Zuidoost-Azië.
     Op deze website presenteer ik mijn meest recente werk en projecten. Om mijn communicatie verbeteren, leer ik actief Nederlands. Daarnaast sta ik open voor nieuwe kansen en ben ik bereid om binnen Nederland te verhuizen als dat nodig is.
+
+page_not_found:
+  en: "Page Not Found"
+  nl: "Pagina niet gevonden"
+
+page_not_found_desc:
+  en: "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+  nl: "De pagina die u zoekt is mogelijk verwijderd, heeft een andere naam gekregen of is tijdelijk niet beschikbaar."
+
+back_to_home:
+  en: "Back to Home"
+  nl: "Terug naar Home"
