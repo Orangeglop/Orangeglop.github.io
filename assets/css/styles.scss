@@ -244,10 +244,101 @@ ul {
   margin: 0 auto;
 }
 
-.carousel-indicators,
+.site-carousel .carousel-control-prev,
+.site-carousel .carousel-control-next {
+  width: 36px;
+  height: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  opacity: 0.4;
+  transition: opacity 0.25s ease, transform 0.2s ease, background-color 0.2s ease;
+  margin: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.site-carousel:hover .carousel-control-prev,
+.site-carousel:hover .carousel-control-next {
+  opacity: 0.75;
+}
+
+.site-carousel .carousel-control-prev:hover,
+.site-carousel .carousel-control-next:hover {
+  opacity: 0.95;
+  background-color: rgba(255, 255, 255, 0.92);
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.site-carousel .carousel-control-prev:focus,
+.site-carousel .carousel-control-next:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.site-carousel .carousel-control-prev:focus:not(:hover),
+.site-carousel .carousel-control-next:focus:not(:hover) {
+  opacity: 0.4;
+  background-color: rgba(255, 255, 255, 0.65);
+  transform: translateY(-50%) scale(1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.site-carousel:hover .carousel-control-prev:focus:not(:hover),
+.site-carousel:hover .carousel-control-next:focus:not(:hover) {
+  opacity: 0.75;
+}
+
+.site-carousel .carousel-control-prev:focus-visible,
+.site-carousel .carousel-control-next:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  filter: invert(60%);
+  width: 15px;
+  height: 15px;
+  filter: invert(1) grayscale(100%) brightness(25%);
+}
+
+.carousel-indicators {
+  bottom: 12px;
+  margin-bottom: 0;
+  gap: 6px;
+  align-items: center;
+}
+
+.carousel-indicators li {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: none;
+  margin: 0;
+  transition: width 0.25s ease, background-color 0.25s ease, opacity 0.2s ease;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.carousel-indicators li.active {
+  width: 18px;
+  border-radius: 4px;
+  background-color: var(--text-heading, #1a1a1a);
+  opacity: 0.9;
+}
+
+.carousel-indicators li:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .carousel-caption {
