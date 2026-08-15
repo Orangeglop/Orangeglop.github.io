@@ -832,14 +832,29 @@
     thumb.setAttribute('role', 'button');
     thumb.setAttribute('aria-label', 'Open ' + opts.label + ' flipbook');
 
-    var cImg = el('img', 'fb-thumb-cover');
+    /* 3D Book wrapper */
+    var book = el('div', 'fb-thumb-book');
+
+    var spine = el('div', 'fb-thumb-spine');
+    var cImg  = el('img', 'fb-thumb-cover');
     cImg.src = opts.thumb; cImg.alt = opts.label; cImg.draggable = false;
 
-    var lbl = el('div', 'fb-thumb-label');
-    lbl.innerHTML = I.book + '<span>' + opts.label + '</span>';
+    var hover = el('div', 'fb-thumb-hover');
+    hover.innerHTML = '<div class="fb-thumb-badge">' + I.book + '<span>' + opts.label + '</span></div>';
 
-    thumb.appendChild(cImg);
-    thumb.appendChild(lbl);
+    book.appendChild(spine);
+    book.appendChild(cImg);
+    book.appendChild(hover);
+
+    /* Caption */
+    var cap = el('div', 'fb-thumb-caption');
+    var capTitle = el('span', 'fb-thumb-title', opts.label);
+    var capAction = el('span', 'fb-thumb-action', 'Explore &rarr;');
+    cap.appendChild(capTitle);
+    cap.appendChild(capAction);
+
+    thumb.appendChild(book);
+    thumb.appendChild(cap);
     container.appendChild(thumb);
 
     var fb = new FlipBook({

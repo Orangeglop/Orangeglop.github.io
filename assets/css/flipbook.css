@@ -3,7 +3,7 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Thumbnail card (.fb-thumb)
+   Thumbnail card (.fb-thumb) — Realistic Publication Book Cover
    -------------------------------------------------------------------------- */
 
 .fb-thumb-container {
@@ -15,69 +15,176 @@
 
 .fb-thumb {
   position: relative;
-  width: 340px;
-  height: 340px;
+  width: 320px;
   max-width: 100%;
-  aspect-ratio: 1 / 1;
-  margin: 15px auto;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin: 16px auto;
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
-  background: #1a1520;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.28s ease;
 }
 
 .fb-thumb:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.24);
+  transform: translateY(-8px);
 }
 
+.fb-thumb:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+/* Realistic 3D Book Cover Container */
+.fb-thumb-book {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px 14px 14px 6px;
+  background: #ffffff;
+  overflow: hidden;
+  /* Multi-layered realistic book shadows & page edge effect */
+  box-shadow:
+    0 16px 36px -8px rgba(35, 20, 55, 0.18),
+    0 6px 14px -4px rgba(35, 20, 55, 0.10),
+    2px 2px 0 #f0eef4,
+    4px 4px 0 #e4e0ec,
+    inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.28s ease;
+}
+
+.fb-thumb:hover .fb-thumb-book {
+  box-shadow:
+    0 24px 48px -10px rgba(60, 30, 95, 0.26),
+    0 10px 20px -6px rgba(60, 30, 95, 0.14),
+    3px 3px 0 #ece8f4,
+    6px 6px 0 #ded8eb,
+    inset 0 0 0 1px rgba(110, 70, 180, 0.15);
+}
+
+/* Book spine crease effect on left edge */
+.fb-thumb-spine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 18px;
+  background: linear-gradient(to right,
+    rgba(0, 0, 0, 0.14) 0%,
+    rgba(0, 0, 0, 0.05) 30%,
+    rgba(255, 255, 255, 0.4) 60%,
+    rgba(0, 0, 0, 0.06) 90%,
+    transparent 100%
+  );
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Cover Image: 100% full view, zero clipping */
 .fb-thumb-cover {
   width: 100%;
-  height: calc(100% - 48px);
-  object-fit: cover;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
   object-position: center;
   display: block;
-  border-radius: 12px 12px 0 0;
+  background: #ffffff;
 }
 
-.fb-thumb-label {
+/* Hover reveal: subtle frosted glass badge */
+.fb-thumb-hover {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 48px;
+  inset: 0;
+  background: rgba(20, 14, 32, 0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  background: rgba(15, 10, 28, 0.9);
-  color: #fff;
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  padding: 0 12px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 10;
 }
-.fb-thumb-label svg { opacity: 0.65; flex-shrink: 0; }
+
+.fb-thumb:hover .fb-thumb-hover {
+  opacity: 1;
+}
+
+.fb-thumb-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1226;
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transform: translateY(8px);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fb-thumb:hover .fb-thumb-badge {
+  transform: translateY(0);
+}
+
+.fb-thumb-badge svg {
+  width: 18px;
+  height: 18px;
+  color: #634399;
+}
+
+/* Bottom caption below book */
+.fb-thumb-caption {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 6px 4px 6px;
+  color: #2b233a;
+}
+
+.fb-thumb-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.fb-thumb-action {
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #7952b3;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.fb-thumb:hover .fb-thumb-action {
+  transform: translateX(4px);
+  color: #56338e;
+}
 
 /* --------------------------------------------------------------------------
-   Overlay — full screen
+   Overlay — full screen with frosted glass backdrop
    -------------------------------------------------------------------------- */
 
 .fb-overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(4, 3, 10, 0.94);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(10, 6, 20, 0.60);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   display: flex;
   flex-direction: column;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
 }
 
 .fb-overlay.fb-open {
@@ -99,7 +206,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Modal — fills overlay
+   Modal — fills overlay with transparent background
    -------------------------------------------------------------------------- */
 
 .fb-modal {
@@ -107,7 +214,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #08060f;
+  background: transparent;
   touch-action: none;
   -webkit-touch-callout: none;
 }
@@ -423,6 +530,20 @@
    -------------------------------------------------------------------------- */
 
 @media (max-width: 600px) {
+  .fb-thumb {
+    width: 100%;
+    max-width: 280px;
+    margin: 10px auto;
+  }
+  .fb-thumb-caption {
+    padding: 10px 4px 0 4px;
+  }
+  .fb-thumb-title {
+    font-size: 0.96rem;
+  }
+  .fb-thumb-action {
+    font-size: 0.8rem;
+  }
   .fb-stage {
     padding: 6px 6px 52px 6px;
   }
