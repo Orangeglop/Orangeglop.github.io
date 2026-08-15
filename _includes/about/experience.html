@@ -1,23 +1,27 @@
 {% assign current_lang = page.lang | default: 'en' %}
 
-<div class="col mt-4">
-  <h5 class="mb-3">{{ include.title }}</h5>
+<div class="col-12 mt-4">
+  <h5 class="section-title">{{ include.title }}</h5>
 
-  <div class="timeline-body bg-themed">
+  <div class="timeline-body">
     {% for item in site.data.experience[current_lang] %}
       <div class="timeline-item">
-        <div class="content">
-          <h4>{{ item.title }}</h4>
-          <h5 style="font-size:80%">{{ item.location }}</h5>
-          <h6 class="date">{{ item.from }} — {{ item.to }}</h6>
-          <p>{{ item.summary }}</p>
-          <p>
-            <ul>
+        <div class="timeline-card">
+          <div class="timeline-title">{{ item.title }}</div>
+          {% if item.location %}
+            <div class="timeline-location">{{ item.location }}</div>
+          {% endif %}
+          <div class="timeline-date">{{ item.from }} — {{ item.to }}</div>
+          {% if item.summary %}
+            <p class="small mb-2">{{ item.summary }}</p>
+          {% endif %}
+          {% if item.highlights and item.highlights.size > 0 %}
+            <ul class="pl-3 mb-0">
               {% for highlight in item.highlights %}
-                <li style="font-size:80%">{{ highlight }}</li>
+                <li class="small text-muted mb-1" style="line-height: 1.55;">{{ highlight }}</li>
               {% endfor %}
             </ul>
-          </p>
+          {% endif %}
         </div>
       </div>
     {% endfor %}

@@ -1,4 +1,4 @@
-<div id="carouselAboutMe" class="carousel slide" data-ride="carousel" data-interval="false">
+<div id="carouselAboutMe" class="site-carousel carousel-about carousel slide" data-ride="carousel" data-interval="5000">
   <ol class="carousel-indicators">
   {% for image in site.data.images_aboutme %}
       <li data-target="#carouselAboutMe" data-slide-to="{{ forloop.index0 }}" class="{% if forloop.first %}active{% endif %}"></li>
@@ -8,7 +8,7 @@
   <div class="carousel-inner">
     {% for image in site.data.images_aboutme %}
       <div class="carousel-item {% if forloop.first %}active{% endif %}">
-        <img src="{{ image.path | relative_url }}" class="d-block w-100">
+        <img src="{{ image.path | relative_url }}" class="carousel-img" alt="About Me">
       </div>
     {% endfor %}
   </div>

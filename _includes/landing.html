@@ -1,134 +1,114 @@
 <link href="{{ '/assets/dflip/css/dflip.min.css' | relative_url }}" rel="stylesheet" type="text/css">
 <link href="{{ '/assets/dflip/css/themify-icons.min.css' | relative_url }}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
 
 <script src="{{ '/assets/dflip/js/libs/jquery.min.js' | relative_url }}"></script>
 <script src="{{ '/assets/dflip/js/dflip.min.js' | relative_url }}"></script>
 
-<hr>
+<div class="landing-content mt-4">
 
-<h6>{{ site.data.strings.featured_works[page.lang] | default: "Featured works" }}</h6>
+  <h5 class="section-title">{{ site.data.strings.featured_works[page.lang] | default: "Featured works" }}</h5>
 
-<hr>
+  <div id="carouselExampleIndicators" class="site-carousel carousel-featured carousel slide" data-ride="carousel"
+    data-interval="2500">
+    <ol class="carousel-indicators">
+      {% for image in site.data.images_featured %}
+      <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.index0 }}"
+        class="{% if forloop.first %}active{% endif %}"></li>
+      {% endfor %}
+    </ol>
 
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2500">
-  <ol class="carousel-indicators">
-  {% for image in site.data.images_featured %}
-      <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.index0 }}" class="{% if forloop.first %}active{% endif %}"></li>
-  {% endfor %}
-  </ol>
-
-  <div class="carousel-inner">
-    {% for image in site.data.images_featured %}
+    <div class="carousel-inner">
+      {% for image in site.data.images_featured %}
       <div class="carousel-item {% if forloop.first %}active{% endif %}">
-        <img src="{{ image.path | relative_url }}" class="d-block w-100">
+        <img src="{{ image.path | relative_url }}" class="carousel-img"
+          alt="{{ image.title | default: 'Featured Work' }}">
       </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
+
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
 
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
+  <h5 class="section-title mt-5">{{ site.data.strings.portfolio[page.lang] | default: "Portfolio" }}</h5>
 
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
+  <div class="row justify-content-center align-items-center py-3">
+    <div class="col-12 col-md-6 mb-3 df_thumb-container">
+      <div class="_df_thumb" thumb="{{ '/assets/portfolio/urban.webp' | relative_url }}" id="button_pdf_urban">
+        {{ site.data.strings.portfolio_urban[page.lang] | default: "Urban" }}
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3 df_thumb-container">
+      <div class="_df_thumb" thumb="{{ '/assets/portfolio/landscape.webp' | relative_url }}" id="button_pdf_landscape">
+        {{ site.data.strings.portfolio_landscape[page.lang] | default: "Landscape" }}
+      </div>
+    </div>
 
-<br>
-
-<hr>
-
-<h6>{{ site.data.strings.portfolio_header[page.lang] | default: "Portfolio" }}</h6>
-
-<hr>
-
-<div class="row justify-content-center align-items-center p-4">
-  <div class="text-center mt-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-6 df_thumb-container">
-              <div
-                class="_df_thumb"
-                thumb="{{ '/assets/portfolio/urban.webp' | relative_url }}"
-                id="button_pdf_urban">
-                  Portfolio
-              </div>
-            </div>
-            <div class="col-12 col-md-6 df_thumb-container">
-              <div
-                class="_df_thumb"
-                thumb="{{ '/assets/portfolio/landscape.webp' | relative_url }}"
-                id="button_pdf_landscape">
-                  Portfolio
-              </div>
-            </div>
-        </div>
-
-        <div class="text-center mt-3">
-          <p class="text-muted wow animated slideInUp" data-wow-delay=".15s">
-            {% if page.lang == 'en' %}
-              {{ site.description_en }}
-            {% else %}
-              {{ site.description_nl }}
-            {% endif %}
-          </p>
-        </div>
-
-        <script>
-          // Define Base URLs for Images and PDFs
-          var urbanBase = "{{ '/assets/portfolio/urban/page-' | relative_url }}";
-          var landscapeBase = "{{ '/assets/portfolio/landscape/page-' | relative_url }}";
-          
-          // Note: URL encoding (%5BTRAN%5D...) is safer for filenames with spaces/brackets
-          var urbanPdf = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_URBAN_2026.pdf' | relative_url }}";
-          var landscapePdf = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_LANDSCAPE_2026.pdf' | relative_url }}";
-
-          var option_button_pdf_landscape = {
-            source: Array.from({ length: 23 }, (_, i) => landscapeBase + (i+1) + ".webp"),
-            webgl:false,
-            webglShadow: true,
-            shadowOpacity: 0.2,
-            soundEnable: false,
-            pageMode: DFLIP.PAGE_MODE.DOUBLE,
-            singlePageMode: DFLIP.SINGLE_PAGE_MODE.AUTO,
-            zoomRatio: 1.5,
-            stiffness: 0,
-            backgroundColor: "#b8a8cbcc",
-            transparent: true,
-            hard: "cover",
-            allControls: "startPage,altPrev,pageNumber,altNext,zoomIn,zoomOut,pageMode,fullScreen",
-            onCreateUI: function (flipBook) {
-              var downloadButton = jQuery('<a class="df-ui-btn ti-download df-ui-custom-download-button" download target="_blank"></a>');
-              downloadButton.attr("href", landscapePdf).attr("title","Download PDF");
-              flipBook.ui.zoomOut.after(downloadButton);
-            },
-          };
-
-          var option_button_pdf_urban = {
-            source: Array.from({ length: 43 }, (_, i) => urbanBase + (i+1) + ".webp"),
-            webgl:false,
-            webglShadow: true,
-            shadowOpacity: 0.2,
-            soundEnable: false,
-            pageMode: DFLIP.PAGE_MODE.DOUBLE,
-            singlePageMode: DFLIP.SINGLE_PAGE_MODE.AUTO,
-            zoomRatio: 1.5,
-            stiffness: 0,
-            backgroundColor: "#b8a8cbcc",
-            transparent: true,
-            hard: "cover",
-            allControls: "startPage,altPrev,pageNumber,altNext,zoomIn,zoomOut,pageMode,fullScreen",
-            onCreateUI: function (flipBook) {
-              var downloadButton = jQuery('<a class="df-ui-btn ti-download df-ui-custom-download-button" download target="_blank"></a>');
-              downloadButton.attr("href", urbanPdf).attr("title","Download PDF");
-              flipBook.ui.zoomOut.after(downloadButton);
-            },
-          };
-        </script>
-
+    <div class="col-12 text-center mt-3">
+      <p class="text-muted lead small wow animated slideInUp" data-wow-delay=".15s">
+        {% if page.lang == 'en' %}
+        {{ site.description_en }}
+        {% else %}
+        {{ site.description_nl }}
+        {% endif %}
+      </p>
     </div>
   </div>
+
+  <script>
+    var urbanBase = "{{ '/assets/portfolio/urban/page-' | relative_url }}";
+    var landscapeBase = "{{ '/assets/portfolio/landscape/page-' | relative_url }}";
+    var urbanPdf = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_URBAN_2026.pdf' | relative_url }}";
+    var landscapePdf = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_LANDSCAPE_2026.pdf' | relative_url }}";
+
+    var option_button_pdf_landscape = {
+      source: Array.from({ length: 23 }, (_, i) => landscapeBase + (i + 1) + ".webp"),
+      webgl: false,
+      webglShadow: true,
+      shadowOpacity: 0.2,
+      soundEnable: false,
+      pageMode: DFLIP.PAGE_MODE.DOUBLE,
+      singlePageMode: DFLIP.SINGLE_PAGE_MODE.AUTO,
+      zoomRatio: 1.5,
+      stiffness: 0,
+      backgroundColor: "#b8a8cbcc",
+      transparent: true,
+      hard: "cover",
+      allControls: "startPage,altPrev,pageNumber,altNext,zoomIn,zoomOut,pageMode,fullScreen",
+      onCreateUI: function (flipBook) {
+        var downloadButton = jQuery('<a class="df-ui-btn ti-download df-ui-custom-download-button" download target="_blank"></a>');
+        downloadButton.attr("href", landscapePdf).attr("title", "Download PDF");
+        flipBook.ui.zoomOut.after(downloadButton);
+      },
+    };
+
+    var option_button_pdf_urban = {
+      source: Array.from({ length: 43 }, (_, i) => urbanBase + (i + 1) + ".webp"),
+      webgl: false,
+      webglShadow: true,
+      shadowOpacity: 0.2,
+      soundEnable: false,
+      pageMode: DFLIP.PAGE_MODE.DOUBLE,
+      singlePageMode: DFLIP.SINGLE_PAGE_MODE.AUTO,
+      zoomRatio: 1.5,
+      stiffness: 0,
+      backgroundColor: "#b8a8cbcc",
+      transparent: true,
+      hard: "cover",
+      allControls: "startPage,altPrev,pageNumber,altNext,zoomIn,zoomOut,pageMode,fullScreen",
+      onCreateUI: function (flipBook) {
+        var downloadButton = jQuery('<a class="df-ui-btn ti-download df-ui-custom-download-button" download target="_blank"></a>');
+        downloadButton.attr("href", urbanPdf).attr("title", "Download PDF");
+        flipBook.ui.zoomOut.after(downloadButton);
+      },
+    };
+  </script>
+
 </div>

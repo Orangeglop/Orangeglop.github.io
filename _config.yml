@@ -16,83 +16,49 @@ plugins:
 
 
 ### Navbar Settings ###
-nav_exclude:                                            # The following paths are excluded from navbar
-  - pages/tags.html
+nav_exclude:                                            # Paths excluded from navbar
   - pages/404.html
   - pages/index.md
-  - documentation/partials/**                           # For Documentation Only
 
 
 ### Author Info ###
 author:
   name              : Tran Hoang
   image             : assets/profile.jpg
-  # behance           : your_username
-# dribbble          : your_username
   email             : tran.hoangnd.kts@gmail.com
-  # facebook          : your_username
-  # github            : your_username
-# gitlab            : your_username
-# instagram         : your_username
-# kaggle            : your_username
   linkedin          : tran-hoang
-  # medium            : your_username
-# soundcloud        : your_username
-# spotify           : your_username
-# stackoverflow     : your_user_id
-# tumblr            : your_username.tumblr.com
-# twitch            : your_username
-  # twitter           : your_username
-# vimeo             : your_username
-# youtube           : your_channel_name
-# keybase           : your_username
-
-
-### Posts ###
-permalink: /blog/:title
 
 
 ### Collections ###
 collections:
-  projects:
+  research:
     output: true
-    permalink: /projects/:name
-
-
-### Disqus ###
-disqus:
-  shortname: your-short-name-disqus                     # Your website Shortname on disqus
 
 
 ### Analytics ###
 analytics:
   enabled: false                                        # Set true to enable analytics
-  google:
-    tracking_id: your-google-tracking-id
 
-
-### Buy me a coffee ###
-# See https://www.buymeacoffee.com/
-buymeacoffee:
-  enabled: false
-  username: your_username
-  color: "#007bff"
-  message: "Thank you for visiting."                    # Message to be displayed aside from the button for a few seconds.
-  description: "Support me on Buy me a coffee!"
+### Build Settings ###
+future: true                                            # Publish posts/research even if dated today/tomorrow
 
 
 ### Defaults for collections ###
 defaults:
   - scope:
-      path: ""
-      type: "projects"
+      path: "_research/en"
+      type: "research"
     values:
-      layout: "page"
+      layout: "post"
+      lang: "en"
+      permalink: "/en/research/:title/"
   - scope:
-      path: ""
-      type: "posts"
+      path: "_research/nl"
+      type: "research"
     values:
-      comments: false                                   # Set to true to enable disqus comments
+      layout: "post"
+      lang: "nl"
+      permalink: "/nl/research/:title/"
 
 
 ### Exclude from processing ###

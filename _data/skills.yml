@@ -3,7 +3,7 @@ en:
     percentage:
     color:
 
-  - name: "QGIS, Sketchup, Lumion, Handsketch"
+  - name: "3D: QGIS, Sketchup, Lumion, Handsketch"
     percentage:
     color:
 
@@ -24,7 +24,7 @@ nl:
     percentage:
     color:
 
-  - name: "QGIS, Sketchup, Lumion, Handsketch"
+  - name: "3D: QGIS, Sketchup, Lumion, Handsketch"
     percentage:
     color:
     

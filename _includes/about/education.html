@@ -1,15 +1,15 @@
 {% assign current_lang = page.lang | default: 'en' %}
 
-<div class="col mt-4">
-  <h5 class="mb-3">{{ include.title }}</h5>
+<div class="col-12 mt-4">
+  <h5 class="section-title">{{ include.title }}</h5>
 
-  <div class="timeline-body bg-themed">
+  <div class="timeline-body">
     {% for item in site.data.education[current_lang] %}
       <div class="timeline-item">
-        <div class="content">
-          <h4>{{ item.area }} ({{ item.degree }})</h4>
-          <h5 style="font-size:80%">{{ item.end_date }}</h5>
-          <p>{{ item.institution }}</p>
+        <div class="timeline-card">
+          <div class="timeline-title">{{ item.area }} ({{ item.degree }})</div>
+          <div class="timeline-location">{{ item.institution }}{% if item.location %} &bull; {{ item.location }}{% endif %}</div>
+          <div class="timeline-date">{{ item.end_date }}</div>
         </div>
       </div>
     {% endfor %}

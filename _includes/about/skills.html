@@ -1,11 +1,18 @@
 {% assign current_lang = page.lang | default: 'en' %}
 
-<div class="col-lg">
-  <h5 class="mb-3">{{ include.title }}</h5>
+<div class="col-12 mt-4">
+  <h5 class="section-title">{{ include.title }}</h5>
 
-  <ul>
+  <ul class="pl-3 mb-0">
   {% for skill in site.data.skills[current_lang] %}
-    <li>{{ skill.name }}</li>
+    {% assign parts = skill.name | split: ":" %}
+    <li class="mb-1">
+      {% if parts.size > 1 %}
+        <strong>{{ parts[0] }}:</strong>{{ parts[1] }}
+      {% else %}
+        {{ skill.name }}
+      {% endif %}
+    </li>
   {% endfor %}
   </ul>
 </div>

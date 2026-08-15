@@ -1,0 +1,8 @@
+<div class="row mt-3">
+  {% assign research_posts = site.research | sort: 'date' | reverse %}
+  {% for item in research_posts %}
+    {% if item.lang == page.lang %}
+      {% include research/research-card.html item=item %}
+    {% endif %}
+  {% endfor %}
+</div>

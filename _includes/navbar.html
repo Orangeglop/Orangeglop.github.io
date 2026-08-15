@@ -27,9 +27,10 @@
         </a>
       {% endfor %}
 
-      {% assign translations = site.pages | where: "ref", page.ref | sort: 'lang' %}
+      {% assign translations = site.pages | concat: site.research %}
+      {% assign translations = translations | where_exp: "item", "item.ref == page.ref" | sort: 'lang' %}
       {% for t in translations %}
-        {% if t.lang != current_lang %}
+        {% if t.lang and t.lang != current_lang %}
           <a class="nav-item nav-link" href="{{ t.url | relative_url }}">
             {{ t.lang | upcase }}
           </a>
