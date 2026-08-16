@@ -28,12 +28,14 @@
     fs       : icon('<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>'),
     fsExit : icon('<path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>'),
     dl     : icon('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>'),
+    share  : icon('<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>'),
+    check  : icon('<polyline points="20 6 9 17 4 12"/>'),
     close  : icon('<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'),
     book   : icon('<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>', 16),
   };
 
   /* =========================================================
-     DOM / image helpers
+     DOM / image / toast helpers
   ========================================================= */
   function el(tag, cls, html) {
     var e = document.createElement(tag);
@@ -45,6 +47,24 @@
     var b = el('button', 'fb-btn' + (cls ? ' ' + cls : ''), html);
     b.type = 'button'; b.title = title; b.setAttribute('aria-label', title);
     return b;
+  }
+
+  function showToast(msg) {
+    var existing = document.querySelector('.fb-toast');
+    if (existing && existing.parentNode) {
+      existing.parentNode.removeChild(existing);
+    }
+    var toast = el('div', 'fb-toast', msg);
+    document.body.appendChild(toast);
+    requestAnimationFrame(function () {
+      toast.classList.add('fb-toast-show');
+    });
+    setTimeout(function () {
+      toast.classList.remove('fb-toast-show');
+      setTimeout(function () {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 300);
+    }, 2200);
   }
 
   var _imgCache = {};
@@ -67,6 +87,7 @@
      FlipBook
   ========================================================= */
   function FlipBook(opts) {
+    this.id          = (opts.id || '').toLowerCase();
     this.source      = opts.source || [];
     this.downloadUrl = opts.downloadUrl || null;
     this.label       = opts.label || '';
@@ -144,6 +165,15 @@
       tb.appendChild(sDL); tb.appendChild(dlA);
     }
 
+    var sShare = el('div', 'fb-sep');
+    var bShare = mkBtn('fb-btn-share', 'Share / Copy link to portfolio', I.share);
+    bShare.addEventListener('click', function (e) {
+      e.preventDefault(); e.stopPropagation();
+      self.copyLink(bShare);
+    });
+    tb.appendChild(sShare);
+    tb.appendChild(bShare);
+
     tb.appendChild(mkBtn('fb-close', 'Close', I.close));
 
     /* ---- Top Bar Controls ---- */
@@ -216,17 +246,66 @@
   };
 
   /* =========================================================
-     Open / Close & Browser History Integration
+     Open / Close, Copy Link & Browser History Integration
   ========================================================= */
   FlipBook.prototype._handlePop = function () {
     if (this._open) {
       this._pushedHistory = false;
-      this.close();
+      this.close({ updateHistory: false });
     }
   };
 
-  FlipBook.prototype.open = function () {
-    if (this._open) return;
+  FlipBook.prototype.copyLink = function (btn) {
+    var base = window.location.origin + window.location.pathname;
+    var linkUrl = base + '#' + (this.id || 'portfolio');
+
+    function onSuccess() {
+      showToast('Portfolio link copied to clipboard!');
+      if (btn) {
+        var oldHtml = btn.innerHTML;
+        btn.innerHTML = I.check;
+        btn.classList.add('fb-copied');
+        setTimeout(function () {
+          btn.innerHTML = oldHtml;
+          btn.classList.remove('fb-copied');
+        }, 1800);
+      }
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(linkUrl).then(onSuccess).catch(function () {
+        promptFallback();
+      });
+    } else {
+      promptFallback();
+    }
+
+    function promptFallback() {
+      var ta = document.createElement('textarea');
+      ta.value = linkUrl;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        onSuccess();
+      } catch (e) {
+        document.body.removeChild(ta);
+        prompt('Copy portfolio URL:', linkUrl);
+      }
+    }
+  };
+
+  FlipBook.prototype.open = function (options) {
+    options = options || {};
+    if (this._open) {
+      if (typeof options.page === 'number' && options.page > 0) {
+        this._jumpTo(options.page);
+      }
+      return;
+    }
     var self = this;
     if (this._animating) this._finishAnim();
     this._open = true;
@@ -241,14 +320,25 @@
     this._overlay.classList.add('fb-open');
     document.body.style.overflow = 'hidden';
 
-    /* Browser back-button support */
-    if (window.history && window.history.pushState) {
-      try {
-        window.history.pushState({ flipbookOpen: true }, '', window.location.href);
-        this._pushedHistory = true;
-      } catch (err) {}
+    /* URL & History sync */
+    if (options.updateHistory !== false && this.id) {
+      var targetHash = '#' + this.id;
+      var curHash = (window.location.hash || '').toLowerCase();
+      if (curHash !== targetHash) {
+        if (window.history && window.history.pushState) {
+          try {
+            window.history.pushState({ flipbookId: this.id, flipbookOpen: true }, '', targetHash);
+            this._pushedHistory = true;
+          } catch (err) {}
+        } else {
+          window.location.hash = targetHash;
+        }
+      }
     }
-    window.addEventListener('popstate', this._onPop);
+
+    if (typeof options.page === 'number' && options.page > 1) {
+      this._jumpTo(options.page);
+    }
 
     document.addEventListener('keydown', this._onKey);
     ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(function (ev) {
@@ -258,7 +348,8 @@
     prefetch(this.source, 0, 5);
   };
 
-  FlipBook.prototype.close = function () {
+  FlipBook.prototype.close = function (options) {
+    options = options || {};
     if (!this._open) return;
     var self = this;
     if (this._animating) this._finishAnim();
@@ -271,12 +362,21 @@
       document.activeElement.blur();
     }
 
-    window.removeEventListener('popstate', this._onPop);
-    if (this._pushedHistory) {
-      this._pushedHistory = false;
-      try {
-        window.history.back();
-      } catch (err) {}
+    if (options.updateHistory !== false) {
+      var curHash = (window.location.hash || '').toLowerCase();
+      if (this.id && curHash.indexOf(this.id) !== -1) {
+        if (this._pushedHistory && window.history && window.history.back) {
+          this._pushedHistory = false;
+          try {
+            window.history.back();
+          } catch (err) {}
+        } else if (window.history && window.history.replaceState) {
+          var cleanUrl = window.location.pathname + window.location.search;
+          window.history.replaceState(null, '', cleanUrl);
+        } else {
+          window.location.hash = '';
+        }
+      }
     }
 
     document.removeEventListener('keydown', this._onKey);
@@ -889,15 +989,111 @@
   };
 
   /* =========================================================
-     Static: thumbnail card builder
+     Static: thumbnail card builder & Router
   ========================================================= */
+  FlipBook.instances = {};
+  FlipBook.list = [];
+
+  FlipBook.register = function (fb) {
+    if (fb && fb.id) {
+      FlipBook.instances[fb.id.toLowerCase()] = fb;
+    }
+    FlipBook.list.push(fb);
+  };
+
+  FlipBook.parseRoute = function () {
+    var hash = (window.location.hash || '').replace(/^#\/?/, '').trim().toLowerCase();
+    var params = null;
+    try {
+      params = new URLSearchParams(window.location.search);
+    } catch (e) {}
+
+    var pParam = params ? (params.get('portfolio') || params.get('p') || '').trim().toLowerCase() : '';
+    var pageParam = params ? parseInt(params.get('page') || params.get('pg'), 10) : NaN;
+
+    var targetId = '';
+    var targetPage = !isNaN(pageParam) && pageParam > 0 ? pageParam : 1;
+
+    if (pParam) {
+      targetId = pParam;
+    } else if (hash) {
+      // Support formats: urban, urban/5, urban:5, urban-5, portfolio-urban, fb-urban-host
+      var parts = hash.split(/[/:]/);
+      var rawId = parts[0].replace(/^portfolio-|^fb-|-host$/g, '');
+      if (parts.length > 1) {
+        var p = parseInt(parts[1], 10);
+        if (!isNaN(p) && p > 0) targetPage = p;
+      }
+      targetId = rawId;
+    }
+
+    return {
+      id: targetId,
+      page: targetPage
+    };
+  };
+
+  FlipBook.checkRoute = function () {
+    var route = FlipBook.parseRoute();
+    var matched = null;
+
+    if (route.id) {
+      for (var key in FlipBook.instances) {
+        if (key === route.id || route.id.indexOf(key) !== -1 || key.indexOf(route.id) !== -1) {
+          matched = FlipBook.instances[key];
+          break;
+        }
+      }
+      if (!matched) {
+        for (var i = 0; i < FlipBook.list.length; i++) {
+          var fb = FlipBook.list[i];
+          var id = (fb.id || '').toLowerCase();
+          var label = (fb.label || '').toLowerCase();
+          if (id === route.id || label === route.id || (id && route.id.indexOf(id) !== -1)) {
+            matched = fb;
+            break;
+          }
+        }
+      }
+    }
+
+    if (matched) {
+      for (var j = 0; j < FlipBook.list.length; j++) {
+        var other = FlipBook.list[j];
+        if (other !== matched && other._open) {
+          other.close({ updateHistory: false });
+        }
+      }
+      matched.open({ page: route.page, updateHistory: false });
+    } else {
+      var rawHash = (window.location.hash || '').toLowerCase();
+      if (!rawHash || rawHash === '#' || rawHash === '#!' || rawHash === '#top') {
+        for (var k = 0; k < FlipBook.list.length; k++) {
+          if (FlipBook.list[k]._open) {
+            FlipBook.list[k].close({ updateHistory: false });
+          }
+        }
+      }
+    }
+  };
+
+  window.addEventListener('popstate', function () {
+    FlipBook.checkRoute();
+  });
+  window.addEventListener('hashchange', function () {
+    FlipBook.checkRoute();
+  });
+
   FlipBook.buildThumb = function (opts) {
     var container = document.getElementById(opts.containerId);
     if (!container) return;
 
+    var fbId = (opts.id || opts.containerId.replace(/^fb-|-host$/g, '') || opts.label || '').toLowerCase();
+
     var thumb = el('div', 'fb-thumb');
     thumb.setAttribute('role', 'button');
     thumb.setAttribute('aria-label', 'Open ' + opts.label + ' flipbook');
+    thumb.setAttribute('data-flipbook-id', fbId);
 
     /* Clean Card wrapper */
     var card = el('div', 'fb-thumb-card');
@@ -913,11 +1109,19 @@
     container.appendChild(thumb);
 
     var fb = new FlipBook({
+      id:          fbId,
       source:      opts.source,
       downloadUrl: opts.downloadUrl,
       label:       opts.label,
     });
     fb.mount(thumb);
+    FlipBook.register(fb);
+
+    if (FlipBook._routeTimer) clearTimeout(FlipBook._routeTimer);
+    FlipBook._routeTimer = setTimeout(function () {
+      FlipBook.checkRoute();
+    }, 20);
+
     return fb;
   };
 

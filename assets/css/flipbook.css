@@ -587,3 +587,38 @@
   .fb-nav-prev { left: 8px; }
   .fb-nav-next { right: 8px; }
 }
+
+/* --------------------------------------------------------------------------
+   Toast notification for copied link & feedback
+   -------------------------------------------------------------------------- */
+
+.fb-toast {
+  position: fixed;
+  top: 28px;
+  left: 50%;
+  transform: translate(-50%, -20px) scale(0.95);
+  z-index: 10005;
+  background: rgba(18, 14, 32, 0.90);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #f8fafc;
+  padding: 9px 20px;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fb-toast.fb-toast-show {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.fb-btn-share.fb-copied {
+  color: #4ade80 !important;
+}
+

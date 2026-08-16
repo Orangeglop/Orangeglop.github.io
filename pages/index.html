@@ -11,8 +11,9 @@ permalink: /
   <script>
     (function() {
       var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-      var target = lang.startsWith('nl') ? '{{ "/nl/" | relative_url }}' : '{{ "/en/" | relative_url }}';
-      window.location.replace(target);
+      var base = lang.startsWith('nl') ? '{{ "/nl/" | relative_url }}' : '{{ "/en/" | relative_url }}';
+      var extra = window.location.search + window.location.hash;
+      window.location.replace(base + extra);
     })();
   </script>
   <meta http-equiv="refresh" content="0; url={{ '/en/' | relative_url }}">
