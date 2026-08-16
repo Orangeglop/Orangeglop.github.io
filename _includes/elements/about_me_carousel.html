@@ -1,25 +1,36 @@
-<div id="carouselAboutMe" class="site-carousel carousel-about carousel slide" data-ride="carousel" data-interval="5000">
-  <ol class="carousel-indicators">
-  {% for image in site.data.images_aboutme %}
-      <li data-target="#carouselAboutMe" data-slide-to="{{ forloop.index0 }}" class="{% if forloop.first %}active{% endif %}"></li>
-  {% endfor %}
-  </ol>
-
-  <div class="carousel-inner">
+<div class="carousel-container carousel-about" data-interval="5000" data-reveal>
+  <div class="carousel-track">
     {% for image in site.data.images_aboutme %}
-      <div class="carousel-item {% if forloop.first %}active{% endif %}">
-        <img src="{{ image.path | relative_url }}" class="carousel-img" alt="About Me">
+      <div class="carousel-slide {% if forloop.first %}active{% endif %}">
+        <img src="{{ image.path | relative_url }}"
+             alt="{{ image.title | default: 'Analytical Spatial Study' }}"
+             {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
       </div>
     {% endfor %}
   </div>
 
-  <a class="carousel-control-prev" href="#carouselAboutMe" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
+  <!-- Navigation Arrows -->
+  <button class="carousel-nav-btn prev" type="button" aria-label="Previous image">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+  <button class="carousel-nav-btn next" type="button" aria-label="Next image">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
 
-  <a class="carousel-control-next" href="#carouselAboutMe" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+  <!-- Slide Caption -->
+  <div class="carousel-caption-pill"></div>
+
+  <!-- Dot Indicators -->
+  <div class="carousel-dots" role="tablist" aria-label="Analytical Slide Selection">
+    {% for image in site.data.images_aboutme %}
+      <button class="carousel-dot {% if forloop.first %}active{% endif %}"
+              type="button"
+              role="tab"
+              aria-label="Slide {{ forloop.index }}"></button>
+    {% endfor %}
+  </div>
 </div>

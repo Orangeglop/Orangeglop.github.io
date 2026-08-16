@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-
-<html lang="{{ page.lang | default: 'en' }}" class="h-100">
+<html lang="{{ page.lang | default: 'en' }}">
 
 {% include head.html %}
 
-<body class="h-100 d-flex flex-column">
+<body>
 
-  <header class="container mt-4">
-    {% include navbar.html %}
+  <header class="site-header">
+    <div class="site-container">
+      {% include navbar.html %}
+    </div>
   </header>
 
-  <main class="flex-shrink-0 container my-4" id="main-content">
+  <main class="site-main site-container" id="main-content">
     {{ content }}
   </main>
 

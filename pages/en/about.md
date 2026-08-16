@@ -9,29 +9,34 @@ weight: 3
 
 <div class="about-page">
 
-  <h5 class="section-title">{{ site.data.strings.about_me[page.lang] }}</h5>
+  <div class="hero-banner" data-reveal>
+    <div class="hero-meta mb-2">
+      <span class="badge badge-status">
+        {{ site.data.strings.status_available[page.lang] | default: "Open to opportunities in The Netherlands" }}
+      </span>
+    </div>
+    <p class="hero-intro-text">
+      {{ site.data.strings.about_me_text[page.lang] | replace: "%AUTHOR_NAME%", site.author.name }}
+    </p>
+  </div>
 
-  <p class="lead about-intro-text mb-4">
-    {{ site.data.strings.about_me_text[page.lang] | replace: "%AUTHOR_NAME%", site.author.name }}
-  </p>
+  <div class="section-header" style="margin-top: 2.5rem;" data-reveal>
+    <h2 class="section-title">
+      {{ site.data.strings.analytical_drawings[page.lang] | default: "Analytical Studies & Spatial Diagrams" }}
+    </h2>
+  </div>
 
-  <div class="my-4">
+  <div style="margin-bottom: 2.5rem;">
     {% include elements/about_me_carousel.html %}
   </div>
 
-  <div class="row">
-    {% assign skills_title = site.data.strings.skills[page.lang] %}
-    {% include about/skills.html title=skills_title %}
-  </div>
+  {% assign skills_title = site.data.strings.skills[page.lang] %}
+  {% include about/skills.html title=skills_title %}
 
-  <div class="row">
-    {% assign education_title = site.data.strings.education[page.lang] %}
-    {% include about/education.html title=education_title %}
-  </div>
+  {% assign education_title = site.data.strings.education[page.lang] %}
+  {% include about/education.html title=education_title %}
 
-  <div class="row mb-4">
-    {% assign experience_title = site.data.strings.experiences[page.lang] %}
-    {% include about/experience.html title=experience_title %}
-  </div>
+  {% assign experience_title = site.data.strings.experiences[page.lang] %}
+  {% include about/experience.html title=experience_title %}
 
 </div>

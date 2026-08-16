@@ -1,22 +1,38 @@
 {% assign current_lang = page.lang | default: 'en' %}
 
-<div class="col-12 mt-4">
-  <h5 class="section-title">{{ include.title }}</h5>
+<div class="about-section" style="width: 100%; margin-top: 2.5rem;" data-reveal>
+  <div class="section-header">
+    <h2 class="section-title">{{ include.title | default: "Experience & Timeline" }}</h2>
+  </div>
 
-  <div class="timeline-body">
+  <div class="timeline">
     {% for item in site.data.experience[current_lang] %}
       <div class="timeline-item">
+        <div class="timeline-marker"></div>
         <div class="timeline-card">
-          <div class="timeline-title">{{ item.title }}</div>
+          <div class="timeline-header">
+            <h3 class="timeline-role">{{ item.title }}</h3>
+            <span class="timeline-date">{{ item.from }} &mdash; {{ item.to }}</span>
+          </div>
+
           {% if item.location %}
-            <div class="timeline-location">{{ item.location }}</div>
+            <div class="timeline-meta">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-muted);">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>{{ item.location }}</span>
+            </div>
           {% endif %}
-          <div class="timeline-date">{{ item.from }} — {{ item.to }}</div>
+
           {% if item.summary %}
-            <p class="small mb-2">{{ item.summary }}</p>
+            <p class="timeline-summary text-muted" style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+              {{ item.summary }}
+            </p>
           {% endif %}
+
           {% if item.highlights and item.highlights.size > 0 %}
-            <ul class="timeline-highlight-list">
+            <ul class="timeline-highlights">
               {% for highlight in item.highlights %}
                 <li class="timeline-highlight-item">{{ highlight }}</li>
               {% endfor %}

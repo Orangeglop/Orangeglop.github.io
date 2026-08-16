@@ -11,38 +11,64 @@ portfolio:
   nl: "Portfolio"
 
 portfolio_urban:
-  en: "Urban"
-  nl: "Urban"
+  en: "Urban Planning & Design"
+  nl: "Stedenbouw & Ontwerp"
+
+portfolio_urban_desc:
+  en: "Spatial strategies, concept zoning, master planning, and sustainable urban frameworks."
+  nl: "Ruimtelijke strategieën, bestemmingsplannen, masterplanning en duurzame stedelijke kaders."
 
 portfolio_landscape:
-  en: "Landscape"
-  nl: "Landscape"
+  en: "Landscape Architecture"
+  nl: "Landschapsarchitectuur"
+
+portfolio_landscape_desc:
+  en: "Ecological design, public realm transformation, green corridors, and drainage swales."
+  nl: "Ecologisch ontwerp, transformatie van de openbare ruimte, groene corridors en wadi-systemen."
+
+open_flipbook:
+  en: "Interactive Flipbook"
+  nl: "Interactief Flipbook"
+
+download_pdf:
+  en: "Download PDF"
+  nl: "Download PDF"
+
+status_available:
+  en: "Open to opportunities in The Netherlands"
+  nl: "Open voor kansen in Nederland"
 
 about_me:
   en: "About me"
   nl: "Over mij"
 
 skills:
-  en: "Skills"
-  nl: "Vaardigheden"
+  en: "Skills & Software"
+  nl: "Vaardigheden & Software"
 
 education:
   en: "Education"
   nl: "Opleiding"
   
 experiences:
-  en: "Experiences"
-  nl: "Ervaringen"
+  en: "Experience & Timeline"
+  nl: "Ervaring & Loopbaan"
+
+analytical_drawings:
+  en: "Analytical Studies & Spatial Diagrams"
+  nl: "Analytische Studies & Ruimtelijke Diagrammen"
 
 about_me_text:
-  en:
-    Hello, I'm <strong class="author-name">%AUTHOR_NAME%</strong> 👋, an urban planner, designer, and a landscape enthusiast.<br>
-    I'm currently living in The Netherlands and working as a freelance planner and designer for several projects in Southeast Asia.
-    This website is created to store my most up-to-date portfolio and featured works. I am also learning Dutch to improve my communication skills. I'm open to work and willingly to relocate within The Netherlands.
-  nl:
-    Hallo, ik ben <strong class="author-name">%AUTHOR_NAME%</strong> 👋, stedenbouwkundig ontwerper, landschapsontwerper en liefhebber van landschappen.<br>
-    Momenteel woon ik in Nederland, en werk ik aan verschillende projecten in Zuidoost-Azië.
-    Op deze website presenteer ik mijn meest recente werk en projecten. Om mijn communicatie verbeteren, leer ik actief Nederlands. Daarnaast sta ik open voor nieuwe kansen en ben ik bereid om binnen Nederland te verhuizen als dat nodig is.
+  en: >-
+    Hello, I'm <strong class="author-name">%AUTHOR_NAME%</strong> 👋, an urban planner, designer, and landscape enthusiast currently based in The Netherlands.
+    I hold an MSc in Urbanism, Landscape and Planning from KU Leuven and a BSc in Urban and Regional Planning from Ho Chi Minh University of Architecture.
+    I work on spatial master plans, public realm designs, and sustainable regional strategies, combining rigorous spatial analysis with clear visual communication.
+    I am actively learning Dutch (B1) and open to new career opportunities and relocation within The Netherlands.
+  nl: >-
+    Hallo, ik ben <strong class="author-name">%AUTHOR_NAME%</strong> 👋, stedenbouwkundig ontwerper en liefhebber van landschappen, momenteel woonachtig in Nederland.
+    Ik heb een MSc in Urbanism, Landscape and Planning behaald aan de KU Leuven en een BSc in Urban and Regional Planning aan de Architectuuruniversiteit van Ho Chi Minhstad.
+    Ik werk aan ruimtelijke masterplannen, openbare ruimte ontwerpen en duurzame regionale strategieën, waarbij ik grondige ruimtelijke analyses combineer met heldere visuele communicatie.
+    Ik leer actief Nederlands (B1) en sta open voor nieuwe carrièremogelijkheden en verhuizing binnen Nederland.
 
 page_not_found:
   en: "Page Not Found"

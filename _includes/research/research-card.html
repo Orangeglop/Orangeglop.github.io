@@ -1,22 +1,23 @@
-{%- comment -%} Determine Research URL {%- endcomment -%}
-{%- if item.external_url -%}
-  {%- assign research_url = item.external_url -%}
-{%- else -%}
-  {%- assign research_url = item.url | relative_url -%}
-{%- endif -%}
+{% if item.external_url %}
+  {% assign research_url = item.external_url %}
+{% else %}
+  {% assign research_url = item.url | relative_url %}
+{% endif %}
 
-{%- assign post_image = item.image | default: item.thumbnail -%}
+{% assign post_image = item.image | default: item.thumbnail %}
 
-<div class="col-12 col-md-6 col-lg-4 mb-4 d-flex align-items-stretch wow animated fadeIn" data-wow-delay=".15s">
-  <a href="{{ research_url }}" class="research-card card w-100" {%- if item.external_url and site.open_new_tab -%} target="_blank" {%- endif -%}>
-    {%- if post_image -%}
-    <div class="research-card-img-wrapper">
-      <img src="{{ post_image | relative_url }}" class="card-img-top research-card-img" alt="{{ item.title }}" loading="lazy">
+<a href="{{ research_url }}"
+   class="research-card"
+   {% if item.external_url and site.open_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+  {% if post_image %}
+    <div class="research-card-media">
+      <img src="{{ post_image | relative_url }}"
+           class="research-card-img"
+           alt="{{ item.title }}"
+           loading="lazy">
     </div>
-    {%- endif -%}
-    
-    <div class="card-body p-3 d-flex align-items-center">
-      <h6 class="card-title font-weight-bold mb-0">{{ item.title }}</h6>
-    </div>
-  </a>
-</div>
+  {% endif %}
+  <div class="research-card-body">
+    <h3 class="research-card-title">{{ item.title }}</h3>
+  </div>
+</a>

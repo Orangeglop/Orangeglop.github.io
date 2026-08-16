@@ -1,57 +1,180 @@
-<div class="landing-content mt-2">
+{% assign current_lang = page.lang | default: 'en' %}
 
-  {% assign current_lang = page.lang | default: 'en' %}
+<div class="landing-content">
 
-  <h5 class="section-title">{{ site.data.strings.featured_works[current_lang] | default: "Featured works" }}</h5>
-
-  <div id="carouselExampleIndicators" class="site-carousel carousel-featured carousel slide" data-ride="carousel" data-interval="3500">
-    <ol class="carousel-indicators">
-      {% for image in site.data.images_featured %}
-      <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.index0 }}"
-        class="{% if forloop.first %}active{% endif %}"></li>
-      {% endfor %}
-    </ol>
-
-    <div class="carousel-inner">
-      {% for image in site.data.images_featured %}
-      <div class="carousel-item {% if forloop.first %}active{% endif %}">
-        <img src="{{ image.path | relative_url }}" class="carousel-img"
-          alt="{{ image.title | default: 'Featured Work' }}"
-          {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
-      </div>
-      {% endfor %}
+  <!-- Hero / Introduction Banner -->
+  <div class="hero-banner" data-reveal>
+    <div class="hero-meta mb-2">
+      <span class="badge badge-status">
+        {{ site.data.strings.status_available[current_lang] | default: "Open to opportunities in The Netherlands" }}
+      </span>
     </div>
-
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" aria-label="Previous Slide">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" aria-label="Next Slide">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+    <p class="hero-intro-text">
+      {% if current_lang == 'nl' %}
+        {{ site.description_nl }}
+      {% else %}
+        {{ site.description_en }}
+      {% endif %}
+    </p>
   </div>
 
-  <h5 class="section-title mt-5">{{ site.data.strings.portfolio[current_lang] | default: "Portfolio" }}</h5>
+  <!-- Featured Works Showcase -->
+  <div class="section-header" data-reveal>
+    <h2 class="section-title">
+      {{ site.data.strings.featured_works[current_lang] | default: "Featured works" }}
+    </h2>
+  </div>
 
-  <div class="row justify-content-center align-items-center py-3">
-    <div class="col-12 col-md-6 mb-3 fb-thumb-container">
-      <div id="fb-urban-host"></div>
-    </div>
-    <div class="col-12 col-md-6 mb-3 fb-thumb-container">
-      <div id="fb-landscape-host"></div>
+  <div class="carousel-container carousel-featured" data-interval="4500" data-reveal>
+    <div class="carousel-track">
+      {% for image in site.data.images_featured %}
+        <div class="carousel-slide {% if forloop.first %}active{% endif %}">
+          <img src="{{ image.path | relative_url }}"
+               alt="{{ image.title | default: 'Featured Architectural & Urban Design Work' }}"
+               {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+        </div>
+      {% endfor %}
     </div>
 
-    <div class="col-12 text-center mt-3">
-      <p class="text-muted lead small wow animated slideInUp" data-wow-delay=".15s">
-        {% if current_lang == 'nl' %}
-        {{ site.description_nl }}
-        {% else %}
-        {{ site.description_en }}
-        {% endif %}
-      </p>
+    <!-- Navigation Arrows -->
+    <button class="carousel-nav-btn prev" type="button" aria-label="Previous image">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="carousel-nav-btn next" type="button" aria-label="Next image">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+
+    <!-- Slide Caption -->
+    <div class="carousel-caption-pill"></div>
+
+    <!-- Dot Indicators -->
+    <div class="carousel-dots" role="tablist" aria-label="Slide Selection">
+      {% for image in site.data.images_featured %}
+        <button class="carousel-dot {% if forloop.first %}active{% endif %}"
+                type="button"
+                role="tab"
+                aria-label="Slide {{ forloop.index }}"></button>
+      {% endfor %}
     </div>
+  </div>
+
+  <!-- Portfolio Books Showcase -->
+  <div class="section-header" style="margin-top: 3.5rem;" data-reveal>
+    <h2 class="section-title">
+      {{ site.data.strings.portfolio[current_lang] | default: "Portfolio" }}
+    </h2>
+  </div>
+
+  <div class="portfolio-grid" data-reveal>
+    
+    <!-- Urban Planning Portfolio Card -->
+    <div class="portfolio-card" id="card-urban">
+      <div class="portfolio-card-media js-open-urban" role="button" tabindex="0" aria-label="Open {{ site.data.strings.portfolio_urban[current_lang] }} Flipbook">
+        <img src="{{ '/assets/portfolio/urban.webp' | relative_url }}"
+             alt="{{ site.data.strings.portfolio_urban[current_lang] }}"
+             class="portfolio-card-img"
+             loading="lazy">
+        <div class="portfolio-card-overlay">
+          <span class="portfolio-open-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+            {{ site.data.strings.open_flipbook[current_lang] | default: "Interactive Flipbook" }}
+          </span>
+        </div>
+      </div>
+      <div class="portfolio-card-content">
+        <div class="portfolio-card-header">
+          <h3 class="portfolio-card-title">
+            {{ site.data.strings.portfolio_urban[current_lang] | default: "Urban Planning & Design" }}
+          </h3>
+          <span class="badge badge-primary">PDF &bull; Interactive</span>
+        </div>
+        <p class="portfolio-card-desc">
+          {{ site.data.strings.portfolio_urban_desc[current_lang] | default: "Spatial strategies, concept zoning, master planning, and sustainable urban frameworks." }}
+        </p>
+        <div class="portfolio-card-actions">
+          <button type="button" class="btn btn-primary js-open-urban" style="flex: 1;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+            {{ site.data.strings.open_flipbook[current_lang] | default: "Flipbook" }}
+          </button>
+          <a href="{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_URBAN_2026.pdf' | relative_url }}"
+             class="btn btn-secondary"
+             download
+             target="_blank"
+             rel="noopener"
+             title="{{ site.data.strings.download_pdf[current_lang] | default: 'Download PDF' }}">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            PDF
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Landscape Architecture Portfolio Card -->
+    <div class="portfolio-card" id="card-landscape">
+      <div class="portfolio-card-media js-open-landscape" role="button" tabindex="0" aria-label="Open {{ site.data.strings.portfolio_landscape[current_lang] }} Flipbook">
+        <img src="{{ '/assets/portfolio/landscape.webp' | relative_url }}"
+             alt="{{ site.data.strings.portfolio_landscape[current_lang] }}"
+             class="portfolio-card-img"
+             loading="lazy">
+        <div class="portfolio-card-overlay">
+          <span class="portfolio-open-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+            {{ site.data.strings.open_flipbook[current_lang] | default: "Interactive Flipbook" }}
+          </span>
+        </div>
+      </div>
+      <div class="portfolio-card-content">
+        <div class="portfolio-card-header">
+          <h3 class="portfolio-card-title">
+            {{ site.data.strings.portfolio_landscape[current_lang] | default: "Landscape Architecture" }}
+          </h3>
+          <span class="badge badge-primary">PDF &bull; Interactive</span>
+        </div>
+        <p class="portfolio-card-desc">
+          {{ site.data.strings.portfolio_landscape_desc[current_lang] | default: "Ecological design, public realm transformation, green corridors, and drainage swales." }}
+        </p>
+        <div class="portfolio-card-actions">
+          <button type="button" class="btn btn-primary js-open-landscape" style="flex: 1;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+            {{ site.data.strings.open_flipbook[current_lang] | default: "Flipbook" }}
+          </button>
+          <a href="{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_LANDSCAPE_2026.pdf' | relative_url }}"
+             class="btn btn-secondary"
+             download
+             target="_blank"
+             rel="noopener"
+             title="{{ site.data.strings.download_pdf[current_lang] | default: 'Download PDF' }}">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            PDF
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   {% assign urban_files = site.static_files | where_exp: "f", "f.path contains '/assets/portfolio/urban/'" %}
@@ -70,7 +193,6 @@
         {% endfor %}
       ];
 
-      /* Natural alphabetical sorting (e.g. page-1.webp, page-2.webp ... page-10.webp ... page-43.webp) */
       function natSort(arr) {
         return arr.slice().sort(function (a, b) {
           return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
@@ -82,41 +204,50 @@
 
       var urbanPdf       = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_URBAN_2026.pdf' | relative_url }}";
       var landscapePdf   = "{{ '/assets/portfolio/%5BTRAN HOANG%5D%20PORTFOLIO_LANDSCAPE_2026.pdf' | relative_url }}";
-      var urbanThumb     = "{{ '/assets/portfolio/urban.webp' | relative_url }}";
-      var landscapeThumb = "{{ '/assets/portfolio/landscape.webp' | relative_url }}";
 
-      var urbanLabel     = {{ site.data.strings.portfolio_urban[current_lang] | default: "Urban" | jsonify }};
-      var landscapeLabel = {{ site.data.strings.portfolio_landscape[current_lang] | default: "Landscape" | jsonify }};
+      var urbanLabel     = {{ site.data.strings.portfolio_urban[current_lang] | default: "Urban Planning & Design" | jsonify }};
+      var landscapeLabel = {{ site.data.strings.portfolio_landscape[current_lang] | default: "Landscape Architecture" | jsonify }};
 
-      function initFlipbooks() {
+      function initPortfolios() {
         if (typeof FlipBook === 'undefined') {
-          setTimeout(initFlipbooks, 50);
+          setTimeout(initPortfolios, 40);
           return;
         }
 
-        FlipBook.buildThumb({
+        var urbanFB = new FlipBook({
           id:          'urban',
-          containerId: 'fb-urban-host',
-          thumb:       urbanThumb,
-          label:       urbanLabel,
           source:      urbanSource,
           downloadUrl: urbanPdf,
+          label:       urbanLabel,
         });
+        FlipBook.register(urbanFB);
 
-        FlipBook.buildThumb({
+        var landscapeFB = new FlipBook({
           id:          'landscape',
-          containerId: 'fb-landscape-host',
-          thumb:       landscapeThumb,
-          label:       landscapeLabel,
           source:      landscapeSource,
           downloadUrl: landscapePdf,
+          label:       landscapeLabel,
         });
+        FlipBook.register(landscapeFB);
+
+        document.querySelectorAll('.js-open-urban').forEach(function (el) {
+          urbanFB.mount(el);
+        });
+
+        document.querySelectorAll('.js-open-landscape').forEach(function (el) {
+          landscapeFB.mount(el);
+        });
+
+        if (FlipBook._routeTimer) clearTimeout(FlipBook._routeTimer);
+        FlipBook._routeTimer = setTimeout(function () {
+          FlipBook.checkRoute();
+        }, 20);
       }
 
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initFlipbooks);
+        document.addEventListener('DOMContentLoaded', initPortfolios);
       } else {
-        initFlipbooks();
+        initPortfolios();
       }
     }());
   </script>

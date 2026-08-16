@@ -1,15 +1,19 @@
 {% assign current_lang = page.lang | default: 'en' %}
 
-<div class="error-page text-center py-5 my-4">
-  <div class="error-code-badge mb-2">404</div>
-  <h2 class="error-title font-weight-bold mb-3">
+<div class="error-page" data-reveal>
+  <div class="error-code">404</div>
+  <h1 class="error-title">
     {{ site.data.strings.page_not_found[current_lang] | default: "Page Not Found" }}
-  </h2>
-  <p class="error-desc lead mx-auto mb-4">
+  </h1>
+  <p class="error-desc">
     {{ site.data.strings.page_not_found_desc[current_lang] | default: "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable." }}
   </p>
-  <div class="error-actions pt-2">
-    <a href="{{ site.baseurl }}/{{ current_lang }}/" class="btn btn-primary px-4 py-2 font-weight-bold">
+  <div class="error-actions">
+    <a href="{{ site.baseurl }}/{{ current_lang }}/" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
       {{ site.data.strings.back_to_home[current_lang] | default: "Back to Home" }}
     </a>
   </div>

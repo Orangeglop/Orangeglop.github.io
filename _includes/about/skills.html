@@ -1,18 +1,34 @@
 {% assign current_lang = page.lang | default: 'en' %}
 
-<div class="col-12 mt-4">
-  <h5 class="section-title">{{ include.title }}</h5>
+<div class="about-section" style="width: 100%; margin-top: 2rem;" data-reveal>
+  <div class="section-header">
+    <h2 class="section-title">{{ include.title | default: "Skills & Software" }}</h2>
+  </div>
 
-  <ul class="pl-3 mb-0">
-  {% for skill in site.data.skills[current_lang] %}
-    {% assign parts = skill.name | split: ":" %}
-    <li class="mb-1">
-      {% if parts.size > 1 %}
-        <strong>{{ parts[0] }}:</strong>{{ parts[1] }}
-      {% else %}
-        {{ skill.name }}
-      {% endif %}
-    </li>
-  {% endfor %}
-  </ul>
+  <div class="skills-grid">
+    {% for skill in site.data.skills[current_lang] %}
+      {% assign parts = skill.name | split: ":" %}
+      <div class="skill-category-card">
+        {% if parts.size > 1 %}
+          <div class="skill-category-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            {{ parts[0] | strip }}
+          </div>
+          <div class="skill-tags">
+            {% assign tags = parts[1] | split: "," %}
+            {% for tag in tags %}
+              <span class="skill-tag">{{ tag | strip }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="skill-tags">
+            <span class="skill-tag">{{ skill.name }}</span>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
 </div>

@@ -7,5 +7,8 @@ permalink: /en/research/
 weight: 2
 ---
 
-<h5 class="section-title">{{ site.data.strings.research[page.lang] | default: page.title }}</h5>
+<div class="section-header" data-reveal>
+  <h2 class="section-title">{{ site.data.strings.research[page.lang] | default: page.title }}</h2>
+</div>
+
 {% include research/index.html %}

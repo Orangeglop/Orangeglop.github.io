@@ -1,10 +1,8 @@
-<footer class="mt-auto py-3 text-center">
-
-  <small class="text-muted mb-2">
-    <i class="fas fa-code"></i> with <i class="fas fa-heart"></i>
-    by <strong>{{ site.author.name }}</strong>
-  </small>
-
-  {% include social.html %}
-
+<footer class="site-footer">
+  <div class="site-container">
+    {% include social.html %}
+    <p class="footer-copy">
+      &copy; {{ 'now' | date: "%Y" }} <strong>{{ site.author.name }}</strong> &mdash; {{ site.description_en | default: site.description }}
+    </p>
+  </div>
 </footer>

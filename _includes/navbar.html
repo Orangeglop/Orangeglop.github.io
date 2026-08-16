@@ -1,43 +1,109 @@
-<nav class="navbar navbar-expand px-0" aria-label="Main Navigation">
+{% assign current_lang = page.lang | default: 'en' %}
 
-  {% assign current_lang = page.lang | default: 'en' %}
-  
-  <a class="navbar-brand" href="{{ site.baseurl }}/{{ current_lang }}/">
-    <h5 class="navbar-brand-title">{{ site.title }}</h5>
-    <span class="navbar-brand-subtitle">
+{% assign translations = site.pages | concat: site.research %}
+{% if page.ref %}
+  {% assign matched_pages = translations | where_exp: "item", "item.ref == page.ref" %}
+  {% assign en_item = matched_pages | where_exp: "item", "item.lang == 'en'" | first %}
+  {% assign nl_item = matched_pages | where_exp: "item", "item.lang == 'nl'" | first %}
+  {% assign en_url = en_item.url | default: '/en/' %}
+  {% assign nl_url = nl_item.url | default: '/nl/' %}
+{% else %}
+  {% assign en_url = '/en/' %}
+  {% assign nl_url = '/nl/' %}
+{% endif %}
+
+<div class="header-inner">
+  <a class="brand" href="{{ site.baseurl }}/{{ current_lang }}/" aria-label="{{ site.title }} Home">
+    <span class="brand-name">{{ site.title }}</span>
+    <span class="brand-tagline">
       {{ site.data.strings.portfolio[current_lang] | default: "Portfolio" }}
     </span>
   </a>
 
-  <div class="navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto align-items-center">
+  <!-- Desktop Navigation -->
+  <nav class="nav-desktop" aria-label="Main Desktop Navigation">
+    <ul class="nav-links">
+      <li>
+        <a class="nav-link {% if page.ref == 'index' or page.url == '/en/' or page.url == '/nl/' %}active{% endif %}"
+           href="{{ site.baseurl }}/{{ current_lang }}/">
+          {{ site.data.strings.portfolio[current_lang] | default: "Portfolio" }}
+        </a>
+      </li>
 
-      {% for link in site.data.navigation.main %}  
+      {% for link in site.data.navigation.main %}
         {% assign link_url = link.url[current_lang] | default: "/" %}
-        
         {% assign active_status = "" %}
         {% if page.ref and page.ref == link.ref %}
           {% assign active_status = "active" %}
         {% endif %}
+        <li>
+          <a class="nav-link {{ active_status }}" href="{{ link_url | relative_url }}">
+            {{ link.title[current_lang] }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
 
-        <a class="nav-item nav-link {{ active_status }}" href="{{ link_url | relative_url }}">
+    <!-- Language Switcher Pill -->
+    <div class="lang-switcher" role="group" aria-label="Language Selector">
+      <a href="{{ en_url | relative_url }}"
+         class="lang-btn {% if current_lang == 'en' %}active{% endif %}"
+         aria-label="Switch to English"
+         {% if current_lang == 'en' %}aria-current="true"{% endif %}>
+        EN
+      </a>
+      <a href="{{ nl_url | relative_url }}"
+         class="lang-btn {% if current_lang == 'nl' %}active{% endif %}"
+         aria-label="Schakel naar Nederlands"
+         {% if current_lang == 'nl' %}aria-current="true"{% endif %}>
+        NL
+      </a>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Button -->
+  <button class="mobile-nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
+</div>
+
+<!-- Mobile Drawer Navigation -->
+<div class="mobile-drawer" id="mobile-drawer">
+  <ul class="mobile-nav-links">
+    <li>
+      <a class="nav-link {% if page.ref == 'index' or page.url == '/en/' or page.url == '/nl/' %}active{% endif %}"
+         href="{{ site.baseurl }}/{{ current_lang }}/">
+        {{ site.data.strings.portfolio[current_lang] | default: "Portfolio" }}
+      </a>
+    </li>
+    {% for link in site.data.navigation.main %}
+      {% assign link_url = link.url[current_lang] | default: "/" %}
+      {% assign active_status = "" %}
+      {% if page.ref and page.ref == link.ref %}
+        {% assign active_status = "active" %}
+      {% endif %}
+      <li>
+        <a class="nav-link {{ active_status }}" href="{{ link_url | relative_url }}">
           {{ link.title[current_lang] }}
         </a>
-      {% endfor %}
+      </li>
+    {% endfor %}
+  </ul>
 
-      {% if page.ref %}
-        {% assign translations = site.pages | concat: site.research %}
-        {% assign translations = translations | where_exp: "item", "item.ref == page.ref" | sort: 'lang' %}
-        {% for t in translations %}
-          {% if t.lang and t.lang != current_lang %}
-            <a class="nav-item nav-link lang-switch" href="{{ t.url | relative_url }}" aria-label="Switch to {{ t.lang | upcase }}">
-              {{ t.lang | upcase }}
-            </a>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-
-    </div>
+  <div class="lang-switcher" role="group" aria-label="Language Selector">
+    <a href="{{ en_url | relative_url }}"
+       class="lang-btn {% if current_lang == 'en' %}active{% endif %}"
+       aria-label="Switch to English">
+      English (EN)
+    </a>
+    <a href="{{ nl_url | relative_url }}"
+       class="lang-btn {% if current_lang == 'nl' %}active{% endif %}"
+       aria-label="Schakel naar Nederlands">
+      Nederlands (NL)
+    </a>
   </div>
-
-</nav>
+</div>
