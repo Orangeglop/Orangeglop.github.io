@@ -1,16 +1,47 @@
 ---
 ---
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 /* ==========================================================================
-   Typography Tuning (Crisp Semi-Bold 600)
+   Design Tokens & CSS Variables
    ========================================================================== */
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #212529;
+  --text-heading: #1a1a1a;
+  --card-bg: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --muted-text: #6c757d;
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --nav-link-color: #4b5563;
+  --nav-link-hover: #111827;
+  --nav-link-active: #111827;
+}
+
+/* ==========================================================================
+   Base Elements & Typography
+   ========================================================================== */
+
+html {
+  padding-left: calc(100vw - 100%);
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 b,
 strong,
 .font-weight-bold {
-  font-weight: 600 !important;
+  font-weight: 600;
+  color: var(--text-heading);
 }
 
 h1,
@@ -22,22 +53,146 @@ h6,
 .section-title,
 .timeline-title,
 .card-title,
-.navbar-brand {
-  font-weight: 600 !important;
+.navbar-brand-title {
+  font-weight: 600;
+  color: var(--text-heading);
 }
 
-.carousel-caption {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
-  color: white;
+a {
+  color: var(--primary-color);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: "◦ ";
 }
 
 /* ==========================================================================
-   Carousel Styling (Complete Image Display, No Zoom/Crop, Transparent BG)
+   Section Headers & Utilities
+   ========================================================================== */
+
+.section-title {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-text);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.about-intro-box {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.about-intro-text {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-color);
+}
+
+/* ==========================================================================
+   Navbar & Navigation Links
+   ========================================================================== */
+
+.navbar {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.navbar-brand {
+  margin-bottom: 0;
+  padding-bottom: 2px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none !important;
+  color: var(--text-heading) !important;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus {
+  text-decoration: none !important;
+  color: var(--text-heading) !important;
+}
+
+.navbar-brand-title {
+  line-height: 1;
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-heading) !important;
+}
+
+.navbar-brand-subtitle {
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin-top: 2px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted-text);
+}
+
+.navbar-nav .nav-link {
+  color: var(--nav-link-color) !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding-left: 0.85rem !important;
+  padding-right: 0.85rem !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  color: var(--nav-link-hover) !important;
+  text-decoration: none !important;
+}
+
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-link.active {
+  color: var(--nav-link-active) !important;
+  font-weight: 600;
+}
+
+.link-after,
+.nav-link::after,
+.navbar-brand::after,
+.nav-item.active::after {
+  content: "";
+  display: block;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+.nav-link::after,
+.navbar-brand::after {
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+.navbar-brand::after {
+  margin-top: 4px;
+}
+
+.nav-link:hover::after,
+.navbar-brand:hover::after {
+  width: 100%;
+}
+
+.nav-item.active::after {
+  width: 100%;
+}
+
+/* ==========================================================================
+   Carousels (Complete Display, Transparent BG)
    ========================================================================== */
 
 .site-carousel {
@@ -46,10 +201,6 @@ h6,
   overflow: hidden;
   background-color: transparent;
   position: relative;
-}
-
-[data-theme="dark"] .site-carousel {
-  background-color: transparent;
 }
 
 .site-carousel.carousel-featured,
@@ -83,301 +234,219 @@ h6,
 #carouselExampleIndicators .carousel-item img,
 #carouselAboutMe .carousel-item img,
 .carousel-img {
-  max-width: 100% !important;
-  max-height: 100% !important;
-  width: auto !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  object-position: center !important;
-  display: block !important;
-  margin: 0 auto !important;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  margin: 0 auto;
 }
 
-.carousel-indicators,
+.site-carousel .carousel-control-prev,
+.site-carousel .carousel-control-next {
+  width: 36px;
+  height: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  opacity: 0.4;
+  transition: opacity 0.25s ease, transform 0.15s ease, background-color 0.2s ease;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.site-carousel .carousel-control-prev:active,
+.site-carousel .carousel-control-next:active {
+  opacity: 0.85;
+  transform: translateY(-50%) scale(0.94);
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.site-carousel .carousel-control-prev:focus,
+.site-carousel .carousel-control-next:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.site-carousel .carousel-control-prev:focus-visible,
+.site-carousel .carousel-control-next:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Desktop-only hover rules (ignored on mobile touchscreens) */
+@media (hover: hover) and (pointer: fine) {
+  .site-carousel:hover .carousel-control-prev,
+  .site-carousel:hover .carousel-control-next {
+    opacity: 0.75;
+  }
+
+  .site-carousel .carousel-control-prev:hover,
+  .site-carousel .carousel-control-next:hover {
+    opacity: 0.95;
+    background-color: rgba(255, 255, 255, 0.92);
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  filter: invert(60%);
+  width: 15px;
+  height: 15px;
+  filter: invert(1) grayscale(100%) brightness(25%);
 }
 
-/* ==========================================================================
-   Section Headers & Utilities
-   ========================================================================== */
-
-.section-title {
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #6c757d;
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="dark"] .section-title {
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-  color: #8b949e;
-}
-
-/* ==========================================================================
-   About Page Styling (Clean, Simple & Transparent Intro)
-   ========================================================================== */
-
-.about-intro-box {
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-}
-
-/* ==========================================================================
-   DFlip Flipbook Portfolio Styling (Flat Lift Hover & Clean Rounded Corners)
-   ========================================================================== */
-
-.df-ui-custom-download-button {
-  width: max-content;
-}
-
-.df_thumb-container {
-  display: flex;
-  justify-content: center;
+.carousel-indicators {
+  bottom: 12px;
+  margin-bottom: 0;
+  gap: 6px;
   align-items: center;
-  width: 100%;
 }
 
-.df-page-front:before,
-.df-page-back:before {
-  opacity: 0;
+.carousel-indicators li {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: none;
+  margin: 0;
+  transition: width 0.25s ease, background-color 0.25s ease, opacity 0.2s ease;
+  cursor: pointer;
+  opacity: 0.7;
 }
 
-.horizontal_container {
+.carousel-indicators li.active {
+  width: 18px;
+  border-radius: 4px;
+  background-color: var(--text-heading, #1a1a1a);
+  opacity: 0.9;
+}
+
+.carousel-indicators li:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-caption {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.horizontal_element {
-  flex: 1 1;
-  text-align: center;
-}
-
-._df_thumb {
-  width: 340px !important;
-  height: 340px !important;
-  max-width: 100% !important;
-  aspect-ratio: 1 / 1 !important;
-  margin: 15px auto !important;
-  display: block !important;
-  border-radius: 12px !important;
-  overflow: hidden !important;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12) !important;
-  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
-  perspective: none !important;
-  -webkit-perspective: none !important;
-}
-
-._df_thumb:hover {
-  transform: translateY(-5px) !important;
-  -webkit-transform: translateY(-5px) !important;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18) !important;
-}
-
-/* Neutralize DFlip's awkward 3D perspective slant */
-._df_thumb ._df_book-cover,
-._df_thumb:hover ._df_book-cover,
-.df-webkit ._df_thumb:hover ._df_book-cover {
-  width: 100% !important;
-  height: 100% !important;
-  aspect-ratio: 1 / 1 !important;
-  background-size: cover !important;
-  background-position: center !important;
-  border-radius: 12px !important;
-  overflow: hidden !important;
-  box-shadow: none !important;
-  transform: none !important;
-  -webkit-transform: none !important;
-}
-
-._df_thumb canvas,
-._df_thumb img,
-._df_thumb ._df_book-cover * {
-  border-radius: 12px !important;
-}
-
-._df_thumb ._df_book-title {
-  border-radius: 0 0 12px 12px !important;
-  padding: 10px 12px !important;
-  font-size: 0.92rem !important;
-  font-weight: 500 !important;
-  background: rgba(50, 50, 50, 0.88) !important;
-  text-align: center !important;
-}
-
-ul {
-  list-style-type: "◦ ";
+  flex-direction: column;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  color: white;
 }
 
 /* ==========================================================================
-   Base Theme Import
+   Timeline (Neutral Line & Dot Indicator)
    ========================================================================== */
 
-@import "portfolYOU";
-
-/* ==========================================================================
-   Navbar Brand & Navigation Link Hover Underline Fix
-   ========================================================================== */
-
-.navbar-brand {
-  margin-bottom: 0 !important;
-  padding-bottom: 2px !important;
-  display: inline-flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-}
-
-.navbar-brand::after {
-  margin-top: 4px !important;
-  height: 2px !important;
-}
-
-.nav-link::after {
-  height: 2px !important;
-}
-
-/* ==========================================================================
-   Timeline Styling Overrides (Colorless Neutral Line & Dots)
-   ========================================================================== */
-
-/* 1. Fully neutralize portfolYOU default timeline pseudo-elements */
-.timeline-body::before,
-.timeline-body::after,
-.timeline-body:before,
-.timeline-body:after,
-.timeline-item::before,
-.timeline-item::after,
-.timeline-item:before,
-.timeline-item:after,
-.timeline-body .timeline-item::before,
-.timeline-body .timeline-item::after,
-.timeline-body .timeline-item:before,
-.timeline-body .timeline-item:after {
-  content: none !important;
-  display: none !important;
-  border: none !important;
-  background: none !important;
-}
-
-/* 2. Colorless neutral vertical border on the timeline body */
 .timeline-body {
-  position: relative !important;
-  border-left: 2px solid rgba(0, 0, 0, 0.12) !important;
-  margin-left: 8px !important;
-  padding-left: 20px !important;
-  margin-top: 1rem !important;
-  margin-bottom: 1.5rem !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-}
-
-[data-theme="dark"] .timeline-body {
-  border-left-color: rgba(255, 255, 255, 0.15) !important;
+  position: relative;
+  border-left: 2px solid rgba(0, 0, 0, 0.12);
+  margin-left: 8px;
+  padding-left: 20px;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0;
+  background: transparent;
 }
 
 .timeline-body .timeline-item {
-  position: relative !important;
-  margin-bottom: 1.25rem !important;
-  padding: 0 !important;
-  border: none !important;
+  position: relative;
+  margin-bottom: 1.25rem;
+  padding: 0;
+  border: none;
 }
 
 .timeline-body .timeline-item:last-child {
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
 }
 
-/* 3. Colorless neutral dot indicator for each timeline item */
 .timeline-body .timeline-item::before {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  left: -25px !important;
-  top: 16px !important;
-  width: 8px !important;
-  height: 8px !important;
-  border-radius: 50% !important;
-  background-color: #6c757d !important;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06) !important;
-  z-index: 2 !important;
-}
-
-[data-theme="dark"] .timeline-body .timeline-item::before {
-  background-color: #8b949e !important;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08) !important;
+  content: "";
+  display: block;
+  position: absolute;
+  left: -25px;
+  top: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--muted-text);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+  z-index: 2;
 }
 
 .timeline-body .timeline-item .content {
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
-/* 4. Ultra-light, subtle grey background ONLY for education and experience entries */
 .timeline-card {
-  background-color: rgba(0, 0, 0, 0.015) !important;
-  border: none !important;
-  border-radius: 8px !important;
-  padding: 0.85rem 1.15rem !important;
-  box-shadow: none !important;
-}
-
-[data-theme="dark"] .timeline-card {
-  background-color: rgba(255, 255, 255, 0.02) !important;
-  border: none !important;
-  box-shadow: none !important;
+  background-color: rgba(0, 0, 0, 0.015);
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 1.15rem;
+  box-shadow: none;
 }
 
 .timeline-title {
   font-size: 1.05rem;
   margin-bottom: 0.2rem;
   line-height: 1.4;
+  color: var(--text-heading);
 }
 
 .timeline-location {
   font-size: 0.88rem;
-  color: #6c757d;
+  color: var(--muted-text);
   margin-bottom: 0.15rem;
   line-height: 1.4;
 }
 
-[data-theme="dark"] .timeline-location {
-  color: #8b949e;
-}
-
 .timeline-date {
   font-size: 0.85rem;
-  color: #6c757d;
+  color: var(--muted-text);
   margin-bottom: 0.4rem;
   line-height: 1.4;
-}
-
-[data-theme="dark"] .timeline-date {
-  color: #8b949e;
 }
 
 .timeline-card > .timeline-date:last-child {
   margin-bottom: 0;
 }
 
+.timeline-highlight-item {
+  font-size: 0.875rem;
+  color: var(--muted-text);
+  line-height: 1.55;
+  margin-bottom: 0.25rem;
+}
+
 /* ==========================================================================
-   Research Posts Styling (Complete Image Display, No Cropping)
+   Research Post Cards
    ========================================================================== */
 
 .research-card {
-  text-decoration: none !important;
+  text-decoration: none;
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background-color: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
   width: 100%;
   aspect-ratio: 1 / 1;
   display: flex;
@@ -386,32 +455,32 @@ ul {
 
 .research-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1) !important;
-  text-decoration: none !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
 }
 
 .research-card-img-wrapper {
-  height: 68% !important;
-  width: 100% !important;
-  flex: 0 0 68% !important;
+  height: 68%;
+  width: 100%;
+  flex: 0 0 68%;
   overflow: hidden;
   background-color: transparent;
   position: relative;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 10px 10px 0 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px 0 10px;
 }
 
 .research-card-img {
-  max-width: 100% !important;
-  max-height: 100% !important;
-  width: auto !important;
-  height: auto !important;
-  object-fit: contain !important;
-  object-position: center !important;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
   transition: transform 0.35s ease;
-  display: block !important;
+  display: block;
 }
 
 .research-card:hover .research-card-img {
@@ -419,12 +488,12 @@ ul {
 }
 
 .research-card .card-body {
-  height: 32% !important;
-  width: 100% !important;
-  flex: 0 0 32% !important;
-  padding: 0.5rem 0.85rem !important;
-  display: flex !important;
-  align-items: center !important;
+  height: 32%;
+  width: 100%;
+  flex: 0 0 32%;
+  padding: 0.5rem 0.85rem;
+  display: flex;
+  align-items: center;
   background-color: inherit;
   overflow: hidden;
 }
@@ -439,21 +508,127 @@ ul {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  color: var(--text-heading);
 }
 
 .research-card:hover .card-title {
-  color: #007bff;
+  color: var(--primary-color);
 }
 
-[data-theme="dark"] .research-card {
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .research-card:hover .card-title {
-  color: #58a6ff;
-}
+/* ==========================================================================
+   Post Layout Elements
+   ========================================================================== */
 
 .post-hero-image img {
   width: 100%;
+  max-height: 520px;
   object-fit: cover;
+  border-radius: 8px;
+}
+
+.post-subtitle {
+  font-size: 1.15rem;
+  font-weight: 400;
+  max-width: 800px;
+  color: var(--muted-text);
+  line-height: 1.6;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-heading);
+}
+
+.markdown-body hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 2rem 0;
+}
+
+.markdown-body img:not(.emoji) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 8px;
+}
+
+.markdown-body p {
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+/* ==========================================================================
+   Social Media Icons & Links
+   ========================================================================== */
+
+.social-link {
+  color: var(--muted-text);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.15rem;
+}
+
+.social-link:hover {
+  transform: scale(1.15);
+  text-decoration: none;
+}
+
+.social-link.social-linkedin:hover { color: #007bb5; }
+.social-link.social-email:hover { color: #db4437; }
+.social-link.social-github:hover { color: #333333; }
+.social-link.social-facebook:hover { color: #3b5998; }
+.social-link.social-instagram:hover { color: #405de6; }
+
+/* ==========================================================================
+   404 Error Page
+   ========================================================================== */
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+}
+
+.error-code-badge {
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--primary-color);
+}
+
+.error-title {
+  font-size: 1.6rem;
+  color: var(--text-heading);
+}
+
+.error-desc {
+  color: var(--muted-text);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  max-width: 520px;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  border-radius: 8px;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }

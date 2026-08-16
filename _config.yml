@@ -1,12 +1,14 @@
 ### Site Settings ###
 title               : Tran Hoang
+description         : >-
+                      Hello, I am Tran - an urban planner-designer, and a landscape enthusiast.
 description_en      : >-
                       Hello, I am Tran - an urban planner-designer, and a landscape enthusiast.
 description_nl      : >-
                       Hallo, ik ben Tran - een stedenbouwkundige en een liefhebber van landschappen.
+url                 : "https://orangeglop.github.io"
 baseurl             : ""            # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : Orangeglop/Orangeglop.github.io      # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
-remote_theme        : yousinix/portfolYOU
 open_new_tab        : false                    # Opens external URLs in new tab (works for posts, projects and navbar only)
 
 
@@ -18,7 +20,7 @@ plugins:
 ### Navbar Settings ###
 nav_exclude:                                            # Paths excluded from navbar
   - pages/404.html
-  - pages/index.md
+  - pages/index.html
 
 
 ### Author Info ###

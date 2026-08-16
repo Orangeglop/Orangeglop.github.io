@@ -11,7 +11,7 @@ weight: 3
 
   <h5 class="section-title">{{ site.data.strings.about_me[page.lang] }}</h5>
 
-  <p class="lead mb-4" style="font-size: 1.05rem; line-height: 1.75;">
+  <p class="lead about-intro-text mb-4">
     {{ site.data.strings.about_me_text[page.lang] | replace: "%AUTHOR_NAME%", site.author.name }}
   </p>
 

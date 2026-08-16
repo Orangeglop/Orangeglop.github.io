@@ -1,22 +1,26 @@
-<!-- GitHub Buttons -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-
 <!-- jQuery CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- Popper.js CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-
-<!-- Bootstrap JS CDN -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- Bootstrap Bundle JS CDN (Includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- wow.js CDN & Activation -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
 <script> new WOW().init(); </script>
 
-<!-- Initialize all tooltips -->
+<!-- FlipBook Viewer -->
+<script src="{{ '/assets/js/flipbook.js' | relative_url }}"></script>
+
+<!-- Initialize Bootstrap tooltips and touch blur handlers -->
 <script>
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  document.addEventListener('touchend', function (e) {
+    var btn = e.target.closest('.carousel-control-prev, .carousel-control-next');
+    if (btn) {
+      setTimeout(function () { btn.blur(); }, 80);
+    }
+  }, { passive: true });
 </script>

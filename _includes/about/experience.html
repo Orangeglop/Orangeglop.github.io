@@ -16,9 +16,9 @@
             <p class="small mb-2">{{ item.summary }}</p>
           {% endif %}
           {% if item.highlights and item.highlights.size > 0 %}
-            <ul class="pl-3 mb-0">
+            <ul class="timeline-highlight-list">
               {% for highlight in item.highlights %}
-                <li class="small text-muted mb-1" style="line-height: 1.55;">{{ highlight }}</li>
+                <li class="timeline-highlight-item">{{ highlight }}</li>
               {% endfor %}
             </ul>
           {% endif %}
