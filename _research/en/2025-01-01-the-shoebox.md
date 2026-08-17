@@ -3,13 +3,13 @@ title: "THE SHOEBOX"
 subtitle: "Mundane items and Memorabilia"
 ref: the-shoebox
 date: 2025-01-01
-image: "/assets/research/the-shoebox/the-shoebox-1.webp"
+image: "/assets/research/the-shoebox/the-shoebox-0.webp"
 ---
 
-![](/assets/research/the-shoebox/the-shoebox-2.webp)
-![](/assets/research/the-shoebox/the-shoebox-3.webp)
-
 I always have a box with me since young, not ONE box, but A box, where I store all random things from events with friends, small gifts, notes, sketches, postcards, etc.
+
+![](/assets/research/the-shoebox/the-shoebox-1.webp)
+
 
 ![](/assets/research/the-shoebox/the-shoebox-4.webp)
 
@@ -32,7 +32,7 @@ I asked my friends, surprisingly, a lot of them have something similar: some are
 <div class="my-4">
   <a href="#the-shoebox" data-pdf-viewer="{{ 'assets/research/the-shoebox/The Shoebox - hndtpuntnl.pdf' | relative_url }}" class="btn-pdf-outline btn-pdf-viewer" role="button" title="The shoebox (PDF)">
     <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
-    <span>The shoebox (PDF)</span>
+    <span>The shoebox - Full paper(PDF)</span>
     <span class="arrow-icon"><i class="fas fa-external-link-alt"></i></span>
   </a>
 </div>
