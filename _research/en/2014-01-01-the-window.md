@@ -2,8 +2,8 @@
 title: "The window"
 subtitle: "A look through Ho Chi Minh city development and the normal living lives early 2010 period"
 ref: the-window
-date: 2026-08-15
-image: "/assets/research_img/the-window/cua so.webp"
+date: 2014-01-01
+image: "/assets/research/the-window/cua so.webp"
 ---
 
 After the war with U.S. (also known as the Vietnam war through Western medias’ lenses), Vietnam was placed under an economical punishment by the U.S. army, stopping any opportunity to have foreign trading (other than the communist countries). The punishment was lifted after 1994, lead to an open and vast investment with development from foreign investor. Ho Chi Minh city (known as Sai Gon during the French colonial time) had a big bloom and quickly filled up with high-rises, commercial buildings - which bringing the new post-modern architecture style, with large glass and seamless façade. This brought a huge contrast toward the existing colonial architecture style, where windows are the majority with small creeks for ventilation and wind blow for the humid and sub-tropical weather.

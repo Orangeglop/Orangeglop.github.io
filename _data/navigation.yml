@@ -1,10 +1,10 @@
 main:
-  # - title: 
-  #     en: "Research"
-  #     nl: "Onderzoek"
-  #   url: 
-  #     en: "/en/research"
-  #     nl: "/nl/research"
+  - title: 
+      en: "Research"
+      nl: "Onderzoek"
+    url: 
+      en: "/en/research"
+      nl: "/nl/research"
   - title: 
       en: "About"
       nl: "Over"
