@@ -11,6 +11,17 @@
 <!-- FlipBook Viewer -->
 <script src="{{ '/assets/js/flipbook.js' | relative_url }}"></script>
 
+<!-- PDF.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  if (window.pdfjsLib) {
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+</script>
+
+<!-- Custom PDF Viewer -->
+<script src="{{ '/assets/js/pdf-viewer.js' | relative_url }}"></script>
+
 <!-- Initialize Bootstrap tooltips and touch blur handlers -->
 <script>
   $(function () {

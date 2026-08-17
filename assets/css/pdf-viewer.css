@@ -1,0 +1,371 @@
+/* ==========================================================================
+   Custom PDF Viewer — pdf-viewer.css
+   Single-column scrollable PDF viewer with transparent frosted-glass backdrop
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Overlay — full screen with frosted glass backdrop (matches FlipBook)
+   -------------------------------------------------------------------------- */
+
+.pv-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(8, 5, 18, 0.62);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.pv-overlay.pv-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+:fullscreen .pv-overlay,
+:-webkit-full-screen .pv-overlay,
+.pv-overlay:fullscreen,
+.pv-overlay:-webkit-full-screen {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: #08060f;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   Modal & Scrollable Container
+   -------------------------------------------------------------------------- */
+
+.pv-modal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.pv-scroll-container {
+  flex: 1 1 100%;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  padding: 36px 0 100px 0;
+  box-sizing: border-box;
+  display: block;
+  text-align: center;
+  position: relative;
+}
+
+/* Sleek custom scrollbar */
+.pv-scroll-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.pv-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.pv-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+.pv-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.38);
+}
+
+/* --------------------------------------------------------------------------
+   Pages Wrapper & Single Column Pages
+   -------------------------------------------------------------------------- */
+
+.pv-pages-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  width: max-content;
+  min-width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.pv-page-container {
+  position: relative;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.42), 0 4px 14px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+  display: block;
+  flex-shrink: 0;
+  margin: 0 auto;
+  transition: box-shadow 0.2s ease;
+}
+
+.pv-page-container:hover {
+  box-shadow: 0 20px 56px rgba(0, 0, 0, 0.52), 0 6px 18px rgba(0, 0, 0, 0.26);
+}
+
+.pv-page-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
+
+.pv-page-number-tag {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #64748b;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.pv-page-container:hover .pv-page-number-tag {
+  opacity: 1;
+}
+
+.pv-page-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #64748b;
+  font-size: 0.85rem;
+  gap: 12px;
+  z-index: 5;
+}
+
+.pv-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(0, 0, 0, 0.08);
+  border-top-color: #4f46e5;
+  border-radius: 50%;
+  animation: pv-spin 0.75s linear infinite;
+}
+
+@keyframes pv-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   Top bar controls — Quick Close
+   -------------------------------------------------------------------------- */
+
+.pv-top-close {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  border-radius: 50% !important;
+  background: rgba(20, 14, 32, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  outline: none !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5) !important;
+  transition: all 0.18s ease !important;
+}
+
+.pv-top-close svg {
+  width: 20px !important;
+  height: 20px !important;
+  stroke: #ffffff !important;
+  stroke-width: 2.2 !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+.pv-top-close:hover {
+  background: rgba(220, 50, 60, 0.9) !important;
+  border-color: rgba(255, 120, 130, 0.6) !important;
+  color: #ffffff !important;
+  transform: scale(1.1) !important;
+}
+
+.pv-top-close:active {
+  transform: scale(0.92) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Toolbar — Floating bottom dock (Matches FlipBook)
+   -------------------------------------------------------------------------- */
+
+.pv-toolbar {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 10px;
+  background: rgba(18, 14, 28, 0.84);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 40px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.58), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  user-select: none;
+  -webkit-user-select: none;
+  opacity: 1;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.pv-toolbar.pv-tb-idle,
+.pv-idle-dim {
+  opacity: 0.25 !important;
+}
+
+.pv-toolbar:hover,
+.pv-toolbar:focus-within {
+  opacity: 1 !important;
+}
+
+.pv-sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0 3px;
+  flex-shrink: 0;
+}
+
+.pv-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, transform 0.12s;
+  flex-shrink: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.pv-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  transform: scale(1.08);
+  text-decoration: none;
+}
+
+.pv-btn:active {
+  transform: scale(0.92);
+}
+
+.pv-btn svg {
+  pointer-events: none;
+}
+
+.pv-page-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 2px;
+}
+
+.pv-page-in {
+  width: 38px;
+  height: 26px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.pv-page-in:focus {
+  border-color: rgba(180, 155, 240, 0.7);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.pv-page-tot {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+  padding-right: 2px;
+}
+
+.pv-dl {
+  text-decoration: none;
+}
+
+.pv-close {
+  margin-left: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 600px) {
+  .pv-scroll-container {
+    padding: 24px 0 80px 0;
+  }
+  .pv-pages-wrapper {
+    gap: 16px;
+    padding: 0 8px;
+  }
+  .pv-toolbar {
+    bottom: 10px;
+    gap: 2px;
+    padding: 3px 6px;
+    max-width: calc(100vw - 16px);
+  }
+  .pv-btn {
+    width: 32px;
+    height: 32px;
+  }
+  .pv-page-in {
+    width: 32px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
+  .pv-page-tot {
+    font-size: 0.75rem;
+  }
+}
