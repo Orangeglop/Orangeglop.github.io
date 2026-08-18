@@ -67,9 +67,11 @@
      FlipBook
   ========================================================= */
   function FlipBook(opts) {
+    opts             = opts || {};
     this.source      = opts.source || [];
     this.downloadUrl = opts.downloadUrl || null;
     this.label       = opts.label || '';
+    this.hash        = opts.hash || (opts.label ? ('#' + opts.label.toLowerCase().replace(/[^a-z0-9]+/g, '-')) : '#portfolio');
 
     this._page       = 0;       // left-page index when in spread mode
     this._coverMode  = true;    // true: cover alone in right slot
@@ -257,10 +259,13 @@
       });
     }
 
-    /* Browser back-button support */
+    /* User-defined Link Hash Integration */
+    var targetHash = this.hash || '#portfolio';
+    if (!targetHash.startsWith('#')) targetHash = '#' + targetHash;
+
     if (window.history && window.history.pushState) {
       try {
-        window.history.pushState({ flipbookOpen: true }, '', window.location.href);
+        window.history.pushState({ flipbookOpen: true, hash: targetHash }, '', targetHash);
         this._pushedHistory = true;
       } catch (err) {}
     }
@@ -302,11 +307,18 @@
     }
 
     window.removeEventListener('popstate', this._onPop);
+
+    /* Clean URL hash when closing */
     if (this._pushedHistory) {
       this._pushedHistory = false;
       try {
         window.history.back();
       } catch (err) {}
+    } else if (window.history && window.history.replaceState) {
+      try {
+        var cleanUrl = window.location.pathname + window.location.search;
+        window.history.replaceState(null, '', cleanUrl);
+      } catch (e) {}
     }
 
     document.removeEventListener('keydown', this._onKey);
@@ -944,8 +956,35 @@
   };
 
   /* =========================================================
-     Static: thumbnail card builder
+     Static: thumbnail card builder & Deep-Link Hash Handler
   ========================================================= */
+  FlipBook._instances = [];
+
+  FlipBook.checkHash = function () {
+    var currentHash = (window.location.hash || '').toLowerCase();
+    if (!currentHash || currentHash.length <= 1) return;
+
+    for (var i = 0; i < FlipBook._instances.length; i++) {
+      var inst = FlipBook._instances[i];
+      var h = (inst.hash || '').toLowerCase();
+      var cleanH = h.replace('#', '');
+      var labelSlug = (inst.label || '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+      if (h === currentHash ||
+          ('#' + labelSlug) === currentHash ||
+          ('#portfolio-' + labelSlug) === currentHash ||
+          (cleanH && currentHash.indexOf(cleanH) !== -1) ||
+          (labelSlug && currentHash.indexOf(labelSlug) !== -1)) {
+        setTimeout(function () {
+          if (!inst._open) {
+            inst.open();
+          }
+        }, 80);
+        break;
+      }
+    }
+  };
+
   FlipBook.buildThumb = function (opts) {
     var container = document.getElementById(opts.containerId);
     if (!container) return;
@@ -971,11 +1010,27 @@
       source:      opts.source,
       downloadUrl: opts.downloadUrl,
       label:       opts.label,
+      hash:        opts.hash,
     });
     fb.mount(thumb);
+
+    FlipBook._instances.push(fb);
+
+    /* Check if current page URL hash matches this portfolio */
+    setTimeout(FlipBook.checkHash, 100);
+
     return fb;
   };
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('hashchange', function () {
+      if (!FlipBook._instances.some(function (inst) { return inst._open; })) {
+        FlipBook.checkHash();
+      }
+    });
+  }
 
   global.FlipBook = FlipBook;
 
 }(window));
+

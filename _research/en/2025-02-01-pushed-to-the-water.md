@@ -15,7 +15,7 @@ Simone, AbdouMaliq. 2004. “People as Infrastructure: Intersecting Fragments in
 
 
 <div class="my-4">
-  <a href="#pushed-to-the-water" data-pdf-viewer="{{ 'assets/research/pushed-to-the-water/Pushed to the water - hndtpuntnl.pdf' | relative_url }}" class="btn-pdf-outline btn-pdf-viewer" role="button" title="The shoebox (PDF)">
+  <a href="#pushed-to-the-water" data-pdf-viewer="{{ 'assets/research/pushed-to-the-water/Pushed to the water - hndtpuntnl.pdf' | relative_url }}" data-pdf-title="Pushed to the water" class="btn-pdf-outline btn-pdf-viewer" role="button" title="Pushed to the water (PDF)">
     <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
     <span>Pushed to the water - Full paper(PDF)</span>
     <span class="arrow-icon"><i class="fas fa-external-link-alt"></i></span>

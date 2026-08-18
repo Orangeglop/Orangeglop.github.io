@@ -34,4 +34,26 @@
       setTimeout(function () { btn.blur(); }, 80);
     }
   }, { passive: true });
+
+  /* Prevent page jumping/scrolling when clicking carousel controls */
+  document.addEventListener('click', function (e) {
+    var control = e.target.closest('.carousel-control-prev, .carousel-control-next, .carousel-indicators li');
+    if (control) {
+      e.preventDefault();
+    }
+  });
+
+  /* Track any direct PDF downloads across the site */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href*=".pdf"]');
+    if (a && !a.closest('.pv-modal, .fb-modal') && !a.classList.contains('btn-pdf-viewer') && !a.hasAttribute('data-pdf-viewer')) {
+      var href = a.getAttribute('href') || '';
+      var cleanName = href.split('/').pop().split('?')[0];
+      try { cleanName = decodeURIComponent(cleanName).replace(/\.pdf$/i, ''); } catch (err) {}
+      var title = a.getAttribute('title') || cleanName;
+      if (window.umami && typeof window.umami.track === 'function') {
+        window.umami.track('Download PDF: ' + title, { file: cleanName, url: href });
+      }
+    }
+  }, { passive: true });
 </script>

@@ -79,12 +79,29 @@
   }
 
   /* =========================================================
+     PDF Title Resolver Helper
+  ========================================================= */
+  function resolveDocTitle(url, title) {
+    if (title && title !== 'PDF Document' && title.trim() !== '') {
+      return title.replace(/\s*\(PDF\)\s*/i, '').replace(/\s*-\s*full paper/i, '').trim();
+    }
+    if (url) {
+      try {
+        var fn = decodeURIComponent(url.split('/').pop().split('?')[0]);
+        fn = fn.replace(/\.pdf$/i, '').replace(/\s*-\s*hndtpuntnl/i, '').replace(/^\[[^\]]+\]\s*/i, '').trim();
+        if (fn) return fn;
+      } catch (e) {}
+    }
+    return 'PDF Document';
+  }
+
+  /* =========================================================
      PdfViewer Class
   ========================================================= */
   function PdfViewer(opts) {
     opts = opts || {};
     this.pdfUrl          = opts.pdfUrl || opts.url || '';
-    this.title           = opts.title || 'PDF Document';
+    this.title           = resolveDocTitle(this.pdfUrl, opts.title);
     this.hash            = opts.hash || '#pdf';
 
     this._pdfDoc         = null;
@@ -992,7 +1009,15 @@
     if (!triggerEl) return;
     opts = opts || {};
     opts.pdfUrl = pdfUrl || triggerEl.getAttribute('data-pdf-viewer') || triggerEl.getAttribute('data-pdf-url');
-    opts.title = opts.title || triggerEl.getAttribute('data-pdf-title');
+    
+    var btnTitle = triggerEl.getAttribute('title') || '';
+    var textSpan = triggerEl.querySelector('span:not(.pdf-icon):not(.arrow-icon)');
+    var innerText = textSpan ? textSpan.textContent : '';
+
+    opts.title = opts.title ||
+                 triggerEl.getAttribute('data-pdf-title') ||
+                 (btnTitle ? btnTitle.replace(/\s*\(PDF\)\s*/i, '').trim() : '') ||
+                 (innerText ? innerText.replace(/\s*-\s*full paper\s*\(pdf\)/i, '').replace(/\s*\(PDF\)\s*/i, '').trim() : '');
 
     var linkHref = triggerEl.getAttribute('href') || '';
     if (linkHref.startsWith('#') && linkHref.length > 1) {

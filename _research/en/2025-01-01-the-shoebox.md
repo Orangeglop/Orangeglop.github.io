@@ -36,7 +36,7 @@ Another box I still keep in Vietnam.
 ![](/assets/research/the-shoebox/the-shoebox-8.webp)
 
 <div class="my-4">
-  <a href="#the-shoebox" data-pdf-viewer="{{ 'assets/research/the-shoebox/The Shoebox - hndtpuntnl.pdf' | relative_url }}" class="btn-pdf-outline btn-pdf-viewer" role="button" title="The shoebox (PDF)">
+  <a href="#the-shoebox" data-pdf-viewer="{{ 'assets/research/the-shoebox/The Shoebox - hndtpuntnl.pdf' | relative_url }}" data-pdf-title="The Shoebox" class="btn-pdf-outline btn-pdf-viewer" role="button" title="The Shoebox (PDF)">
     <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
     <span>The shoebox - Full paper(PDF)</span>
     <span class="arrow-icon"><i class="fas fa-external-link-alt"></i></span>
