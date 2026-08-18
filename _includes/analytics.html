@@ -5,4 +5,11 @@
           data-website-id="{{ site.analytics.website_id }}"
           {%- if site.analytics.domains %} data-domains="{{ site.analytics.domains }}"{%- endif -%}>
   </script>
+  {%- if site.analytics.replays == true -%}
+  <!-- Umami Session Replays & Heatmaps Recorder -->
+  <script defer
+          src="{{ site.analytics.host_url | default: 'https://cloud.umami.is' }}/recorder.js"
+          data-website-id="{{ site.analytics.website_id }}">
+  </script>
+  {%- endif -%}
 {%- endif -%}

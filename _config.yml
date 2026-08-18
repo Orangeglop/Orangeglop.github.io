@@ -42,6 +42,7 @@ analytics:
   enabled: true                                         # Set true to enable analytics
   host_url: "https://pulse.2ntense.com"                # Umami instance URL
   website_id: "1260b7a5-8b63-4ed6-bdd1-bc656dc9b00f"    # Umami Website ID
+  replays: true                                         # Enable Session Replays & Heatmaps (loads recorder.js)
 
 ### Build Settings ###
 future: true                                            # Publish posts/research even if dated today/tomorrow
