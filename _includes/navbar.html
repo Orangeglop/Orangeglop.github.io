@@ -2,7 +2,7 @@
 
   {% assign current_lang = page.lang | default: 'en' %}
   
-  <a class="navbar-brand" href="{{ site.baseurl }}/{{ current_lang }}/">
+  <a class="navbar-brand" href="{{ site.baseurl }}/{{ current_lang }}/" data-umami-event="Brand Click: {{ current_lang | upcase }}">
     <h5 class="navbar-brand-title">{{ site.title }}</h5>
     <span class="navbar-brand-subtitle">
       {{ site.data.strings.portfolio[current_lang] | default: "Portfolio" }}
@@ -20,7 +20,10 @@
           {% assign active_status = "active" %}
         {% endif %}
 
-        <a class="nav-item nav-link {{ active_status }}" href="{{ link_url | relative_url }}">
+        <a class="nav-item nav-link {{ active_status }}"
+           href="{{ link_url | relative_url }}"
+           data-umami-event="Nav: {{ link.title[current_lang] | default: link.ref }}"
+           data-umami-event-target="{{ link.ref | default: link.title[current_lang] }}">
           {{ link.title[current_lang] }}
         </a>
       {% endfor %}
@@ -30,7 +33,12 @@
         {% assign translations = translations | where_exp: "item", "item.ref == page.ref" | sort: 'lang' %}
         {% for t in translations %}
           {% if t.lang and t.lang != current_lang %}
-            <a class="nav-item nav-link lang-switch" href="{{ t.url | relative_url }}" aria-label="Switch to {{ t.lang | upcase }}">
+            <a class="nav-item nav-link lang-switch"
+               href="{{ t.url | relative_url }}"
+               aria-label="Switch to {{ t.lang | upcase }}"
+               data-umami-event="Switch Language: {{ current_lang | upcase }} -> {{ t.lang | upcase }}"
+               data-umami-event-from="{{ current_lang }}"
+               data-umami-event-to="{{ t.lang }}">
               {{ t.lang | upcase }}
             </a>
           {% endif %}

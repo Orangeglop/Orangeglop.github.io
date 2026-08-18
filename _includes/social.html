@@ -9,7 +9,9 @@
        href="{{ service_data.url }}{{ account[1] }}"
        target="_blank"
        rel="noopener noreferrer"
-       aria-label="{{ service_name | capitalize }}">
+       aria-label="{{ service_name | capitalize }}"
+       data-umami-event="Contact: {{ service_name | capitalize }} Click"
+       data-umami-event-service="{{ service_name }}">
       <i class="{{ service_data.icon }}"></i>
     </a>
     {%- endif -%}

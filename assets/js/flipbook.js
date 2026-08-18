@@ -141,6 +141,9 @@
       var dlA = el('a', 'fb-btn fb-dl', I.dl);
       dlA.href = this.downloadUrl; dlA.download = ''; dlA.target = '_blank';
       dlA.title = 'Download PDF'; dlA.setAttribute('aria-label', 'Download PDF');
+      var portfolioName = this.label || 'Portfolio';
+      dlA.setAttribute('data-umami-event', 'Download Portfolio PDF: ' + portfolioName);
+      dlA.setAttribute('data-umami-event-portfolio', portfolioName);
       tb.appendChild(sDL); tb.appendChild(dlA);
     }
 
@@ -237,9 +240,22 @@
     this._putSlot(this._leftSlot,  -1);   // blank (closed book back)
     this._putSlot(this._rightSlot,  0);   // cover image
     this._syncUI();
+    this._openTime = Date.now();
+    this._maxPageReached = 1;
+    this._milestones = {};
+
     document.body.appendChild(this._overlay);
     this._overlay.classList.add('fb-open');
     document.body.style.overflow = 'hidden';
+
+    /* Detailed Umami Event Tracking */
+    var portfolioLabel = this.label || 'Portfolio';
+    if (window.umami && typeof window.umami.track === 'function') {
+      window.umami.track('Open Portfolio: ' + portfolioLabel, {
+        portfolio: portfolioLabel,
+        total_pages: this.source.length
+      });
+    }
 
     /* Browser back-button support */
     if (window.history && window.history.pushState) {
@@ -269,6 +285,20 @@
     document.body.style.overflow = '';
     if (document.activeElement && document.activeElement.blur) {
       document.activeElement.blur();
+    }
+
+    /* Track reading engagement upon closing */
+    if (this._openTime && window.umami && typeof window.umami.track === 'function') {
+      var durationSec = Math.round((Date.now() - this._openTime) / 1000);
+      var portfolioLabel = this.label || 'Portfolio';
+      if (durationSec >= 2) {
+        window.umami.track('Close Portfolio: ' + portfolioLabel, {
+          portfolio: portfolioLabel,
+          duration_seconds: durationSec,
+          max_page_reached: this._maxPageReached || 1,
+          total_pages: this.source.length
+        });
+      }
     }
 
     window.removeEventListener('popstate', this._onPop);
@@ -886,6 +916,31 @@
     var disp = this._coverMode ? 1 : this._page + 1;
     if (this._pageInput) this._pageInput.value = disp;
     if (this._pageTotal) this._pageTotal.textContent = '/ ' + this.source.length;
+
+    if (this._maxPageReached === undefined || disp > this._maxPageReached) {
+      this._maxPageReached = disp;
+    }
+
+    /* Track reading milestones (50% and 100%) */
+    var total = this.source ? this.source.length : 0;
+    if (total > 1 && window.umami && typeof window.umami.track === 'function' && this._milestones) {
+      var portfolioLabel = this.label || 'Portfolio';
+      if (disp >= Math.floor(total / 2) && !this._milestones['50%']) {
+        this._milestones['50%'] = true;
+        window.umami.track('Portfolio Read 50%: ' + portfolioLabel, {
+          portfolio: portfolioLabel,
+          page: disp,
+          total_pages: total
+        });
+      }
+      if (disp >= total - 1 && !this._milestones['100%']) {
+        this._milestones['100%'] = true;
+        window.umami.track('Portfolio Completed: ' + portfolioLabel, {
+          portfolio: portfolioLabel,
+          total_pages: total
+        });
+      }
+    }
   };
 
   /* =========================================================

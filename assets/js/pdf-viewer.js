@@ -385,12 +385,22 @@
     if (this._open) return;
     var self = this;
     this._open = true;
-    this._currentPage = 1;
-    this._zoomScale = 1.0;
+    this._openTime = Date.now();
+    this._maxPageReached = 1;
+    this._milestones = {};
 
     document.body.appendChild(this._overlay);
     this._overlay.classList.add('pv-open');
     document.body.style.overflow = 'hidden';
+
+    /* Detailed Umami Event Tracking */
+    var docTitle = this.title || 'PDF Document';
+    if (window.umami && typeof window.umami.track === 'function') {
+      window.umami.track('Open PDF: ' + docTitle, {
+        title: docTitle,
+        url: this.pdfUrl
+      });
+    }
 
     if (this._scrollContainer) {
       this._scrollContainer.scrollTop = 0;
@@ -424,6 +434,20 @@
     if (this._idleTimer) clearTimeout(this._idleTimer);
     if (this._zoomDebounce) clearTimeout(this._zoomDebounce);
     document.body.style.overflow = '';
+
+    /* Track reading engagement upon closing */
+    if (this._openTime && window.umami && typeof window.umami.track === 'function') {
+      var durationSec = Math.round((Date.now() - this._openTime) / 1000);
+      var docTitle = this.title || 'PDF Document';
+      if (durationSec >= 2) {
+        window.umami.track('Close PDF: ' + docTitle, {
+          title: docTitle,
+          duration_seconds: durationSec,
+          max_page_reached: this._maxPageReached || 1,
+          total_pages: this._totalPages || 1
+        });
+      }
+    }
 
     window.removeEventListener('popstate', this._onPop);
 
@@ -780,6 +804,7 @@
       var p = this._pageContainers[i];
       var pTop = p.el.offsetTop;
       var pHeight = p.el.offsetHeight;
+      var pBottom = pTop + pHeight;
       if (centerY >= pTop && centerY <= pBottom) {
         currentNum = p.num;
         break;
@@ -919,6 +944,32 @@
   PdfViewer.prototype._syncUI = function () {
     if (this._pageInput) this._pageInput.value = this._currentPage;
     if (this._pageTotal) this._pageTotal.textContent = '/ ' + (this._totalPages || '—');
+
+    var cur = this._currentPage || 1;
+    if (this._maxPageReached === undefined || cur > this._maxPageReached) {
+      this._maxPageReached = cur;
+    }
+
+    /* Track reading milestones (50% and 100%) */
+    var total = this._totalPages || 0;
+    if (total > 1 && window.umami && typeof window.umami.track === 'function' && this._milestones) {
+      var docTitle = this.title || 'PDF Document';
+      if (cur >= Math.floor(total / 2) && !this._milestones['50%']) {
+        this._milestones['50%'] = true;
+        window.umami.track('PDF Read 50%: ' + docTitle, {
+          title: docTitle,
+          page: cur,
+          total_pages: total
+        });
+      }
+      if (cur >= total && !this._milestones['100%']) {
+        this._milestones['100%'] = true;
+        window.umami.track('PDF Completed: ' + docTitle, {
+          title: docTitle,
+          total_pages: total
+        });
+      }
+    }
   };
 
   /* =========================================================
