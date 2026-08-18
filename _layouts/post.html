@@ -28,3 +28,42 @@ layout: page
   {% include blog/disqus.html %}
 </div>
 {% endif %}
+
+<script>
+  (function () {
+    var article = document.querySelector('.post-content');
+    if (!article) return;
+
+    var title = {{ page.title | jsonify }};
+    var lang = {{ page.lang | default: 'en' | jsonify }};
+    var milestones = {};
+
+    function checkReadProgress() {
+      if (typeof window.umami === 'undefined' || typeof window.umami.track !== 'function') return;
+
+      var rect = article.getBoundingClientRect();
+      var windowH = window.innerHeight || document.documentElement.clientHeight;
+      var totalH = rect.height;
+      if (totalH <= 0) return;
+
+      var scrolledPast = Math.max(0, windowH - rect.top);
+      var progress = Math.min(1.0, scrolledPast / totalH);
+
+      if (progress >= 0.5 && !milestones['50%']) {
+        milestones['50%'] = true;
+        window.umami.track('Read Article 50%: ' + title, { title: title, lang: lang });
+      }
+      if (progress >= 0.95 && !milestones['100%']) {
+        milestones['100%'] = true;
+        window.umami.track('Read Article Completed: ' + title, { title: title, lang: lang });
+      }
+    }
+
+    window.addEventListener('scroll', checkReadProgress, { passive: true });
+    if (document.readyState === 'complete') {
+      checkReadProgress();
+    } else {
+      window.addEventListener('load', checkReadProgress);
+    }
+  })();
+</script>

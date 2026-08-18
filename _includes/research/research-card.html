@@ -8,7 +8,11 @@
 {%- assign post_image = item.image | default: item.thumbnail -%}
 
 <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex align-items-stretch wow animated fadeIn" data-wow-delay=".15s">
-  <a href="{{ research_url }}" class="research-card card w-100" {%- if item.external_url and site.open_new_tab -%} target="_blank" {%- endif -%}>
+  <a href="{{ research_url }}"
+     class="research-card card w-100"
+     {%- if item.external_url and site.open_new_tab -%} target="_blank" {%- endif -%}
+     data-umami-event="Research Card: {{ item.title | escape }}"
+     data-umami-event-title="{{ item.title | escape }}">
     {%- if post_image -%}
     <div class="research-card-img-wrapper">
       <img src="{{ post_image | relative_url }}" class="card-img-top research-card-img" alt="{{ item.title }}" loading="lazy">

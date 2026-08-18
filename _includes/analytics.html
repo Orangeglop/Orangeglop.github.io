@@ -1,11 +1,8 @@
-{%- if jekyll.environment == 'production' and site.analytics.enabled == true -%}
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.analytics.google.tracking_id }}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', '{{ site.analytics.google.tracking_id }}');
+{%- if site.analytics.enabled == true and site.analytics.website_id and site.analytics.website_id != '' -%}
+  <!-- Umami Analytics (Cookieless & Privacy-friendly) -->
+  <script defer
+          src="{{ site.analytics.host_url | default: 'https://cloud.umami.is' }}/script.js"
+          data-website-id="{{ site.analytics.website_id }}"
+          {%- if site.analytics.domains %} data-domains="{{ site.analytics.domains }}"{%- endif -%}>
   </script>
 {%- endif -%}
